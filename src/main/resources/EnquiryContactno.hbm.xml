@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.EnquiryContactno" table="enquiry_contactno" catalog="projecttest">
+        <id name="enquiryConId" type="java.lang.Integer">
+            <column name="Enquiry_con_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="enquiry" class="com.gopiraj.Model.Enquiry" fetch="select">
+            <column name="Enquiry_id" not-null="true" />
+        </many-to-one>
+        <property name="contactNumber" type="long">
+            <column name="Contact_Number" precision="10" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

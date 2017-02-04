@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 17, 2017 4:30:25 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.MenuMaster" table="menu_master" catalog="projecttest">
+        <id name="menuMasterId" type="java.lang.Integer">
+            <column name="menu_master_id" />
+            <generator class="identity" />
+        </id>
+        <property name="menuName" type="string">
+            <column name="menu_name" length="45" not-null="true" />
+        </property>
+        <property name="pageName" type="string">
+            <column name="page_name" length="45" not-null="true" />
+        </property>
+        <set name="menuTypes" table="menu_type" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="menu_master_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.MenuType" />
+        </set>
+    </class>
+</hibernate-mapping>

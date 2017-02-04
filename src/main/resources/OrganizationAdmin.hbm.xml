@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.OrganizationAdmin" table="organization_admin" catalog="projecttest">
+        <id name="organizationAdmin" type="java.lang.Integer">
+            <column name="Organization_Admin" />
+            <generator class="foreign">
+                <param name="property">person</param>
+            </generator>
+        </id>
+        <one-to-one name="person" class="com.gopiraj.Model.Person" constrained="true"></one-to-one>
+        <property name="password" type="string">
+            <column name="Password" length="45" not-null="true" />
+        </property>
+        <set name="courses" table="course" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Org_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.Course" />
+        </set>
+        <set name="tasks" table="task" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Org_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.Task" />
+        </set>
+        <set name="preBrochureses" table="pre_brochures" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Org_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.PreBrochures" />
+        </set>
+        <set name="reports" table="report" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Org_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.Report" />
+        </set>
+    </class>
+</hibernate-mapping>

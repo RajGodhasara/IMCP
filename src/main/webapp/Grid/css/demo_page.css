@@ -1,0 +1,43 @@
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * General page setup
+ */
+#dt_example {
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: #fff;
+}
+
+
+#dt_example #container {
+        font: 100%/1.65em Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
+        width: 800px;
+	margin: 30px auto;
+	padding: 0;
+}
+
+.css_right {
+	float: right;
+}
+
+.css_left {
+	float: left;
+}
+
+label{
+float: left;
+width: 100px;
+font-weight: bold;
+}
+label.error{
+	float: left;
+	clear: both;
+	color: red;
+	width: 200px;
+	}
+
+input, textarea, select{
+width: 120px;
+margin-bottom: 5px;
+}

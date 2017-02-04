@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.Enquiry" table="enquiry" catalog="projecttest">
+        <id name="enqId" type="java.lang.Integer">
+            <column name="Enq_id" />
+            <generator class="identity" />
+        </id>
+        <property name="clgName" type="string">
+            <column name="Clg_name" length="45" />
+        </property>
+        <property name="branch" type="string">
+            <column name="Branch" length="45" />
+        </property>
+        <property name="semester" type="string">
+            <column name="Semester" length="45" />
+        </property>
+        <property name="status" type="string">
+            <column name="Status" length="45" not-null="true" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="First_Name" length="45" not-null="true" />
+        </property>
+        <property name="middleName" type="string">
+            <column name="Middle_Name" length="45" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="Last_Name" length="45" not-null="true" />
+        </property>
+        <property name="mailId" type="string">
+            <column name="Mail_id" length="45" not-null="true" />
+        </property>
+        <property name="dob" type="timestamp">
+            <column name="DOB" length="19" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="Gender" length="45" not-null="true" />
+        </property>
+        <property name="streetAddress" type="string">
+            <column name="Street_Address" length="45" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="City" length="45" not-null="true" />
+        </property>
+        <property name="state" type="string">
+            <column name="State" length="45" not-null="true" />
+        </property>
+        <property name="creationTime" type="timestamp">
+            <column name="Creation_Time" length="19" />
+        </property>
+        <set name="enquiryCourses" table="enquiry_course" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Enquiry_Course_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.EnquiryCourse" />
+        </set>
+        <set name="enquiryContactnos" table="enquiry_contactno" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Enquiry_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.EnquiryContactno" />
+        </set>
+        <set name="sentMails" table="sent_mail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Enq_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.SentMail" />
+        </set>
+        <set name="sentSmses" table="sent_sms" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Enq_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.SentSms" />
+        </set>
+    </class>
+</hibernate-mapping>

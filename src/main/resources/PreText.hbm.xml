@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.PreText" table="pre_text" catalog="projecttest">
+        <id name="preTextId" type="java.lang.Integer">
+            <column name="Pre_Text_id" />
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="Title" length="45" not-null="true" />
+        </property>
+        <property name="message" type="string">
+            <column name="Message" length="45" not-null="true" />
+        </property>
+        <property name="forWhat" type="string">
+            <column name="For_what" length="45" not-null="false" />
+        </property>
+        <!--
+        <set name="sentSmses" table="sent_sms" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Pre_Text_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.SentSms" />
+        </set>
+        <set name="sentMails" table="sent_mail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Pre_Text_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.SentMail" />
+        </set>
+        -->
+    </class>
+</hibernate-mapping>

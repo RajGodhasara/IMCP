@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.Person" table="person" catalog="projecttest">
+        <id name="personId" type="java.lang.Integer">
+            <column name="Person_id" />
+            <generator class="identity" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="First_name" length="45" not-null="true" />
+        </property>
+        <property name="middleName" type="string">
+            <column name="Middle_name" length="45" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="Last_name" length="45" not-null="true" />
+        </property>
+        <property name="mailId" type="string">
+            <column name="Mail_id" length="45" not-null="true" />
+        </property>
+        <property name="dateOfBirth" type="timestamp">
+            <column name="Date_of_Birth" length="19" not-null="true" />
+        </property>
+        <property name="creationTime" type="timestamp">
+            <column name="Creation_Time" length="19" not-null="true" />
+        </property>
+        <property name="streetAdd" type="string">
+            <column name="Street_Add" length="45" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="City" length="45" not-null="true" />
+        </property>
+        <property name="state" type="string">
+            <column name="State" length="45" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="Gender" length="45" not-null="true" />
+        </property>
+        <property name="personType" type="string">
+            <column name="Person_Type" length="45" not-null="true" />
+        </property>
+        <set name="activities" table="activity" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Person_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.Activity" />
+        </set>
+        <set name="personContactnos" table="person_contactno" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="person_id" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.PersonContactno" />
+        </set>
+        <one-to-one name="organizationAdmin" class="com.gopiraj.Model.OrganizationAdmin"></one-to-one>
+        <set name="sentMails" table="sent_mail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Person_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.SentMail" />
+        </set>
+        <one-to-one name="employee" class="com.gopiraj.Model.Employee"></one-to-one>
+        <set name="feedbacks" table="feedback" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Person_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.Feedback" />
+        </set>
+        <set name="sentSmses" table="sent_sms" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Person_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.SentSms" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.SentMail" table="sent_mail" catalog="projecttest">
+        <id name="sentMailId" type="java.lang.Integer">
+            <column name="Sent_Mail_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="preBrochures" class="com.gopiraj.Model.PreBrochures" fetch="select">
+            <column name="Brochures_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="enquiry" class="com.gopiraj.Model.Enquiry" fetch="select">
+            <column name="Enq_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="person" class="com.gopiraj.Model.Person" fetch="select">
+            <column name="Person_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="preText" class="com.gopiraj.Model.PreText" fetch="select">
+            <column name="Pre_Text_id" not-null="true" />
+        </many-to-one>
+        <property name="creationTime" type="timestamp">
+            <column name="Creation_Time" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

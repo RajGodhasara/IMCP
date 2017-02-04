@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.Course" table="course" catalog="projecttest">
+        <id name="courseId" type="java.lang.Integer">
+            <column name="Course_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="organizationAdmin" class="com.gopiraj.Model.OrganizationAdmin" fetch="select">
+            <column name="Org_id" not-null="true" />
+        </many-to-one>
+        <property name="courseName" type="string">
+            <column name="Course_Name" length="45" not-null="true" />
+        </property>
+        <property name="duration" type="int">
+            <column name="Duration" not-null="true" />
+        </property>
+        <property name="Description" type="string">
+            <column name="Description" not-null="true" />
+        </property>
+        <set name="enquiryCourses" table="enquiry_course" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Enquiry_Course_id" not-null="true" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.EnquiryCourse" />
+        </set>
+    </class>
+</hibernate-mapping>

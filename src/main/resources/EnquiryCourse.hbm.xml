@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2016 6:34:28 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.EnquiryCourse" table="enquiry_course" catalog="projecttest">
+        <composite-id name="id" class="com.gopiraj.Model.EnquiryCourseId">
+            <key-property name="enquiryCourseId" type="int">
+                <column name="Enquiry_Course_id" />
+            </key-property>
+            <key-property name="enqCourseId" type="int">
+                <column name="Enq_Course_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="enquiry" class="com.gopiraj.Model.Enquiry" update="false" insert="false" fetch="select">
+            <column name="Enquiry_Course_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="course" class="com.gopiraj.Model.Course" update="false" insert="false" fetch="select">
+            <column name="Enquiry_Course_id" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
