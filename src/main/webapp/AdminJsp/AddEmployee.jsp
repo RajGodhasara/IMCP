@@ -167,7 +167,7 @@ $(document).ready(function() {
     </head>
     <body>
     
-    <form:form method="POST" commandName="command">
+        <form:form id="Form" method="POST" commandName="command">
         <table>
            <h1>Create new employee</h1>
            <tr>

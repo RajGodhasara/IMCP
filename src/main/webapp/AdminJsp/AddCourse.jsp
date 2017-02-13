@@ -14,67 +14,25 @@
 <!--        <link href="AdminStyle/bootstrap.css" rel="stylesheet"/>
         <script src="JQGrid-JS/jquery-1.11.0.min.js"></script>
         <script src="AdminJS/bootstrap.js"></script>-->
-        <script>
- $(document).ready(function()
- {
-     	alert("Welcome");
-	var totalElements = jQuery('.CheckField').length;
-	var count=0;	
-	$("#progressmain").hide();
-	$("#courseForm").change(function()
-	{
-		//alert("change");
-		$(".CheckField").each(function(index) {
-			
-			if($(this).val().length > 0) {
-				
-				count++;
-				
-			}
-			
-			
-		});
-		//alert(count);
-		
-		var progress = (count/totalElements)*100;
-		//alert("Progress"+progress);
-		
-		$("#progress").attr("aria-valuenow", progress);
-		$("#progress").attr("style", "width:"+progress+"%");
-		$("#progress").text(progress+"%");
-		
-		if(count>0)
-		{
-			$("#progressmain").show();
-		}
-		else
-		{
-			$("#progressmain").hide();
-		}
-		
-		count=0;
-	});
-});
-</script>
         
     </head>
     <body>
        <div style="margin-left: 200px;">   
             <h1 style="margin-left: 180px;">Course</h1>
             <div id="mydiv">
-                </div>
+            </div>
         
             <div class="container">
-  <div id="progressmain" class="progress" style="width: 400px;">
-    <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-      0%
-    </div>
-  </div>
-</div>
+                <div id="progressmain" class="progress" style="width: 400px;">
+                    <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                     0%
+                    </div>
+                </div>
+            </div>
             
             
         
-            <form:form id="courseForm" method="POST" commandName="command" action="admin_insert_course">
+            <form:form id="Form" method="POST" commandName="command" action="admin_insert_course">
 <table>
     <tr>
         <td>

@@ -18,7 +18,7 @@
             <column name="Semester" length="45" />
         </property>
         <property name="status" type="string">
-            <column name="Status" length="45" not-null="true" />
+            <column name="Status" length="45" not-null="false" />
         </property>
         <property name="firstName" type="string">
             <column name="First_Name" length="45" not-null="true" />
@@ -33,7 +33,7 @@
             <column name="Mail_id" length="45" not-null="true" />
         </property>
         <property name="dob" type="timestamp">
-            <column name="DOB" length="19" not-null="true" />
+            <column name="DOB" length="19" not-null="false" />
         </property>
         <property name="gender" type="string">
             <column name="Gender" length="45" not-null="true" />

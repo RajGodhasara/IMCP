@@ -8,10 +8,13 @@ package com.gopiraj.Controller;
 import com.gopiraj.Business.CourseBusiness;
 import com.gopiraj.Model.Course;
 import com.gopiraj.Model.OrganizationAdmin;
+import com.gopiraj.Model.Person;
 import com.gopiraj.dispature.MyDispatureServlet;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,14 +46,19 @@ public class AdminCourseController {
     }
     
     @RequestMapping("/admin_insert_course")
-    public ModelAndView getAdminInsertCourse(ModelMap map,@ModelAttribute Course course) {
+    public ModelAndView getAdminInsertCourse(ModelMap map,@ModelAttribute Course course,HttpServletRequest res) {
         
         SessionFactory sf = MyDispatureServlet.getSessionFactory();
         CourseBusiness business = new CourseBusiness();
-        OrganizationAdmin admin=null;
+        Person person=null;
         
-        admin = business.searchByAdminId(6,sf);
-        course.setOrganizationAdmin(admin);
+        HttpSession session = res.getSession(false);
+        person = (Person)session.getAttribute("person");
+        if(person!=null){
+            course.setOrganizationAdmin(person.getOrganizationAdmin());
+            System.out.println("setting admin");
+        }
+        
         String answer = business.insert(course, sf);
         System.out.println(answer);
         

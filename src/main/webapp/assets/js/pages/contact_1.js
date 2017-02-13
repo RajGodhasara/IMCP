@@ -1,7 +1,7 @@
 (function ($) {
 
     function init() {
-        var myLatlng = new google.maps.LatLng(53.464892, -2.285771);
+        var myLatlng = new google.maps.LatLng(22.3072, 73.1812);
         // If document (your website) is wider than 767px, isDraggable = true, else isDraggable = false
         var isDraggable = $(document).width() > 767 ? true : false;
         var myOptions = {
@@ -37,8 +37,8 @@
         });
         // infowindow.open(map, marker);
         map.setCenter({
-            lat: 53.464892,
-            lng: -2.285771
+            lat: 22.3072,
+            lng: 73.1812
         });
 
 

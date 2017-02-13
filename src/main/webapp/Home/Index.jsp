@@ -45,7 +45,7 @@
             </div>
             <div class="topbar-right pull-right">
                 <div class="socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a><a href="#" class="blog"><i class="fa fa-rss"></i></a><a href="#" class="dribbble"><i class="fa fa-dribbble"></i></a></div>
-                <div class="group-sign-in"><a href="login.html" class="login">login</a><a href="register.html" class="register">register</a></div>
+                <div class="group-sign-in"><a href="login" class="login">login</a></div>
             </div>
         </div>
     </div>
@@ -58,27 +58,19 @@
                 </div>
                 <nav class="navigation collapse navbar-collapse pull-right">
                     <ul class="nav-links nav navbar-nav">
-                        <li class="dropdown active"><a href="javascript:void(0)" class="main-menu">Home<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            
+                        <li class="active"><a href="index" class="main-menu">Home</a>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">Courses<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            <ul class="dropdown-menu edugate-dropdown-menu-1">
-                                <li><a href="courses.html" class="link-page">courses</a></li>
-                                <li><a href="courses-detail.html" class="link-page">course detail</a></li>
-                                <li><a href="events.html" class="link-page">events</a></li>
-                                <li><a href="event-detail.html" class="link-page">event detail</a></li>
-                            </ul>
+                        <li><a href="courses-detail" class="main-menu">Courses</a>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">gallery<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            
+                        <li><a href="#" class="main-menu">gallery</a>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">About Us<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            
+                        <li><a href="aboutus-us" class="main-menu">About Us</a>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">News<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            
+                        <li><a href="#" class="main-menu">News</a>
                         </li>
-                        <li><a href="contact.html" class="main-menu">Contact</a></li>
+                        <li><a href="contact" class="main-menu">Contact</a>
+                        </li>
+                        
                         <li class="button-search"><p class="main-menu"><i class="fa fa-search"></i></p></li>
                         <div class="nav-search hide">
                             <form><input type="text" placeholder="Search" class="searchbox"/>
@@ -167,7 +159,7 @@
                     </div>
                 </div>
                 <!-- PROGRESS BARS-->
-                <div class="section progress-bars section-padding">
+<!--                <div class="section progress-bars section-padding">
                     <div class="container">
                         <div class="progress-bars-content">
                             <div class="progress-bar-wrapper"><h2 class="title-2">Some important facts about us</h2>
@@ -207,7 +199,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- TOP COURSES-->
                 <div class="section section-padding top-courses">
                     <div class="container">
@@ -502,7 +494,7 @@
                     </div>
                 </div>-->
                 <!-- BEST STAFF-->
-                <div class="section section-padding background-opacity best-staff">
+<!--                <div class="section section-padding background-opacity best-staff">
                     <div class="container">
                         <div class="group-title-index"><h4 class="top-title">touch them if you want</h4>
 
@@ -559,7 +551,7 @@
                         <div class="btn-prev"><i class="fa fa-angle-left"></i></div>
                         <div class="btn-next"><i class="fa fa-angle-right"></i></div>
                     </div>
-                </div>
+                </div>-->
                 <!-- PICTURE AND GALLERY-->
                 <div class="section section-padding picture-gallery">
                     <div class="group-title-index"><h4 class="top-title">see and feel it</h4>
@@ -759,12 +751,11 @@
             <div class="hyperlink">
                 <div class="pull-left hyper-left">
                     <ul class="list-inline">
-                        <li><a href="index.html">HOME</a></li>
-                        <li><a href="courses.html">COURSES</a></li>
-                        <li><a href="about-us.html">ABOUT</a></li>
-                        <li><a href="categories.html">PAGES</a></li>
+                        <li><a href="index">HOME</a></li>
+                        <li><a href="courses-detail">COURSES</a></li>
+                        <li><a href="about-us">ABOUT</a></li>
                         <li><a href="news.html">NEWS</a></li>
-                        <li><a href="contact.html">CONTACT</a></li>
+                        <li><a href="contact">CONTACT</a></li>
                     </ul>
                 </div>
                 <div class="pull-right hyper-right">@ SWLABS</div>

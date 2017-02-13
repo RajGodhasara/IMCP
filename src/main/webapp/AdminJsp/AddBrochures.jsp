@@ -23,7 +23,7 @@
      <h2>Add Brochures1</h2>
      
       
-        <form:form method="POST" commandName="command" action="admin_add_prebrochures_insert">
+        <form:form method="POST" commandName="command" action="admin_add_prebrochures_insert" enctype="multipart/form-data">
 <table>
     <tr>
         <td>
@@ -41,7 +41,7 @@
         </td>
         <td>
             <div class="col-xs-5">
-                <form:input path="upload" cssClass="form-control" />
+                <input type="file" name="file" class="form-control"/>
             </div>
             
         </td>

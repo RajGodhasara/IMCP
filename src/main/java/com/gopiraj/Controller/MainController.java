@@ -90,10 +90,29 @@ public class MainController {
     }
     
     @RequestMapping("/courses-detail")
-    public String getCourseList(ModelMap map) {
+    public ModelAndView getCourseList(ModelMap map) {
 
-        return "CourseList";
-
+        try{
+            SessionFactory sf = null;
+            List list = null;
+            sf = MyDispatureServlet.getSessionFactory();
+            CourseBusiness business = new CourseBusiness();
+            if(sf!=null){
+                System.out.println("Session factory initialized.");
+                list = business.search(sf);
+            }
+            ModelAndView model = new ModelAndView("CourseList", "command", new Course());
+            if(list!=null){
+                System.out.println("Attaching list to model.");
+                model.addObject("courses", list);
+            }
+            return model;   
+        }
+        catch(Exception e){
+            System.out.println("ERROR in INDEX");
+            e.printStackTrace();
+            return null;
+        }        
     }
     
     @RequestMapping("/404")

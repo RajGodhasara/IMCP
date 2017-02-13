@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="enquiry" class="com.gopiraj.Model.Enquiry" fetch="select">
-            <column name="Enq_id" not-null="true" />
+            <column name="Enq_id" not-null="false" />
         </many-to-one>
         <many-to-one name="person" class="com.gopiraj.Model.Person" fetch="select">
             <column name="Person_id" not-null="true" />

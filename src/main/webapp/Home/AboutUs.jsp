@@ -42,8 +42,8 @@
     <div class="header-topbar">
         <div class="container">
             <div class="topbar-left pull-left">
-                <div class="email"><a href="#"><i class="topbar-icon fa fa-envelope-o"></i><span>hello.shinway@gmail.com</span></a></div>
-                <div class="hotline"><a href="#"><i class="topbar-icon fa fa-phone"></i><span>+84 909 015 345</span></a></div>
+                <div class="email"><a href="#"><i class="topbar-icon fa fa-envelope-o"></i><span>Edu-Marketing@gmail.com</span></a></div>
+                <div class="hotline"><a href="#"><i class="topbar-icon fa fa-phone"></i><span>+99 8866142423</span></a></div>
             </div>
             <div class="topbar-right pull-right">
                 <div class="socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a><a href="#" class="blog"><i class="fa fa-rss"></i></a><a href="#" class="dribbble"><i class="fa fa-dribbble"></i></a></div>
@@ -60,49 +60,19 @@
                 </div>
                 <nav class="navigation collapse navbar-collapse pull-right">
                     <ul class="nav-links nav navbar-nav">
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">Home<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            <ul class="dropdown-menu edugate-dropdown-menu-1">
-                                <li><a href="index.html" class="link-page">Home page 01</a></li>
-                                <li><a href="homepage-02.html" class="link-page">Home page 02</a></li>
-                                <li><a href="homepage-03.html" class="link-page">Home page 03</a></li>
-                            </ul>
+                        <li><a href="index" class="main-menu">Home</a>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">Courses<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            <ul class="dropdown-menu edugate-dropdown-menu-1">
-                                <li><a href="courses.html" class="link-page">courses</a></li>
-                                <li><a href="courses-detail.html" class="link-page">course detail</a></li>
-                                <li><a href="events.html" class="link-page">events</a></li>
-                                <li><a href="event-detail.html" class="link-page">event detail</a></li>
-                            </ul>
+                        <li><a href="courses-detail" class="main-menu">Courses</a>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">gallery<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            <ul class="dropdown-menu edugate-dropdown-menu-1">
-                                <li><a href="gallery-3column.html" class="link-page">gallery 3 column</a></li>
-                                <li><a href="gallery-4column.html" class="link-page">gallery 4 column</a></li>
-                                <li><a href="gallery-masonry.html" class="link-page">gallery masonry</a></li>
-                            </ul>
+                        <li><a href="#" class="main-menu">gallery</a>
                         </li>
-                        <li class="dropdown active"><a href="javascript:void(0)" class="main-menu">pages<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            <ul class="dropdown-menu edugate-dropdown-menu-1">
-                                <li><a href="categories.html" class="link-page">categories</a></li>
-                                <li><a href="profile-teacher.html" class="link-page">profile teacher</a></li>
-                                <li><a href="about-us.html" class="link-page">about us</a></li>
-                                <li><a href="login.html" class="link-page">login</a></li>
-                                <li><a href="register.html" class="link-page">register</a></li>
-                                <li><a href="404.html" class="link-page">404 page</a></li>
-                                <li><a href="faq.html" class="link-page">FAQ page</a></li>
-                            </ul>
+                        <li class="active"><a href="aboutus-us" class="main-menu">About Us</a>
                         </li>
-                        <li class="dropdown"><a href="javascript:void(0)" class="main-menu">News<span class="fa fa-angle-down icons-dropdown"></span></a>
-                            <ul class="dropdown-menu edugate-dropdown-menu-1">
-                                <li><a href="news.html" class="link-page">news list</a></li>
-                                <li><a href="news-grid.html" class="link-page">news grid</a></li>
-                                <li><a href="news-grid-nonsidebar.html" class="link-page">news grid nonsidebar</a></li>
-                                <li><a href="news-masonry.html" class="link-page">news masonry</a></li>
-                                <li><a href="news-detail.html" class="link-page">news detail</a></li>
-                            </ul>
+                        <li><a href="#" class="main-menu">News</a>
                         </li>
-                        <li><a href="contact.html" class="main-menu">Contact</a></li>
+                        <li><a href="contact" class="main-menu">Contact</a>
+                        </li>
+                        
                         <li class="button-search"><p class="main-menu"><i class="fa fa-search"></i></p></li>
                         <div class="nav-search hide">
                             <form><input type="text" placeholder="Search" class="searchbox"/>
@@ -120,16 +90,16 @@
     <div id="page-wrapper"><!-- MAIN CONTENT-->
         <div class="main-content"><!-- CONTENT-->
             <div class="content">
-                <div class="section background-opacity page-title set-height-top">
+<!--                <div class="section background-opacity page-title set-height-top">
                     <div class="container">
-                        <div class="page-title-wrapper"><!--.page-title-content--><h2 class="captions">about us</h2>
+                        <div class="page-title-wrapper">.page-title-content<h2 class="captions">about us</h2>
                             <ol class="breadcrumb">
                                 <li><a href="index.html">Home</a></li>
                                 <li class="active"><a href="#">About</a></li>
                             </ol>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="section nav-subscribe">
                     <div class="container">
                         <div class="nav-subscribe-wrapper">
@@ -151,10 +121,10 @@
                                     <div class="intro-content"><p>Aliquam pulvinar pellentesque purus, nec condimentum nibh. Aenean dapibus iaculis odio id vestibulum. Nam at justo ante. Aenean hendrerit gravida ligula, id lacinia sapien tristique eget. In elit ipsum, vestibulum eu pulvinar sed.</p>
 
                                         <p>Maecenas eros mi, lacinia eu ultricies vel, elementum et justo. Ut at tortor a odio vestibulum suscipit non sit amet dolor. Morbi molestie magna nec metus facilisis, at iaculis mi adipiscing. Praesent ac diam velit. Curabitur lacinia tristique velit ut laoreet. Nam pretium id risus vitae fermentum. Aenean eu euismod justo. Aliquam sodales tortor elit, non luctus felis tristique sit amet.</p></div>
-                                    <div class="group-button">
+<!--                                    <div class="group-button">
                                         <button class="btn btn-transition-2"><span>purchase theme</span></button>
                                         <button class="btn btn-green"><span>start learn now</span></button>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -183,7 +153,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="section section-padding edu-feature">
+<!--                <div class="section section-padding edu-feature">
                     <div class="container">
                         <div class="edu-feature-wrapper">
                             <div class="row">
@@ -234,7 +204,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- PROGRESS BARS-->
                 <div class="section progress-bars section-padding">
                     <div class="container">
@@ -265,10 +235,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="group-button">
+<!--                                <div class="group-button">
                                     <button onclick="window.location.href='categories.html'" class="btn btn-transition-3"><span>Purchase theme</span></button>
                                     <button onclick="window.location.href='about-us.html'" class="btn btn-green-3"><span>start Learn now</span></button>
-                                </div>
+                                </div>-->
                                 <div class="group-btn-slider">
                                     <div class="btn-prev"><i class="fa fa-angle-left"></i></div>
                                     <div class="btn-next"><i class="fa fa-angle-right"></i></div>
@@ -375,7 +345,7 @@
                     </a></div>
                 </div>
                 <!-- SLIDER LOGO-->
-                <div class="section slider-logo">
+<!--                <div class="section slider-logo">
                     <div class="container">
                         <div class="slider-logo-wrapper">
                             <div class="slider-logo-content">
@@ -396,7 +366,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -405,7 +375,7 @@
 </div>
 <!-- FOOTER-->
 <footer>
-    <div class="footer-top">
+<!--    <div class="footer-top">
         <div class="container">
             <div class="footer-top-wrapper">
                 <div class="footer-top-left"><p class="footer-top-focus">BECOME AN INSTRUCTOR</p>
@@ -416,7 +386,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="footer-main">
         <div class="container">
             <div class="footer-main-wrapper">
@@ -502,12 +472,11 @@
             <div class="hyperlink">
                 <div class="pull-left hyper-left">
                     <ul class="list-inline">
-                        <li><a href="index.html">HOME</a></li>
-                        <li><a href="courses.html">COURSES</a></li>
-                        <li><a href="about-us.html">ABOUT</a></li>
-                        <li><a href="categories.html">PAGES</a></li>
+                        <li><a href="index">HOME</a></li>
+                        <li><a href="courses-detail">COURSES</a></li>
+                        <li><a href="about-us">ABOUT</a></li>
                         <li><a href="news.html">NEWS</a></li>
-                        <li><a href="contact.html">CONTACT</a></li>
+                        <li><a href="contact">CONTACT</a></li>
                     </ul>
                 </div>
                 <div class="pull-right hyper-right">@ SWLABS</div>

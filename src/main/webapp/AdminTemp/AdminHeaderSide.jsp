@@ -132,6 +132,48 @@
 
 <script src="AdminJS/index.js"></script> <!-- Index Javascripts -->
     
+        <script>
+ $(document).ready(function()
+ {
+     	alert("Welcome");
+	var totalElements = jQuery('.CheckField').length;
+	var count=0;	
+	$("#progressmain").hide();
+	$("#Form").change(function()
+	{
+		//alert("change");
+		$(".CheckField").each(function(index) {
+			
+			if($(this).val().length > 0) {
+				
+				count++;
+				
+			}
+			
+			
+		});
+		//alert(count);
+		
+		var progress = (count/totalElements)*100;
+		//alert("Progress"+progress);
+		
+		$("#progress").attr("aria-valuenow", progress);
+		$("#progress").attr("style", "width:"+progress+"%");
+		$("#progress").text(progress+"%");
+		
+		if(count>0)
+		{
+			$("#progressmain").show();
+		}
+		else
+		{
+			$("#progressmain").hide();
+		}
+		
+		count=0;
+	});
+});
+</script>
     
 </head>
 

@@ -60,7 +60,7 @@ public class SentSMSBusiness {
             }
             catch(Exception e)
             {
-                return "Error:"+e.getStackTrace();
+                return "Error:"+e.getMessage();
             }
     }
     public SentSms searchById(int id)
@@ -95,6 +95,8 @@ public class SentSMSBusiness {
             return null;
         }
     }
+    
+    
     
     public String delete(int id)
     {

@@ -42,6 +42,21 @@
     </tr>
     
     <tr>
+        <td>
+            <label class="col-xs-3 control-label">For What</label>
+        </td>
+        <td>
+            <div class="col-xs-5">
+                <form:select path="forWhat">
+                            <form:option value="NONEE" label="--- Select ---"/>
+                            <form:option label="SMS" value="SMS" />
+                            <form:option label="EMAIL" value="EMAIL" />
+                </form:select>
+            </div>
+        </td>
+    </tr>
+    
+    <tr>
         <td colspan="2">
             <div class="form-group">
                 <div class="col-xs-5 col-xs-offset-3" style="margin-left: 150px;">

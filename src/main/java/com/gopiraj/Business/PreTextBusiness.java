@@ -7,6 +7,7 @@
 package com.gopiraj.Business;
 
 
+import com.gopiraj.Model.Person;
 import com.gopiraj.Model.PreText;
 import com.gopiraj.dispature.MyDispatureServlet;
 import java.util.List;
@@ -80,6 +81,45 @@ public class PreTextBusiness {
             Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from PreText").list();
+            t.commit();
+            
+            return list;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }
+    
+    public PreText searchByText(String title)
+    {
+        try
+        {
+            s = sf.openSession(); 
+            Transaction t = s.beginTransaction();
+            int id=0;
+            String hql = "select preTextId from PreText PT where PT.title = ?";
+            id = (int)s.createQuery(hql).setString(0,title).uniqueResult();
+            PreText pretext = searchById(id);
+            t.commit();
+            s.close();
+            return pretext;
+        }
+        catch(Exception e)
+        {
+            System.out.println("searchByText:"+e.getMessage());
+            return null;
+        }
+    }
+    
+    public List searchTitle()
+    {
+        try
+        {
+             s = sf.openSession(); 
+            Transaction t = s.beginTransaction();
+            List list;
+            list = s.createQuery("select title from PreText").list();
             t.commit();
             
             return list;

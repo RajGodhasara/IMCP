@@ -54,7 +54,7 @@ public class PreBrochuresBusiness {
             }
             catch(Exception e)
             {
-                return "Error:"+e.getStackTrace();
+                return "Error:"+e.getMessage();
             }
     }
     public PreBrochures searchById(int id)
