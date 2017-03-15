@@ -12,13 +12,19 @@
             <column name="menu_name" length="45" not-null="true" />
         </property>
         <property name="pageName" type="string">
-            <column name="page_name" length="45" not-null="true" />
+            <column name="page_name" length="45" not-null="false" />
         </property>
         <set name="menuTypes" table="menu_type" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="menu_master_id" not-null="true" />
             </key>
             <one-to-many class="com.gopiraj.Model.MenuType" />
+        </set>
+        <set name="subMenuTypes" table="submenu_type" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="subMenuMasterId" not-null="false" />
+            </key>
+            <one-to-many class="com.gopiraj.Model.SubmenuMaster" />
         </set>
     </class>
 </hibernate-mapping>

@@ -3,8 +3,8 @@
     Created on : Dec 23, 2016, 3:06:49 PM
     Author     : GOPIRAJ
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,11 +42,15 @@
     <div class="header-topbar">
         <div class="container">
             <div class="topbar-left pull-left">
-                <div class="email"><a href="#"><i class="topbar-icon fa fa-envelope-o"></i><span>Edu-Marketing@gmail.com</span></a></div>
-                <div class="hotline"><a href="#"><i class="topbar-icon fa fa-phone"></i><span>+99 8866142423</span></a></div>
+                <c:forEach items="${details}" var="details">
+                    <div class="email"><a href="#"><i class="topbar-icon fa fa-envelope-o"></i><span>${details.emailId1}</span></a></div>
+                <div class="hotline"><a href="#"><i class="topbar-icon fa fa-phone"></i><span>${details.mobileNo}</span></a></div>
+                </c:forEach>
             </div>
             <div class="topbar-right pull-right">
-                <div class="socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a><a href="#" class="blog"><i class="fa fa-rss"></i></a><a href="#" class="dribbble"><i class="fa fa-dribbble"></i></a></div>
+                <c:forEach items="${link}" var="link">
+                <div class="socials"><a href="${link.facebook}" class="facebook"><i class="fa fa-facebook"></i></a><a href="${link.gmail}" class="google"><i class="fa fa-google-plus"></i></a><a href="${link.twitter}" class="twitter"><i class="fa fa-twitter"></i></a></div>
+                </c:forEach>
                 <div class="group-sign-in"><a href="login.html" class="login">login</a><a href="register.html" class="register">register</a></div>
             </div>
         </div>
@@ -258,7 +262,21 @@
                         </div>
                         <div class="best-staff-wrapper">
                             <div class="best-staff-content">
-                                <div class="staff-item customize">
+                                <c:forEach items="${teachers}" var="teachers">
+                                    <div class="staff-item customize">
+                                    <div class="staff-item-wrapper"><!--data:image/jpeg;utf8;base64,-->
+                                        <!-- insted use file system for image and while getting download image from database into file system and then fetch that file from the file system to print image on jsp file.-->
+                                        <!-- for low Server-client operation you can download all the images at the time of initialize project and use latter from the file system.
+                                        <div class="staff-info"><a href="#" class="staff-avatar"><img src="${teachers.photograph}" alt="" style="border-color: red; border: 1px;" class=""/></a><a href="#" class="staff-name">${teachers.name}</a>
+
+                                            <div class="staff-job">${teachers.designation}</div>
+                                            <div class="staff-desctiption">${teachers.thought}</div>
+                                        </div>
+                                    </div>
+                                    <div class="staff-socials"><a href="${teachers.facebook}" class="facebook"><i class="fa fa-facebook"></i></a><a href="${teachers.gmail}" class="google"><i class="fa fa-google-plus"></i></a><a href="${teachers.twitter}" class="twitter"><i class="fa fa-twitter"></i></a></div>
+                                    </div>
+                                </c:forEach>
+<!--                                <div class="staff-item customize">
                                     <div class="staff-item-wrapper">
                                         <div class="staff-info"><a href="#" class="staff-avatar"><img src="assets/images/people-avatar-2.jpg" alt="" class="img-responsive"/></a><a href="#" class="staff-name">Alex trevor</a>
 
@@ -297,7 +315,7 @@
                                         </div>
                                     </div>
                                     <div class="staff-socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -311,7 +329,17 @@
                     <div class="container">
                         <div id="people-talk" data-ride="carousel" data-interval="5000" class="slider-talk-about-us-wrapper carousel slide">
                             <div role="listbox" class="slider-talk-about-us-content carousel-inner">
-                                <div class="peopel-item item active"><p class="peopel-comment">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "</p>
+                                <c:forEach items="${corporates}" var="corporates">
+                                    <div class="peopel-item item active"><p class="peopel-comment">" ${corporates.thought}"</p>
+
+                                    <div class="group-peole-info">
+                                        <div class="peopel-avatar"><img src="assets/images/people-avatar-1.jpg" alt="" class="img-responsive"/></div>
+                                        <div class="peopel-name">${corporates.name}</div>
+                                        <div class="people-job">${corporates.designation}</div>
+                                    </div>
+                                    </div>
+                                </c:forEach>
+<!--                                <div class="peopel-item item active"><p class="peopel-comment">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. "</p>
 
                                     <div class="group-peole-info">
                                         <div class="peopel-avatar"><img src="assets/images/people-avatar-1.jpg" alt="" class="img-responsive"/></div>
@@ -334,7 +362,7 @@
                                         <div class="peopel-name">john doe</div>
                                         <div class="people-job">Microshop Crop.SEO</div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -462,7 +490,9 @@
                                     </form>
                                     <p>We respect your privacy</p>
 
-                                    <div class="socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a><a href="#" class="blog"><i class="fa fa-rss"></i></a><a href="#" class="dribbble"><i class="fa fa-dribbble"></i></a></div>
+                                    <c:forEach items="${link}" var="link">
+                <div class="socials"><a href="${link.facebook}" class="facebook"><i class="fa fa-facebook"></i></a><a href="${link.gmail}" class="google"><i class="fa fa-google-plus"></i></a><a href="${link.twitter}" class="twitter"><i class="fa fa-twitter"></i></a></div>
+                </c:forEach>
                                 </div>
                             </div>
                         </div>

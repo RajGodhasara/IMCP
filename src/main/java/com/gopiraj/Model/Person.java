@@ -31,6 +31,7 @@ public class Person  implements java.io.Serializable {
      private Employee employee;
      private Set feedbacks = new HashSet(0);
      private Set sentSmses = new HashSet(0);
+     
 
     public Person() {
     }
@@ -68,6 +69,7 @@ public class Person  implements java.io.Serializable {
        this.employee = employee;
        this.feedbacks = feedbacks;
        this.sentSmses = sentSmses;
+       
     }
    
     public Integer getPersonId() {
@@ -204,8 +206,6 @@ public class Person  implements java.io.Serializable {
         this.sentSmses = sentSmses;
     }
 
-
-
-
+  
 }
 

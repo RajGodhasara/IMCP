@@ -10,14 +10,13 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Pretext</title>
-    </head>
-    <body><div class="form-group">
-       
-            <form:form method="POST" commandName="command" action="admin_add_pretext_insert">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Add Pretext</title>
+</head>
+<body>
+    <div class="form-group">
+        <form:form method="POST" commandName="command" action="admin_add_pretext_insert">
 <table>
     <tr>
         <td>
@@ -29,7 +28,6 @@
             </div>
         </td>
     </tr>
-    
     <tr>
         <td>
             <label class="col-xs-3 control-label">Description</label>
@@ -40,7 +38,6 @@
             </div>
         </td>
     </tr>
-    
     <tr>
         <td>
             <label class="col-xs-3 control-label">For What</label>
@@ -55,7 +52,6 @@
             </div>
         </td>
     </tr>
-    
     <tr>
         <td colspan="2">
             <div class="form-group">
@@ -67,6 +63,6 @@
     </tr>
 </table>
 </form:form>
-            </div>
-    </body>
+</div>
+</body>
 </html>

@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,37 +39,74 @@ public class AdminEnquiryController {
     }
     
     @RequestMapping("/admin_insert_enquiry")
-    public ModelAndView getAdminInsertCourse(ModelMap map,@ModelAttribute Enquiry enq) {
+    public ModelAndView getAdminInsertCourse(ModelMap map,@ModelAttribute Enquiry enq,HttpServletRequest req) {
         
-        String answer = "NULL";
-        String answer1 = "NULL";
-        String no=null;
+        String contactNo1=null;
+        String contactNo2=null;
+        String contactNo3=null;
+        String contactNo4=null;
+        String contactNo5=null;
+        if(req.getParameter("dynamic2")!=null){
+            contactNo1 = req.getParameter("dynamic1");
+            System.out.println(req.getParameter("dynamic2"));
+        }
+        if(req.getParameter("dynamic2")!=null){
+            contactNo2 = req.getParameter("dynamic2");
+            System.out.println(req.getParameter("dynamic2"));
+        }
+        if(req.getParameter("dynamic3")!=null){
+             contactNo3 = req.getParameter("dynamic3");
+            System.out.println(req.getParameter("dynamic3"));
+        }
+        if(req.getParameter("dynamic4")!=null){
+             contactNo4 = req.getParameter("dynamic4");
+            System.out.println(req.getParameter("dynamic4"));
+        }
+        if(req.getParameter("dynamic5")!=null){
+             contactNo5 = req.getParameter("dynamic5");
+            System.out.println(req.getParameter("dynamic5"));
+        }
+     
         EnquiryBusiness business = new EnquiryBusiness();
-        EnquiryContactno cn = new EnquiryContactno();
- 
-        Set<EnquiryContactno> set = new HashSet<EnquiryContactno>();
-        
+     
         enq.setCreationTime(new Date());
         
-        set = enq.getEnquiryContactnos();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            no = iter.next().toString();
-        }
-        
-        cn.setContactNumber(Long.parseLong(no));
-        cn.setEnquiry(enq);
-        
         if(enq!=null){
-            answer = business.insert(enq);
-            answer1 = business.insertContact(cn);
-            System.out.println(answer);
-            System.out.println(answer1);
+            System.out.println(business.insert(enq));
         }
         
+        if(contactNo1!=null){
+            EnquiryContactno cn = new EnquiryContactno();
+            cn.setContactNumber(Long.parseLong(contactNo1));
+            cn.setEnquiry(enq);
+            System.out.println(business.insertContact(cn));
+        }
+        if(contactNo2!=null){
+            EnquiryContactno cn = new EnquiryContactno();
+            cn.setContactNumber(Long.parseLong(contactNo2));
+            cn.setEnquiry(enq);
+            System.out.println(business.insertContact(cn));
+        }
+        if(contactNo3!=null){
+            EnquiryContactno cn = new EnquiryContactno();
+            cn.setContactNumber(Long.parseLong(contactNo3));
+            cn.setEnquiry(enq);
+            System.out.println(business.insertContact(cn));
+        }
+        if(contactNo4!=null){
+            EnquiryContactno cn = new EnquiryContactno();
+            cn.setContactNumber(Long.parseLong(contactNo4));
+            cn.setEnquiry(enq);
+            System.out.println(business.insertContact(cn));
+        }
+        if(contactNo5!=null){
+            EnquiryContactno cn = new EnquiryContactno();
+            cn.setContactNumber(Long.parseLong(contactNo5));
+            cn.setEnquiry(enq);
+            System.out.println(business.insertContact(cn));
+        }
         
         ModelAndView model = new ModelAndView("AdminJsp-AddEnquiry", "command", new Enquiry());
-        model.addObject(answer);
         return model;
     }
 }

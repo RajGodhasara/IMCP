@@ -135,8 +135,7 @@
         <script>
  $(document).ready(function()
  {
-     	alert("Welcome");
-	var totalElements = jQuery('.CheckField').length;
+     	var totalElements = jQuery('.CheckField').length;
 	var count=0;	
 	$("#progressmain").hide();
 	$("#Form").change(function()
@@ -240,12 +239,24 @@
             <ul id="nav">
                 <c:forEach items="${sessionScope.menu}" var="m">
                 
-                    <li class="has_sub"><a href="${m.pageName}" class="open"><i class="fa fa-home"></i><span>${m.menuName}</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
-                    
+                    <li class="has_sub"><a href="#"><i class="fa fa-home"></i><span>${m.menuName}</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
+                        <ul>
+                            <c:forEach items="${m.subMenuTypes}" var="s">
+                                <li><a href="${s.subPageName}">${s.subMenuName}</a></li>
+                            </c:forEach> 
+                        </ul>
                     </li>
                 </c:forEach>
-                
-                <!-- Main menu with font awesome icon -->
+               
+                <li class="has_sub"><a href="#" class="open"><i class="fa fa-home"></i><span>Manage Permissions</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
+                    <ul>
+                        <li><a href="admin_add_permissions">Add Permissions</a></li>
+                        <li><a href="#">Search Permissions</a></li>
+                    </ul>
+                </li>    
+                    
+                    
+<!--                 Main menu with font awesome icon 
                 <li class="has_sub"><a href="#" class="open"><i class="fa fa-home"></i><span>Manage Post</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
                     <ul>
                         <li><a href="admin_add_activity">Add Post</a></li>
@@ -301,7 +312,7 @@
                     </ul>
                 </li>
                 
-               
+               -->
                
               
 

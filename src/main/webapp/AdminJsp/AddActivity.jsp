@@ -14,39 +14,31 @@
         <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        
-        
         <script type="text/javascript">
             $(document).ready(function()
             {
-                alert("welcome....");
-                
                 jQuery("#activitySubmit").click(function () {
                     jQuery.ajax({
                         url: 'admin_add_activity_insert',
                         async: false,
                         data: {
-                            Description: jQuery('#Description').val()
-                            
-                        },  
-                        dataType: 'json',
+                            Description: jQuery('#Description').val()},  
+                        dataType: 'text',
                         success: function (params) {
-                            alert('updated successfully');
+                            alert('Posted successfully');
                         },
                         error: function (error) {
-                            alert('update failed !!'+error.val());
+                            alert('Posted failed !!'+error.val());
                         }
-                    })
+                    });
                 });
             });
         </script>
         
         <script>
             $(document).ready(function(){
-
-    
-    $("[data-toggle=tooltip]").tooltip();
-});
+                $("[data-toggle=tooltip]").tooltip();
+            });
         </script>
         
         <style>
@@ -283,116 +275,110 @@ margin-right: 7px;
 }
         </style>
         
-        
-    </head>
-     <body>
-
-         
-         <div class="container">
-
+        <script>
+function myFunction(id) {
+    jQuery.ajax({
+                        url: 'admin_add_activity_comment_insert',
+                        async: false,
+                        data: {
+                            ActivityID: id,
+                            Comment: jQuery('#commentText'+id).val()
+                        },  
+                        dataType: 'text',
+                        success: function (params) {
+                            alert('Comment Inserted');
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert('Comment Inserting failed !!'+error.val());
+                        }
+                    });
     
+}
+</script>
+</head>
+<body>
+<div class="container">
     <div class="row">
-    
         <div class="col-md-6" style="width:65%; margin-left: 17px;">
-    						<div class="widget-area no-padding blank">
-								<div class="status-upload">
-									<form>
-                                                                            <textarea id="Description" placeholder="What are you doing right now?" ></textarea>
-										<ul>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
-											<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
-										</ul>
-                                                                            <button type="submit" id="activitySubmit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-									</form>
-								</div><!-- Status Upload  -->
-							</div><!-- Widget Area -->
-						</div>
-        
+            <div class="widget-area no-padding blank">
+                <div class="status-upload">
+                    <form>
+                        <textarea id="Description" placeholder="What are you doing right now?" ></textarea>
+                            <ul>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
+				<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
+				<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
+                            </ul>
+                            <button type="submit" id="activitySubmit" class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
+                    </form>
+		</div><!-- Status Upload  -->
+            </div><!-- Widget Area -->
+	</div>
     </div>
 </div>
-        
-         <c:forEach items="${activity}" var="activity">        
-         <div class="container">
-    <div class="col-sm-8">
-        <div class="panel panel-white post panel-shadow">
-            <div class="post-heading">
-                <div class="pull-left image">
-                    <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
-                </div>
-                <div class="pull-left meta">
-                    <div class="title h5">
-                        <a href="#"><b>${activity.person.firstName}</b></a>
-                        made a post.
+<c:forEach items="${activity}" var="activity">        
+    <div class="container">
+        <div class="col-sm-8">
+            <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left image">
+                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
                     </div>
-                    <h6 class="text-muted time">${activity.creationTime}</h6>
-                </div>
-            </div> 
-            <div class="post-description"> 
-                <p>${activity.description}</p>
-                <div class="stats">
-                    <a href="#" class="btn btn-default stat-item">
-                        <i class="fa fa-thumbs-up icon"></i>2
-                    </a>
-                    <a href="#" class="btn btn-default stat-item">
-                        <i class="fa fa-share icon"></i>12
-                    </a>
-                </div>
-            </div>
-            <div class="post-footer">
-                <div class="input-group"> 
-                    <input class="form-control" placeholder="Add a comment" type="text">
-                    <span class="input-group-addon">
-                        <a href="#"><i class="fa fa-edit"></i></a>  
-                    </span>
-                </div>
-                <ul class="comments-list">
-                    <li class="comment">
-                        <a class="pull-left" href="#">
-                            <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">
-                        </a>
-                        <div class="comment-body">
-                            <div class="comment-heading">
-                                <h4 class="user">Gavino Free</h4>
-                                <h5 class="time">5 minutes ago</h5>
-                            </div>
-                            <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <a href="#"><b>${activity.person.firstName}</b></a>
+                                made a post.
                         </div>
-                        <ul class="comments-list">
-                            <li class="comment">
-                                <a class="pull-left" href="#">
-                                    <img class="avatar" src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                    <div class="comment-heading">
-                                        <h4 class="user">Ryan Haywood</h4>
-                                        <h5 class="time">3 minutes ago</h5>
-                                    </div>
-                                    <p>Relax my friend</p>
-                                </div>
-                            </li> 
-                            <li class="comment">
-                                <a class="pull-left" href="#">
-                                    <img class="avatar" src="http://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                    <div class="comment-heading">
-                                        <h4 class="user">Gavino Free</h4>
-                                        <h5 class="time">3 minutes ago</h5>
-                                    </div>
-                                    <p>Ok, cool.</p>
-                                </div>
-                            </li> 
-                        </ul>
-                    </li>
-                </ul>
+                        <h6 class="text-muted time">${activity.creationTime}</h6>
+                    </div>
+                </div> 
+                <div class="post-description"> 
+                    <p>${activity.description}</p>
+                    <div class="stats">
+                        <a href="#" class="btn btn-default stat-item">
+                            <i class="fa fa-thumbs-up icon"></i>2
+                        </a>
+                        <a href="#" class="btn btn-default stat-item">
+                            <i class="fa fa-share icon"></i>12
+                        </a>
+                    </div>
+                </div>
+                <div class="post-footer">
+                    <div class="input-group"> 
+                        <input class="form-control" id="commentText${activity.activityId}" placeholder="Add a comment" type="text">
+                            <span class="input-group-addon">
+                                <i class="fa fa-edit" onclick="myFunction(${activity.activityId})"></i> 
+                            </span>
+                    </div>
+                    <ul class="comments-list">
+                        <li class="comment">
+                        
+                            <c:forEach items="${activityComment}" var="activityComment">
+                                <c:choose>
+                                    <c:when test="${activityComment.activity.activityId == activity.activityId}">
+                                        <a class="pull-left" href="#">
+                                            <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">
+                                        </a>
+                                        <div class="comment-body">
+                                            <div class="comment-heading">
+                                                <h4 class="user">${activityComment.person.firstName}</h4>
+                                                <h5 class="time">${activityComment.creationTime}</h5>
+                                            </div>
+                                             <p>${activityComment.comment}</p>
+                                        </div>
+                                    </c:when>    
+                                    <c:otherwise>            
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
- </c:forEach>
-         
-         
-    </body>
+</c:forEach>
+</body>
 </html>

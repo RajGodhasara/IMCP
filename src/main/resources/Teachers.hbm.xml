@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 24, 2017 9:51:21 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.Teachers" table="teachers" catalog="projecttest">
+        <id name="teachersId" type="java.lang.Integer">
+            <column name="teachers_id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <property name="thought" type="string">
+            <column name="thought" length="45" />
+        </property>
+        <property name="photograph" type="binary">
+            <column name="photograph" />
+        </property>
+        <property name="designation" type="string">
+            <column name="designation" length="45" />
+        </property>
+        <property name="facebook" type="string">
+            <column name="facebook" length="45" />
+        </property>
+        <property name="gmail" type="string">
+            <column name="gmail" length="45" />
+        </property>
+        <property name="twitter" type="string">
+            <column name="twitter" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -8,8 +8,11 @@ package com.gopiraj.Business;
 
 import com.gopiraj.Model.MenuMaster;
 import com.gopiraj.Model.Person;
+import com.gopiraj.Model.SubmenuMaster;
 import com.gopiraj.dispature.MyDispatureServlet;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -48,7 +51,15 @@ public class LoginBusiness {
             if(password.equals(pass)){
                 return true;
             }else{
-                return false;
+                String hql2 = "SELECT password FROM Employee E WHERE E.employeeId = ?";
+                String password2 = (String)s.createQuery(hql1).setInteger(0, id).uniqueResult();
+                System.out.println(pass+" :"+password2);
+                if(password2.equals(pass)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
             
             
@@ -91,19 +102,26 @@ public class LoginBusiness {
     {
 	try{
 		ArrayList <MenuMaster> listMenu =new ArrayList<MenuMaster>();
+               
 		MenuMaster menu=null;
                 Session s = sf.openSession();
-                String hql = "SELECT menuTypeId FROM MenuType m WHERE m.personType=:typep";
+                String hql = "SELECT menuMaster.menuMasterId FROM MenuType m WHERE m.personType=:typep";
                 Query q=s.createQuery(hql);
                 q.setParameter("typep", ptype);
                 ArrayList list=(ArrayList)q.list();
-                System.out.println("-------studentttttttttttt"+list+"-----"+list.size());
+                System.out.println("-------studentttttttttttt-----"+list.size());
                 for(int i=0;i<list.size();i++)
                 {
                     int menuTypeId=(Integer)list.get(i);
                     MenuMasterBusiness business=new MenuMasterBusiness();
+                    
                     menu=business.getMenu(menuTypeId);
+                    
+                    //subMenuList = businessSubmenu.getSubMenu(menu.getMenuMasterId());
+                    //menu.setSubMenuTypes(subMenuList);
+                    
                     System.out.println(menu+"---------");
+                    //System.out.println("SUBMENU SIZE:"+menu.getSubMenuTypes().size());
                     listMenu.add(menu);
                 }
                 return listMenu;
@@ -114,4 +132,6 @@ public class LoginBusiness {
         return null;
         }
     }
+    
+    
 }

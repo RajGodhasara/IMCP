@@ -10,20 +10,34 @@
 
 <!DOCTYPE html>
 <html>
-    
     <head>
-     <%--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">%-->
-     <%--  <link href="C:\Users\thakormehta\Documents\NetBeansProjects\IMCP\web\CSS\bootstrap.min.css" rel="stylesheet"/>--%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-    </head>
-    <body>
-     
-       
-     <h2>Add Brochures1</h2>
-     
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#Form").validate({
+        rules : {
+        'title' : {
+                required : true
+            }
+        }
+    });
+});
+</script>
+</head>
+<body>
+    <h2>Add Brochures1</h2>
+        <div class="container">
+            <div id="progressmain" class="progress" style="width: 400px;">
+                <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                     0%
+                </div>
+            </div>
+        </div>
       
-        <form:form method="POST" commandName="command" action="admin_add_prebrochures_insert" enctype="multipart/form-data">
+<form:form method="POST" id="Form" commandName="command" action="admin_add_prebrochures_insert" enctype="multipart/form-data">
 <table>
     <tr>
         <td>
@@ -31,7 +45,7 @@
         </td>
         <td>
             <div class="col-xs-5">
-                <form:input path="title" cssClass="form-control"/>
+                <form:input path="title" id="title" name="title" cssClass="form-control CheckField"/>
             </div>
         </td>
     </tr>
@@ -41,7 +55,7 @@
         </td>
         <td>
             <div class="col-xs-5">
-                <input type="file" name="file" class="form-control"/>
+                <input type="file" name="file" class="CheckField" required="required"/>
             </div>
             
         </td>
@@ -58,6 +72,6 @@
     </tr>
 </table>
 </form:form>
-    </body>
+</body>
 </html>
 

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,16 +6,20 @@
  */
 package com.gopiraj.Controller;
 
+
 import com.gopiraj.Business.CourseBusiness;
+import com.gopiraj.Business.OrganizationAdminBusiness;
 import com.gopiraj.Model.Course;
 import com.gopiraj.Model.OrganizationAdmin;
 import com.gopiraj.Model.Person;
 import com.gopiraj.dispature.MyDispatureServlet;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,28 +43,31 @@ public class AdminCourseController {
     }
     
     @RequestMapping("/admin_search_course")
-    public ModelAndView getAdminSearchCourse(ModelMap map) {
+    public String getAdminSearchCourse(ModelMap map) {
 
-        System.out.println("IN admin_search_course");
-        ModelAndView model = new ModelAndView("AdminJsp-SearchCourse", "command", new Course());
-        return model;
+        CourseBusiness business = new CourseBusiness();
+        List<Course> list = new ArrayList<Course>();
+        list = business.search();
+        System.out.println("Size:"+list.size());
+        map.addAttribute("list", list);
+        
+        return "AdminJsp-SearchCourse";
     }
     
+    
+    
     @RequestMapping("/admin_insert_course")
-    public ModelAndView getAdminInsertCourse(ModelMap map,@ModelAttribute Course course,HttpServletRequest res) {
+    public ModelAndView getAdminInsertCourse(HttpServletResponse res,HttpServletRequest rq,ModelMap map,@ModelAttribute Course course) {
         
-        SessionFactory sf = MyDispatureServlet.getSessionFactory();
         CourseBusiness business = new CourseBusiness();
-        Person person=null;
-        
-        HttpSession session = res.getSession(false);
-        person = (Person)session.getAttribute("person");
-        if(person!=null){
+        if(rq.getSession(false)!=null){
+            HttpSession session = rq.getSession(false);
+            Person person = (Person)session.getAttribute("person");
             course.setOrganizationAdmin(person.getOrganizationAdmin());
-            System.out.println("setting admin");
-        }
+        }      
+               
+        String answer = business.insert(course);
         
-        String answer = business.insert(course, sf);
         System.out.println(answer);
         
         ModelAndView model = new ModelAndView("AdminJsp-AddCourse", "command", new Course());
@@ -67,58 +75,54 @@ public class AdminCourseController {
         return model;
     }
     
-    @RequestMapping("/admin_search_course_grid")
-    public String getAdminSearchCourse(ModelMap map,@ModelAttribute Course course,HttpServletResponse res) {
-        PrintWriter out1=null;
-        SessionFactory sf = MyDispatureServlet.getSessionFactory();
-        CourseBusiness business = new CourseBusiness();
-        try{
-           out1 = res.getWriter();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+    @RequestMapping("/admin_delete_multiple_course")
+    public String deleteMultipleStudent(ModelMap map,HttpServletRequest req){
         
-        JSONObject obj1 = new JSONObject();
-        try{
-                
-                        JSONArray array = new JSONArray();
-                  
-                        List list1 = business.search(sf);
-                        int n=list1.size();
-                        System.out.println("len:"+n);
-                        for(int i=0;i<n;i++)
-                        {
-                            
-                            System.out.println();
-                            course =(Course) list1.get(i);
-                            //System.out.println("Record:"+(i+1));
-                            JSONObject obj = new JSONObject();
-                            obj.put("CourseID", course.getCourseId());
-                            obj.put("CourseName", course.getCourseName());
-                            //System.out.println(course.getCourseId());
-                            obj.put("Description", course.getDescription());
-                            obj.put("OrganizationAdmin", course.getOrganizationAdmin().getPerson().getFirstName());
-                            obj.put("Duration", course.getDuration());
-                  
-                            /* 
-                            obj.put("CreationTime", rs.getDate("Creation_Time"));
-                    
-                            */                         
-                              array.put(obj);
-                        }
-                    
-                
-                obj1.put("rows", array);
-                System.out.println(obj1.toString());
-                out1.print(obj1.toString());
-                
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-        return null;
+        CourseBusiness courseBusiness = new CourseBusiness();
+        String id = req.getParameter("listSelectedCourse");
+        if(id!=null){
+            List<Course> st = courseBusiness.getStudentObject(id);
+            if(st!=null){
+                courseBusiness.deleteMultiple(st);
+            }
+            else{
+                System.out.println("IN ELSE");
+            }
+        }
+        List<Course> list = new ArrayList<Course>();
+        list = courseBusiness.search();
+        map.addAttribute("list", list);
+        return "AdminJsp-SearchCourse";
+    }
+    
+    @RequestMapping("/EditCourse")
+    public String editGrid(ModelMap map,HttpServletRequest req){
+        
+        System.out.println("IN EDIT");
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        int dur = Integer.parseInt(req.getParameter("dur"));
+        String desc = req.getParameter("desc");
+        String admin = req.getParameter("admin");
+        Course course = new Course();
+        course.setCourseName(name);
+        course.setDescription(desc);
+        course.setDuration(dur);
+        course.setCourseId(id);
+        
+        CourseBusiness courseBusiness = new CourseBusiness();
+        
+        Course courseObj = courseBusiness.searchById(id);
+        
+        course.setOrganizationAdmin(courseObj.getOrganizationAdmin());
+        
+        CourseBusiness business = new CourseBusiness();
+        System.out.println(business.update(course));
+        
+        List<Course> st1 = business.search();
+        System.out.println("Size:"+st1.size());
+        map.addAttribute("list", st1);
+        return "AdminJsp-SearchCourse";
     }
     
 }

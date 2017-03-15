@@ -20,5 +20,6 @@
         <property name="attachment" type="binary">
             <column name="Attachment" />
         </property>
+       
     </class>
 </hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 26, 2017 12:45:47 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.PersonType" table="person_type" catalog="projecttest">
+        <id name="personTypeId" type="java.lang.Integer">
+            <column name="person_type_id" />
+            <generator class="identity" />
+        </id>
+        <property name="personTypeName" type="string">
+            <column name="person_type_name" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -10,6 +10,7 @@ package com.gopiraj.Business;
 import com.gopiraj.Model.Course;
 import com.gopiraj.Model.OrganizationAdmin;
 import com.gopiraj.dispature.MyDispatureServlet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import org.hibernate.Session;
@@ -42,9 +43,9 @@ public class CourseBusiness {
     }
      
     
-    public String insert(Course course,SessionFactory sf1)
+    public String insert(Course course)
     {
-            s = sf1.openSession();
+            s = sf.openSession();
             Transaction tx = s.beginTransaction();
             
             try
@@ -79,11 +80,11 @@ public class CourseBusiness {
         }
     }
     
-    public OrganizationAdmin searchByAdminId(int id,SessionFactory sf1)
+    public OrganizationAdmin searchByAdminId(int id)
     {
         try
         {
-            s = sf1.openSession();
+            s = sf.openSession();
             OrganizationAdmin admin = (OrganizationAdmin)s.get(OrganizationAdmin.class, id);
             
             return admin;
@@ -94,11 +95,11 @@ public class CourseBusiness {
         }
     }
     
-    public List search(SessionFactory sf1)
+    public List search()
     {
         try
         {
-            s = sf1.openSession();
+            s = sf.openSession();
             Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from Course").list();
@@ -141,9 +142,43 @@ public class CourseBusiness {
             
     }
     
+    public void deleteMultiple(List<Course> list) {
+            Session s;
+            s = sf.openSession();
+            Transaction t = s.beginTransaction();
+            for(int i=0;i<list.size();i++){
+                s.delete(list.get(i));
+            }
+            
+            t.commit();
+    }
+    
+    public List<Course> getStudentObject(String str) {
+        try
+        {
+            List<Course> listStudent = new ArrayList<Course>();
+            Session s;
+            SessionFactory sf = MyDispatureServlet.getSessionFactory();
+            s = sf.openSession();
+            String[] parts = str.split(":");
+            for(int i=0;i<parts.length;i++){
+                Course st = (Course)s.get(Course.class, Integer.parseInt(parts[i]));
+                listStudent.add(st);
+            }
+            s.close();
+            return listStudent;
+           
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public String update(Course course)
     {
-           // Session ss = sf.openSession();
+            Session s = sf.openSession();
             Transaction tx = s.beginTransaction();
            
             try
@@ -153,12 +188,12 @@ public class CourseBusiness {
                     s.update(course);
                 }
                 tx.commit();
-            
+                s.close();
                 return "Updated.";      
             }
             catch(Exception e)
             {
-                return "Error:"+e.getStackTrace();
+                return "Error:"+e.getMessage();
             }
             
     }

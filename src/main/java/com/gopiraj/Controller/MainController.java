@@ -6,14 +6,22 @@
 
 package com.gopiraj.Controller;
 
+import com.gopiraj.Business.BasicDetailsBusiness;
+import com.gopiraj.Business.CorporatesBusiness;
 import com.gopiraj.Business.CourseBusiness;
 import com.gopiraj.Business.LoginBusiness;
+import com.gopiraj.Business.SocialLinksBusiness;
+import com.gopiraj.Business.SubmenuMasterBusiness;
+import com.gopiraj.Business.TeachersBusiness;
 import com.gopiraj.Model.Course;
 import com.gopiraj.Model.Login;
 import com.gopiraj.Model.MenuMaster;
 import com.gopiraj.Model.Person;
+import com.gopiraj.Model.Teachers;
 import com.gopiraj.dispature.MyDispatureServlet;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -33,18 +42,23 @@ public class MainController {
     @RequestMapping("/index")
     public ModelAndView getHome(ModelMap map) {
         try{
-            SessionFactory sf = null;
+           
             List list = null;
-            sf = MyDispatureServlet.getSessionFactory();
+            List linkList = null;
+            List detailsList = null;
             CourseBusiness business = new CourseBusiness();
-            if(sf!=null){
+            SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
+            BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
                 System.out.println("Session factory initialized.");
-                list = business.search(sf);
-            }
+                list = business.search();
+                linkList = linkBusiness.search();
+                detailsList = detalsBusiness.search();
             ModelAndView model = new ModelAndView("Index", "command", new Course());
             if(list!=null){
                 System.out.println("Attaching list to model.");
                 model.addObject("courses", list);
+                model.addObject("link", linkList);
+                model.addObject("details", detailsList);
             }
             return model;   
         }
@@ -57,14 +71,41 @@ public class MainController {
     
     @RequestMapping("/aboutus-us")
     public String getAboutUs(ModelMap map) {
-
+        List linkList = null;
+        List detailsList = null;
+        List TeacherList = null;
+        List corporateList = null;
+        SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
+        BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
+        TeachersBusiness teacherBusiness = new TeachersBusiness();
+        CorporatesBusiness corporateBusiness = new CorporatesBusiness();
+        linkList = linkBusiness.search();
+        detailsList = detalsBusiness.search();
+        TeacherList = teacherBusiness.search();
+        
+            
+            
+        
+        
+        corporateList = corporateBusiness.search();
+        map.addAttribute("link",linkList);
+        map.addAttribute("details", detailsList);
+        map.addAttribute("teachers", TeacherList);
+        map.addAttribute("corporates", corporateList);
         return "AboutUs";
 
     }
       
     @RequestMapping("/contact")
     public String getContactUs(ModelMap map) {
-        
+        List linkList = null;
+        List detailsList = null;
+        SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
+        BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
+        linkList = linkBusiness.search();
+        detailsList = detalsBusiness.search();
+        map.addAttribute("link",linkList);
+        map.addAttribute("details", detailsList);
         return "ContactUs";
     
     }
@@ -91,20 +132,30 @@ public class MainController {
     
     @RequestMapping("/courses-detail")
     public ModelAndView getCourseList(ModelMap map) {
-
+        
+        
         try{
-            SessionFactory sf = null;
+            //SessionFactory sf = null;
             List list = null;
-            sf = MyDispatureServlet.getSessionFactory();
+            List linkList = null;
+            List detailsList = null;
+            //sf = MyDispatureServlet.getSessionFactory();
             CourseBusiness business = new CourseBusiness();
-            if(sf!=null){
+            BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
+            SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
+
+            //if(sf!=null){
                 System.out.println("Session factory initialized.");
-                list = business.search(sf);
-            }
+                list = business.search();
+                linkList = linkBusiness.search();
+                detailsList = detalsBusiness.search();
+            //}
             ModelAndView model = new ModelAndView("CourseList", "command", new Course());
-            if(list!=null){
+            if(list!=null || linkList!=null){
                 System.out.println("Attaching list to model.");
                 model.addObject("courses", list);
+                map.addAttribute("link",linkList);
+                map.addAttribute("details", detailsList);
             }
             return model;   
         }
@@ -125,9 +176,9 @@ public class MainController {
     @RequestMapping("/authentication")
     public ModelAndView Authentication(HttpServletRequest rq,ModelMap map,@RequestParam("Email") String email,@RequestParam("Pass") String pass) {
         try{
-            
+            List<MenuMaster> menuList = null;
             LoginBusiness login = new LoginBusiness();
-                     
+            SubmenuMasterBusiness subMenuBusiness = new SubmenuMasterBusiness();
             Boolean result = login.authentication(email,pass);
             System.out.println(result);
             if(result == true) 
@@ -138,9 +189,14 @@ public class MainController {
                 if(person!=null){
                     session.setAttribute("person", person);
                     m=login.getMenu(person.getPersonType());
-                    if(m!=null){
+                    menuList = subMenuBusiness.getSub(m);
+                    System.out.println("SUBMENU SIZE:"+menuList.get(0).getSubMenuTypes());
+                   // List<SubmenuMaster> subList = (ArrayList)menuList.get(0).getSubMenuTypes();
+                    
+                    //System.out.println("SUBMIST NAME:"+subList.get(0).getSubPageName());
+                    if(menuList!=null){
                         System.out.println("Setting menu as a session---------------");
-                        session.setAttribute("menu",m);
+                        session.setAttribute("menu",menuList);
                     }                    
                 }
                 ModelAndView model = new ModelAndView("AdminJsp-AddCourse", "command", new Course());

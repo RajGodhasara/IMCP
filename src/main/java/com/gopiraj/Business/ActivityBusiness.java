@@ -11,6 +11,8 @@ package com.gopiraj.Business;
 import com.gopiraj.Model.Activity;
 import com.gopiraj.Model.Person;
 import com.gopiraj.dispature.MyDispatureServlet;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import org.hibernate.Session;
@@ -41,7 +43,6 @@ public class ActivityBusiness {
            e.printStackTrace();
         }
     }  
-    
     
     public String insert(Activity activity)
     {
@@ -103,6 +104,8 @@ public class ActivityBusiness {
             List list;
             //ResultSet rs;
             list = s.createQuery("from Activity").list();
+            System.out.println("Reversing list");
+            Collections.reverse(list);
             t.commit();
             //s.close();
             return list;

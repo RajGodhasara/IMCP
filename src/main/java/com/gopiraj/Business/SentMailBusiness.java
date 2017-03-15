@@ -15,7 +15,6 @@ import com.gopiraj.dispature.MyDispatureServlet;
 import java.util.List;
 import java.util.Scanner;
 import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
 /**
  *
  * @author GOPIRAJ
@@ -79,7 +78,7 @@ public class SentMailBusiness {
     {
         try
         {
-             s = sf.openSession(); 
+            s = sf.openSession(); 
             Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from SentMail").list();

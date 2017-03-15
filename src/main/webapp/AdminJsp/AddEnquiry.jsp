@@ -10,17 +10,132 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-    </head>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#Form").validate({
+        rules : {
+        'firstName' : {
+                required : true
+            },
+            'middleName' : {
+                required : true
+            },
+            'lastName' : {
+                required : true
+            },
+            'mailId' : {
+                required : true
+            },
+            'date' : {
+                required : true
+            },
+            'streetAddress' : {
+                required : true
+            },
+            'city' : {
+                required : true
+            },
+            'state' : {
+                required : true
+            },
+            'clgName' : {
+                required : true
+            },
+            'branch' : {
+                required : true
+            },
+            'semester' : {
+                required : true
+            },
+            'status' : {
+                required : true
+            },
+            'dynamic' : {
+                required : true
+            }
+        }
+        });
+});
+</script>
+<script>
+  j=0;
+function createdefault()
+ {
+	j++;
+	ctrl0 = $(document.createElement('input')).attr({'type':'text','id':'txtt'+j,'name':'dynamic'+j,'class':'form-control CheckField'});
+	ctrl1 = $(document.createElement('input')).attr({'type':'button','value':'+','class':'btnp'+j+' btn','id':'btnp'+j});
+	ctrl2 = $(document.createElement('input')).attr({'type':'button','value':'-','class':'btnm'+j+' btn','id':'btnm'+j});
+	br = $(document.createElement('br'));
+	$("#mydiv").append(ctrl0,ctrl1,ctrl2,br);
+	
+	$(ctrl1).attr({'onClick':function ()
+	{
+			$( this ).on( "click", function(elem) 
+				{ 
+					$("#btnp"+j).remove();
+					createdefault();
+				});
+	}});
+
+        $(ctrl2).attr({'onClick':function ()
+	{
+			$( this ).on( "click", function(elem) 
+				{ 
+					 var currentId = $(this).attr('id');
+					 p=currentId.charAt(4);
+					x=$("#btnp"+p);
+					// here length property will check in whole document whether that jquery obj is present or not.
+					y = x.length;
+					if(y == "1")
+					{
+						//with plus
+						$("#btnp"+p).remove();
+						//and add another plus to previous element.
+						ctrl1 = $(document.createElement('input')).attr({'type':'button','value':'+','class':'btnp'+(j-1),'id':'btnp'+(j-1)});
+						$(ctrl1).attr({'onClick':function ()
+						{
+							$( this ).on( "click", function(elem) 
+							{ 
+								$("#btnp"+(j-1)).remove();
+								createdefault();
+							});
+						}
+						});
+						$("#mydiv").append(ctrl1);
+        				}
+					$("#txtt"+p).remove();
+					$("#btnm"+p).remove();
+				});
+	}});
+ }
+$(document).ready(function()
+ {
+	createdefault();
+	$( "#mydiv" ).on( "click","input.btnm"+j, function(elem) 
+	{ 
+		createdefault();
+        });		
+});
+</script>
+</head>
     <body>
-        
-        <div style="margin-left: 200px;">   
-            <form:form method="POST" action="admin_insert_enquiry" commandName="command">
-                <table>
+        <div style="margin-left: 200px;">  
+            <div class="container">
+                <div id="progressmain" class="progress" style="width: 400px;">
+                    <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                     0%
+                    </div>
+                </div>
+            </div>
+            <form:form method="POST" id="Form" action="admin_insert_enquiry" commandName="command">
+            <table>
                 <tr>
                     <td><label class="col-xs-12 control-label">First Name</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="firstName" cssClass="form-control CheckField"/>
+                            <form:input path="firstName" id="firstName" name="firstName" cssClass="form-control CheckField"/>
                         </div>
                     </td>
                 </tr>
@@ -28,7 +143,7 @@
                     <td><label class="col-xs-12 control-label">Middle Name</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="middleName" cssClass="form-control CheckField" />
+                            <form:input path="middleName" id="middleName" name="middleName" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -36,7 +151,7 @@
                     <td><label class="col-xs-12 control-label">Last Name</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="lastName" cssClass="form-control CheckField" />
+                            <form:input path="lastName" id="lastName" name="lastName" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -44,7 +159,7 @@
                     <td><label class="col-xs-12 control-label">Mail ID</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="mailId" cssClass="form-control CheckField" />
+                            <form:input path="mailId" id="mailId" name="mailId" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -52,7 +167,7 @@
                     <td><label class="col-xs-12 control-label">Contact Number</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="enquiryContactnos" cssClass="form-control CheckField" />
+                            <div id="mydiv"></div>
                         </div>
                     </td>
                 </tr>
@@ -61,7 +176,7 @@
                     <td>
                         <div class="col-xs-5">
                             <div class="input-group date" data-provide="datepicker">
-                                <input type="date"  class="form-control CheckField" value=""/>
+                                <input type="date" id="date" name="date"  class="form-control CheckField" value=""/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon-calendar glyphicon"></span>
                                 </span>
@@ -73,7 +188,7 @@
                     <td><label class="col-xs-12 control-label">Street Address</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="streetAddress" cssClass="form-control CheckField" />
+                            <form:input path="streetAddress" id="streetAddress" name="streetAddress" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -81,7 +196,7 @@
                     <td><label class="col-xs-12 control-label">City</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="city" cssClass="form-control CheckField" />
+                            <form:input path="city" id="city" name="city" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -89,7 +204,7 @@
                     <td><label class="col-xs-12 control-label">State</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="state" cssClass="form-control CheckField" />
+                            <form:input path="state" id="state" name="state" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -106,7 +221,7 @@
                     <td><label class="col-xs-12 control-label">Collage Name</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="clgName" cssClass="form-control CheckField" />
+                            <form:input path="clgName" id="clgName" name="clgName" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -114,7 +229,7 @@
                     <td><label class="col-xs-12 control-label">Branch</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="branch" cssClass="form-control CheckField" />
+                            <form:input path="branch" id="branch" name="branch" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -122,7 +237,7 @@
                     <td><label class="col-xs-12 control-label">Semester</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:input path="semester" cssClass="form-control CheckField" />
+                            <form:input path="semester" id="semester" name="semester" cssClass="form-control CheckField" />
                         </div>
                     </td>
                 </tr>
@@ -130,7 +245,7 @@
                     <td><label class="col-xs-12 control-label">Status</label></td>
                     <td>
                         <div class="col-xs-5">
-                            <form:select path="status" cssClass="form-control CheckField">
+                            <form:select path="status" id="status" name="status" cssClass="form-control CheckField">
                                 <form:option tabindex="0" value="Default">---Select Any---</form:option>
                                 <form:option value="Interested">Interested</form:option>
                                 <form:option value="Partially Interested">Partially Interested</form:option>
@@ -148,8 +263,7 @@
                         </div>
                     </td>
                 </tr>
-                
-                </table>
+            </table>
             </form:form>
         </div>
     </body>

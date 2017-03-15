@@ -15,7 +15,7 @@ public class Course  implements java.io.Serializable {
      private OrganizationAdmin organizationAdmin;
      private String courseName;
      private int duration;
-     private String Description;
+     private String description;
      private Set enquiryCourses = new HashSet(0);
 
     public Course() {
@@ -26,13 +26,13 @@ public class Course  implements java.io.Serializable {
         this.organizationAdmin = organizationAdmin;
         this.courseName = courseName;
         this.duration = duration;
-        this.Description = Description;
+        this.description = Description;
     }
     public Course(OrganizationAdmin organizationAdmin, String courseName, int duration,String Description, Set enquiryCourses) {
        this.organizationAdmin = organizationAdmin;
        this.courseName = courseName;
        this.duration = duration;
-       this.Description = Description;
+       this.description = Description;
        this.enquiryCourses = enquiryCourses;
     }
    
@@ -66,11 +66,11 @@ public class Course  implements java.io.Serializable {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String Description) {
-        this.Description = Description;
+        this.description = Description;
     }
         
     public Set getEnquiryCourses() {

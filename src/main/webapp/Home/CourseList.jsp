@@ -42,11 +42,15 @@
     <div class="header-topbar">
         <div class="container">
             <div class="topbar-left pull-left">
-                <div class="email"><a href="#"><i class="topbar-icon fa fa-envelope-o"></i><span>Edu-Marketing@gmail.com</span></a></div>
-                <div class="hotline"><a href="#"><i class="topbar-icon fa fa-phone"></i><span>+99 8866142423</span></a></div>
+                <c:forEach items="${details}" var="details">
+                    <div class="email"><a href="#"><i class="topbar-icon fa fa-envelope-o"></i><span>${details.emailId1}</span></a></div>
+                <div class="hotline"><a href="#"><i class="topbar-icon fa fa-phone"></i><span>${details.mobileNo}</span></a></div>
+                </c:forEach>
             </div>
             <div class="topbar-right pull-right">
-                <div class="socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a><a href="#" class="blog"><i class="fa fa-rss"></i></a><a href="#" class="dribbble"><i class="fa fa-dribbble"></i></a></div>
+                <c:forEach items="${link}" var="link">
+                <div class="socials"><a href="${link.facebook}" class="facebook"><i class="fa fa-facebook"></i></a><a href="${link.gmail}" class="google"><i class="fa fa-google-plus"></i></a><a href="${link.twitter}" class="twitter"><i class="fa fa-twitter"></i></a></div>
+                </c:forEach>
                 <div class="group-sign-in"><a href="login" class="login">login</a></div>
             </div>
         </div>
@@ -599,7 +603,9 @@
                                     </form>
                                     <p>We respect your privacy</p>
 
-                                    <div class="socials"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google-plus"></i></a><a href="#" class="twitter"><i class="fa fa-twitter"></i></a><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a><a href="#" class="blog"><i class="fa fa-rss"></i></a><a href="#" class="dribbble"><i class="fa fa-dribbble"></i></a></div>
+                                    <c:forEach items="${link}" var="link">
+                <div class="socials"><a href="${link.facebook}" class="facebook"><i class="fa fa-facebook"></i></a><a href="${link.gmail}" class="google"><i class="fa fa-google-plus"></i></a><a href="${link.twitter}" class="twitter"><i class="fa fa-twitter"></i></a></div>
+                </c:forEach>
                                 </div>
                             </div>
                         </div>

@@ -11,11 +11,26 @@
        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Course</title>
-<!--        <link href="AdminStyle/bootstrap.css" rel="stylesheet"/>
-        <script src="JQGrid-JS/jquery-1.11.0.min.js"></script>
-        <script src="AdminJS/bootstrap.js"></script>-->
-        
-    </head>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#Form").validate({
+        rules : {
+            'courseName' : {
+                required : true
+            },
+            'duration' : {
+                required : true
+            },
+            'Description' : {
+                required : true
+            }
+        }
+    });
+});
+</script>
+</head>
     <body>
        <div style="margin-left: 200px;">   
             <h1 style="margin-left: 180px;">Course</h1>
@@ -29,39 +44,36 @@
                     </div>
                 </div>
             </div>
-            
-            
-        
             <form:form id="Form" method="POST" commandName="command" action="admin_insert_course">
 <table>
     <tr>
         <td>
-            <label class="col-xs-3 control-label">Name</label>
+            <label class="col-xs-11 control-label">Name</label>
         </td>
         <td>
             <div class="col-xs-5">
-                <form:input path="courseName" cssClass="form-control CheckField"/>
+                <form:input path="courseName" id="courseName" name="courseName" cssClass="form-control CheckField"/>
             </div>
         </td>
     </tr>
     <tr>
         <td>
-            <label class="col-xs-3 control-label">Duration</label>
+            <label class="col-xs-11 control-label">Duration</label>
         </td>
         <td>
             <div class="col-xs-5">
-                <form:input path="duration" cssClass="form-control CheckField" />
+                <form:input path="duration" id="duration" name="duration" cssClass="form-control CheckField" />
             </div>
             
         </td>
     </tr>
     <tr>
         <td>
-            <label class="col-xs-3 control-label">Description</label>
+            <label class="col-xs-11 control-label">Description</label>
         </td>
         <td>
             <div class="col-xs-5">
-                <form:textarea path="Description" cssClass="form-control CheckField"/>
+                <form:textarea path="Description" id="Description" name="Description" cssClass="form-control CheckField"/>
             </div>
         </td>
     </tr>
@@ -77,45 +89,6 @@
     </tr>
 </table>
 </form:form>
- 
-       </div>
-        
-        <!--
-        <div style="margin-left: 200px;">   
-            <h1 style="margin-left: 180px;">Course</h1>
-            <div id="mydiv">
-                </div>
-        
-            
-            <div class="form-group">
-                <label class="col-xs-3 control-label">Name</label>
-                <div class="col-xs-5">
-                    <input type="text" class="form-control" name="name" id="name" required></input>
-                </div>
-            </div>
-            <br/><br/>
-            <div class="form-group">
-                <label class="col-xs-3 control-label">Duration</label>
-                <div class="col-xs-5">
-                    <input type="number" class="form-control" name="duration" id="duration" required/>
-                </div>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label class="col-xs-3 control-label">Description</label>
-                <div class="col-xs-5">
-                    <textarea class="form-control" name="description" id="description" required></textarea>
-                </div>
-            </div>
-            <br/><br/>
-            <div class="form-group">
-                <div class="col-xs-5 col-xs-offset-3" style="margin-left: 300px;">
-                    <button type="submit" id="btn" class="btn btn-success">Submit</button>
-                    
-                </div>
-            </div>
-          
-        
-     </div>-->
-    </body>
+</div>
+</body>
 </html>

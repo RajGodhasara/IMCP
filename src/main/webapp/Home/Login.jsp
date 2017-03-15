@@ -54,7 +54,7 @@
                                 <div class="login-form bg-w-form rlp-form">
                                     <div class="row">
                                         <div class="col-md-12"><label for="regemail" class="control-label form-label">email <span class="highlight">*</span></label><form:input path="Email" id="regemail" cssClass="form-control form-input"/><!--p.help-block Warning !--></div>
-                                        <div class="col-md-12"><label for="regpassword" class="control-label form-label">password <span class="highlight">*</span></label><form:input path="Pass" id="regpassword" cssClass="form-control form-input"/><!-- p.help-block Warning !--></div>
+                                        <div class="col-md-12"><label for="regpassword" class="control-label form-label">password <span class="highlight">*</span></label><form:password path="Pass" id="regpassword" cssClass="form-control form-input"/><!-- p.help-block Warning !--></div>
                                     </div>
                                 </div>
                                 <div class="login-submit">

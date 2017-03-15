@@ -15,6 +15,7 @@ public class MenuMaster  implements java.io.Serializable {
      private String menuName;
      private String pageName;
      private Set menuTypes = new HashSet(0);
+     private Set subMenuTypes = new HashSet(0);
 
     public MenuMaster() {
     }
@@ -24,10 +25,11 @@ public class MenuMaster  implements java.io.Serializable {
         this.menuName = menuName;
         this.pageName = pageName;
     }
-    public MenuMaster(String menuName, String pageName, Set menuTypes) {
+    public MenuMaster(String menuName, String pageName, Set menuTypes, Set subMenuTypes) {
        this.menuName = menuName;
        this.pageName = pageName;
        this.menuTypes = menuTypes;
+       this.subMenuTypes = subMenuTypes;
     }
    
     public Integer getMenuMasterId() {
@@ -59,7 +61,15 @@ public class MenuMaster  implements java.io.Serializable {
         this.menuTypes = menuTypes;
     }
 
+    public Set getSubMenuTypes() {
+        return subMenuTypes;
+    }
 
+    public void setSubMenuTypes(Set subMenuTypes) {
+        this.subMenuTypes = subMenuTypes;
+    }
+
+    
 
 
 }

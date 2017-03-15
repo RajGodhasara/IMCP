@@ -9,6 +9,7 @@ package com.gopiraj.Business;
 
 import com.gopiraj.Model.Employee;
 import com.gopiraj.Model.PersonContactno;
+import com.gopiraj.Model.PersonType;
 import com.gopiraj.dispature.MyDispatureServlet;
 import java.util.List;
 import java.util.Scanner;
@@ -58,18 +59,25 @@ public class EmployeeBusiness {
             }
             catch(Exception e)
             {
-                return "Error:"+e.getStackTrace();
+                return "Error:"+e.getMessage();
             }
     }
     
-    public void insertContactno(PersonContactno pc)
+    public String insertContactno(PersonContactno pc)
     {
-        
-             s = sf.openSession();
+        try
+        {
+            s = sf.openSession();
             Transaction tx = s.beginTransaction();
             s.save(pc);                 
             tx.commit();
             System.out.println("Person Contactno Data inserted.");
+            return "Inserted.";
+        }
+        catch(Exception e){
+            return "Error:"+e.getMessage();
+        }
+            
     }
     
     
@@ -97,6 +105,24 @@ public class EmployeeBusiness {
             Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from Employee").list();
+            t.commit();
+            //s.close();
+            return list;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }
+    
+    public List<PersonType> searchbyPersonType()
+    {
+        try
+        {
+            s = sf.openSession(); 
+            Transaction t = s.beginTransaction();
+            List<PersonType> list;
+            list = s.createQuery("from PersonType").list();
             t.commit();
             //s.close();
             return list;

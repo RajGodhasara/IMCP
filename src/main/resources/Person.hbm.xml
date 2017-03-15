@@ -21,7 +21,7 @@
             <column name="Mail_id" length="45" not-null="true" />
         </property>
         <property name="dateOfBirth" type="timestamp">
-            <column name="Date_of_Birth" length="19" not-null="true" />
+            <column name="Date_of_Birth" length="19" not-null="false" />
         </property>
         <property name="creationTime" type="timestamp">
             <column name="Creation_Time" length="19" not-null="true" />
@@ -73,5 +73,6 @@
             </key>
             <one-to-many class="com.gopiraj.Model.SentSms" />
         </set>
+        
     </class>
 </hibernate-mapping>
