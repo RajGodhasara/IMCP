@@ -29,7 +29,7 @@
                         error: function (error) {
                             alert('failed !!'+error.val());
                         }
-                    })
+                    });
                 });
                 
                 jQuery("#submitRoles").click(function () {
@@ -44,6 +44,24 @@
                     var AddBrochures;
                     var SearchBrochures;
                     var AddPost;
+                    var SendMail;
+                    var SearchSendMail;
+                    var AddEnquiry;
+                    var SearchEnquiry;
+                    if ($('#SendMail').is(":checked"))
+                    {
+                        SendMail = jQuery('#SendMail').val();
+                    }
+                    else{   
+                        SendMail = "";
+                    }
+                    if ($('#SearchSendMail').is(":checked"))
+                    {
+                        SearchSendMail = jQuery('#SearchSendMail').val();
+                    }
+                    else{   
+                        SearchSendMail = "";
+                    }
                     if ($('#AddEmployee').is(":checked"))
                     {
                         AddEmployee = jQuery('#AddEmployee').val();
@@ -121,6 +139,20 @@
                     else{   
                         SearchBrochures = "";
                     }
+                    if ($('#AddEnquiry').is(":checked"))
+                    {
+                        AddEnquiry = jQuery('#AddEnquiry').val();
+                    }
+                    else{   
+                        AddEnquiry = "";
+                    }
+                    if ($('#SearchEnquiry').is(":checked"))
+                    {
+                        SearchEnquiry = jQuery('#SearchEnquiry').val();
+                    }
+                    else{   
+                        SearchEnquiry = "";
+                    }
                     
                     jQuery.ajax({
                         url: 'admin_add_permission_insert',
@@ -137,6 +169,10 @@
                             AddAdmin:AddAdmin,
                             SearchAdmin:SearchAdmin,
                             AddPost:AddPost,
+                            SendMail:SendMail,
+                            SearchSendMail:SearchSendMail,
+                            AddEnquiry:AddEnquiry,
+                            SearchEnquiry:SearchEnquiry,
                             ptype:jQuery('#pTypeSelect').val()
                         },  
                         dataType: 'text',
@@ -249,6 +285,13 @@
                     <td>Assign Task</td>
                     <td><input type="checkbox" value="post" name="SearchAssignedtask" id="SearchAssignedtask" class="form-control"/></td>
                     <td>Search Assigned Task</td>
+                </tr>
+                <tr>
+                    <td>Manage Enquiry:</td>
+                    <td><input type="checkbox" value="AddEnquiry" name="AddEnquiry" id="AddEnquiry" class="form-control"/></td>
+                    <td>Add Enquiry</td>
+                    <td><input type="checkbox" value="SearchEnquiry" name="SearchEnquiry" id="SearchEnquiry" class="form-control"/></td>
+                    <td>Search Enquiry</td>
                 </tr>
                 <tr>
                     <td>Manage Comapny Profile</td>

@@ -98,14 +98,28 @@ public class EnquiryBusiness {
     {
         try
         {
-            
             s = sf.openSession(); 
             Transaction t = s.beginTransaction();
             List<String> list = new ArrayList<String>();
             String hql = "select firstName from Enquiry E where E.status = ?";
             list = (List)s.createQuery(hql).setString(0,status).list();
-            System.out.println("SIZE:"+list.size());
-            //s.close();
+            return list;
+        }
+        catch(Exception e)
+        {
+            System.out.println("searchByStatus:"+e.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Enquiry> searchObjectByStatus(String status)
+    {
+        try
+        {
+            s = sf.openSession(); 
+            List<Enquiry> list = new ArrayList<Enquiry>();
+            String hql = "from Enquiry E where E.status = ?";
+            list = (List)s.createQuery(hql).setString(0,status).list();
             return list;
         }
         catch(Exception e)

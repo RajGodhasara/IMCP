@@ -33,7 +33,12 @@ public class AdminBasicDetailsController {
     public ModelAndView getAdminAddBasicDetailsInsert(ModelMap map,@RequestParam CommonsMultipartFile file,@ModelAttribute BasicDetails basic)
     {
         if(file!=null){
-            
+            try{
+            byte[] bytes = file.getBytes();  
+            basic.setLogo(bytes);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         }
         if(basic!=null){
             BasicDetailsBusiness business = new BasicDetailsBusiness();

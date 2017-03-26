@@ -59,7 +59,7 @@
         <div class="container">
             <div class="header-main-wrapper">
                 <div class="navbar-heade">
-                    <div class="logo pull-left"><a href="index.html" class="header-logo"><img src="assets/images/logo-color-1.png" alt=""/></a></div>
+                    <div class="logo pull-left"><a href="index.html" class="header-logo"><img src="data:image/jpeg;base64,${logo}" alt=""/></a></div>
                     <button type="button" data-toggle="collapse" data-target=".navigation" class="navbar-toggle edugate-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <nav class="navigation collapse navbar-collapse pull-right">
@@ -195,7 +195,7 @@
                                                                 <th class="col-1">title</th>
                                                                 <th class="col-2">estimate time</th>
                                                                 <th class="col-3">spent time</th>
-                                                                <th class="col-4">status</th>
+                                                                <th class="col-4">Description</th>
                                                             </tr>
                                                             </thead>
                                                         </table>
@@ -213,7 +213,7 @@
                                                                     <td class="left col-1"><a href="#"><i class="bg-green mr25 fa fa-caret-right"></i><span>${course.courseName}</span></a></td>
                                                                     <td class="col-2"><i class="w20 fa fa-clock-o"></i><span>${course.duration}</span></td>
                                                                     <td class="col-3"><i class="w20 fa fa-clock-o"></i><span>${course.duration}</span></td>
-                                                                    <td class="green-color col-4"><i class="w27 fa fa-check-square"></i><span>Complete</span></td>
+                                                                    <td class="green-color col-4"><i class="w27 fa fa-check-square"></i><span>${course.description}</span></td>
                                                                 </tr>
                                                             </c:forEach>
                                                             
@@ -651,12 +651,7 @@
         </ul>
     </div>
 </div>
-<!-- LOADING--><!-- JAVASCRIPT LIBS-->
-<script>if ((Cookies.get('color-skin') != undefined) && (Cookies.get('color-skin') != 'color-1')) {
-    $('.logo .header-logo img').attr('src', 'assets/images/logo-' + Cookies.get('color-skin') + '.png');
-} else if ((Cookies.get('color-skin') == undefined) || (Cookies.get('color-skin') == 'color-1')) {
-    $('.logo .header-logo img').attr('src', 'assets/images/logo-color-1.png');
-}</script>
+
 <script src="assets/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="assets/libs/smooth-scroll/jquery-smoothscroll.js"></script>
 <script src="assets/libs/owl-carousel-2.0/owl.carousel.min.js"></script>

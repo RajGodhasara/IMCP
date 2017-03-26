@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="organizationAdmin" class="com.gopiraj.Model.OrganizationAdmin" fetch="select">
-            <column name="Org_id" not-null="true" />
+            <column name="Org_id" not-null="false" />
         </many-to-one>
         <property name="courseName" type="string">
             <column name="Course_Name" length="45" not-null="true" />

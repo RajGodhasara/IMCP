@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <img  src="data:image/jpeg;base64,${userImage}" />
         <h1>
             Add Basic Details of Company to make effect on your main index page.
         </h1>

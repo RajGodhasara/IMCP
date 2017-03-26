@@ -33,7 +33,12 @@ public class AdminCorporatesController {
     public ModelAndView getAdminAddBasicDetailsInsert(ModelMap map,@RequestParam CommonsMultipartFile file,@ModelAttribute Corporates corporates)
     {
         if(file!=null){
-            
+            try{
+            byte[] bytes = file.getBytes();  
+            corporates.setPhotograph(bytes);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         }
         if(corporates!=null){
             CorporatesBusiness business = new CorporatesBusiness();

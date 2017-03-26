@@ -17,15 +17,6 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
 
-<!-- JQGRID CSS 
-<link href="JQGrid-CSS/dataTables.bootstrap.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="JQGrid-CSS/ui.jqgrid-bootstrapNew.css">
-        <link rel="stylesheet" href="JQGrid-CSS/ui.jqgrid-bootstrap-ui.css">
-        <link rel="stylesheet" href="JQGrid-CSS/ui.jqgrid.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="JQGrid-CSS/ui.jqgrid-bootstrap.css" />-->
-             
-  
-    <!-- Grid CSS Vaishali -->
     <link rel="stylesheet" href="Grid/css/demo_page.css">
     <link rel="stylesheet" href="Grid/css/demo_table.css">
     <link rel="stylesheet" href="Grid/css/demo_table_iui.css">
@@ -73,11 +64,6 @@
     <link href="AdminStyle/widgets.css" rel="stylesheet">
     <!-- Gritter Notifications stylesheet -->
     <link href="AdminStyle/jquery.gritter.css" rel="stylesheet">
-
-    <!-- HTML5 Support for IE -->
-    <!--[if lt IE 9]>
-  <script src="js/html5shim.js"></script>
-  <![endif]-->
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon/favicon.png">
@@ -209,7 +195,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="fa fa-user"></i>Profile</a></li>
                                 <li><a href="#"><i class="fa fa-cogs"></i>Settings</a></li>
-                                <li><a href="Index.jsp"><i class="fa fa-key"></i>Logout</a></li>
+                                <li><a href="logout"><i class="fa fa-key"></i>Logout</a></li>
                             </ul>
                         </li>
                         <!-- Upload to server link. Class "dropdown-big" creates big dropdown -->
@@ -247,14 +233,16 @@
                         </ul>
                     </li>
                 </c:forEach>
-               
-                <li class="has_sub"><a href="#" class="open"><i class="fa fa-home"></i><span>Manage Permissions</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
-                    <ul>
-                        <li><a href="admin_add_permissions">Add Permissions</a></li>
-                        <li><a href="#">Search Permissions</a></li>
-                    </ul>
-                </li>    
-                    
+                   
+                <c:if test="${person.personType == 'AdminMaster'}">
+                    <li class="has_sub"><a href="#" class="open"><i class="fa fa-home"></i><span>Manage Permissions</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
+                        <ul>
+                            <li><a href="admin_add_permissions">Add Permissions</a></li>
+                            <li><a href="#">Search Permissions</a></li>
+                        </ul>
+                    </li>    
+                </c:if>
+              
                     
 <!--                 Main menu with font awesome icon 
                 <li class="has_sub"><a href="#" class="open"><i class="fa fa-home"></i><span>Manage Post</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>

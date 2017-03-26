@@ -13,6 +13,8 @@ import com.gopiraj.Business.LoginBusiness;
 import com.gopiraj.Business.SocialLinksBusiness;
 import com.gopiraj.Business.SubmenuMasterBusiness;
 import com.gopiraj.Business.TeachersBusiness;
+import com.gopiraj.Model.BasicDetails;
+import com.gopiraj.Model.Corporates;
 import com.gopiraj.Model.Course;
 import com.gopiraj.Model.Login;
 import com.gopiraj.Model.MenuMaster;
@@ -46,9 +48,23 @@ public class MainController {
             List list = null;
             List linkList = null;
             List detailsList = null;
+            
             CourseBusiness business = new CourseBusiness();
             SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
             BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
+            List basicList = null;
+            basicList = detalsBusiness.search();
+            BasicDetails details = (BasicDetails)basicList.get(0);
+                    
+            try{
+            byte[] encodeBase64 = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.encode(details.getLogo()).getBytes();
+            String base64Encoded = new String(encodeBase64, "UTF-8");
+            map.addAttribute("logo", base64Encoded );
+            System.out.println("LOGO ADDED");
+            }catch(Exception e){
+                System.out.println("ERROR IN TRY IMAGE:"+e.getMessage());
+            }
+            
                 System.out.println("Session factory initialized.");
                 list = business.search();
                 linkList = linkBusiness.search();
@@ -82,9 +98,38 @@ public class MainController {
         linkList = linkBusiness.search();
         detailsList = detalsBusiness.search();
         TeacherList = teacherBusiness.search();
+        corporateList = corporateBusiness.search();
         
-            
-            
+        List basicList = null;
+            basicList = detalsBusiness.search();
+            BasicDetails details = (BasicDetails)basicList.get(0);
+                    
+            try{
+            byte[] encodeBase64 = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.encode(details.getLogo()).getBytes();
+            String base64Encoded = new String(encodeBase64, "UTF-8");
+            map.addAttribute("logo", base64Encoded );
+            System.out.println("LOGO ADDED");
+            }catch(Exception e){
+                System.out.println("ERROR IN TRY IMAGE:"+e.getMessage());
+            }
+        
+        Teachers teachers = (Teachers)TeacherList.get(0);
+        Corporates corporate = (Corporates)corporateList.get(0);
+        try{
+            byte[] encodeBase64 = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.encode(teachers.getPhotograph()).getBytes();
+            String base64Encoded = new String(encodeBase64, "UTF-8");
+            map.addAttribute("userImage", base64Encoded );
+        }catch(Exception e){
+            System.out.println("ERROR IN TRY IMAGE:"+e.getMessage());
+        }
+        try{
+            byte[] encodeBase64 = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.encode(corporate.getPhotograph()).getBytes();
+            String base64Encoded = new String(encodeBase64, "UTF-8");
+            map.addAttribute("corporatesImage", base64Encoded );
+        }catch(Exception e){
+            System.out.println("ERROR IN TRY IMAGE:"+e.getMessage());
+        }
+        
         
         
         corporateList = corporateBusiness.search();
@@ -100,8 +145,22 @@ public class MainController {
     public String getContactUs(ModelMap map) {
         List linkList = null;
         List detailsList = null;
-        SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
         BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
+        List basicList = null;
+            basicList = detalsBusiness.search();
+            BasicDetails details = (BasicDetails)basicList.get(0);
+                    
+            try{
+            byte[] encodeBase64 = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.encode(details.getLogo()).getBytes();
+            String base64Encoded = new String(encodeBase64, "UTF-8");
+            map.addAttribute("logo", base64Encoded );
+            System.out.println("LOGO ADDED");
+            }catch(Exception e){
+                System.out.println("ERROR IN TRY IMAGE:"+e.getMessage());
+            }
+        
+        SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
+        
         linkList = linkBusiness.search();
         detailsList = detalsBusiness.search();
         map.addAttribute("link",linkList);
@@ -139,9 +198,23 @@ public class MainController {
             List list = null;
             List linkList = null;
             List detailsList = null;
+            BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
+            List basicList = null;
+            basicList = detalsBusiness.search();
+            BasicDetails details = (BasicDetails)basicList.get(0);
+                    
+            try{
+            byte[] encodeBase64 = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.encode(details.getLogo()).getBytes();
+            String base64Encoded = new String(encodeBase64, "UTF-8");
+            map.addAttribute("logo", base64Encoded );
+            System.out.println("LOGO ADDED");
+            }catch(Exception e){
+                System.out.println("ERROR IN TRY IMAGE:"+e.getMessage());
+            }
+            
             //sf = MyDispatureServlet.getSessionFactory();
             CourseBusiness business = new CourseBusiness();
-            BasicDetailsBusiness detalsBusiness = new BasicDetailsBusiness();
+            
             SocialLinksBusiness linkBusiness = new SocialLinksBusiness();
 
             //if(sf!=null){
@@ -174,7 +247,7 @@ public class MainController {
     }
     
     @RequestMapping("/authentication")
-    public ModelAndView Authentication(HttpServletRequest rq,ModelMap map,@RequestParam("Email") String email,@RequestParam("Pass") String pass) {
+    public String Authentication(HttpServletRequest rq,ModelMap map,@RequestParam("Email") String email,@RequestParam("Pass") String pass) {
         try{
             List<MenuMaster> menuList = null;
             LoginBusiness login = new LoginBusiness();
@@ -199,13 +272,18 @@ public class MainController {
                         session.setAttribute("menu",menuList);
                     }                    
                 }
-                ModelAndView model = new ModelAndView("AdminJsp-AddCourse", "command", new Course());
-                return model;       
+                map.addAttribute(new Course());
+                return "redirect:admin_add_activity";
+                
+                //ModelAndView model = new ModelAndView("test", "command", new Course());
+                //return model;       
             }
             else
             {
-                ModelAndView model = new ModelAndView("Login", "command", new Login());
-                return model;  
+                map.addAttribute(new Login());
+                return "Login";
+                //ModelAndView model = new ModelAndView("Login", "command", new Login());
+                //return model;  
             }
         }
         catch(Exception e){

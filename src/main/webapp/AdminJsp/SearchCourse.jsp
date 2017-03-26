@@ -58,7 +58,7 @@
 			{
 				var aData = oTable.fnGetData(nRow);
 				var jqTds = $('>td', nRow);
-                                alert(jqTds.length+"-------");
+                                
                                 jqTds[0].innerHTML = '<input type="text" value="'+aData[0]+'" readOnly>';
 				jqTds[1].innerHTML = '<input type="text" value="'+aData[1]+'">';
 				jqTds[2].innerHTML = '<input type="text" value="'+aData[2]+'">';
@@ -107,7 +107,7 @@
                 var nEditing = null;
 
                 $( document ).on( 'click','#example a.edit', function (e){
-                    alert("inedit");
+                    
                      e.preventDefault();
 
                     var nRow = $(this).parents('tr')[0];

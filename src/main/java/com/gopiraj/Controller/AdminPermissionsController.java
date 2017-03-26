@@ -57,17 +57,15 @@ public class AdminPermissionsController {
     @RequestMapping("/admin_add_permission_insert")
     public String getAdminAddPermissionsInsert(ModelMap map,HttpServletRequest req)
     {
-        
-        //String AddCourse = req.getParameter("AddCourse");
-        //String SearchCourse = req.getParameter("SearchCourse");
         String ptype = req.getParameter("ptype");
         
-        //System.out.println(AddCourse+SearchCourse);
         checkForAvailable( req.getParameter("AddCourse") , req.getParameter("SearchCourse") , ptype);
         checkForAvailable( req.getParameter("AddPreText") , req.getParameter("SearchPreText") , ptype);
         checkForAvailable( req.getParameter("AddBrochures") , req.getParameter("SearchBrochures") , ptype);
         checkForAvailable( req.getParameter("AddEmployee") , req.getParameter("SearchEmployee") , ptype);
         checkForAvailable( req.getParameter("AddAdmin") , req.getParameter("SearchAdmin") , ptype);
+        checkForAvailable( req.getParameter("SendMail") , req.getParameter("SearchSendMail") , ptype);
+        checkForAvailable( req.getParameter("AddEnquiry") , req.getParameter("SearchEnquiry") , ptype);
         checkForAvailable( req.getParameter("AddPost") , "" , ptype);
         
         PersonTypeBusiness business = new PersonTypeBusiness();
@@ -122,6 +120,22 @@ public class AdminPermissionsController {
                 String searchLink = ApplicationConstants.manageAdminSerachLink;
                 insertForPermissions(ptype, Boolean.TRUE, Boolean.TRUE,main,addName,addLink,searchName,searchLink);
             }
+            if(add.equals("SendMail") && search.equals("SearchSendMail")){
+                String main = ApplicationConstants.manageSendMail;
+                String addName = ApplicationConstants.manageSendMailAdd;
+                String addLink = ApplicationConstants.manageSendMailAddLink;
+                String searchName = ApplicationConstants.manageSendMailSerach;
+                String searchLink = ApplicationConstants.manageSendMailSerachLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.TRUE,main,addName,addLink,searchName,searchLink);
+            }
+            if(add.equals("AddEnquiry") && search.equals("SearchEnquiry")){
+                String main = ApplicationConstants.manageEnquiry;
+                String addName = ApplicationConstants.manageEnquiryAdd;
+                String addLink = ApplicationConstants.manageEnquiryAddLink;
+                String searchName = ApplicationConstants.manageEnquirySerach;
+                String searchLink = ApplicationConstants.manageEnquirySerachLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.TRUE,main,addName,addLink,searchName,searchLink);
+            }
             
         }
         else if(!search.isEmpty()){
@@ -153,6 +167,18 @@ public class AdminPermissionsController {
                 String main = ApplicationConstants.manageAdmin;
                 String searchName = ApplicationConstants.manageAdminSerach;
                 String searchLink = ApplicationConstants.manageAdminSerachLink;
+                insertForPermissions(ptype, Boolean.FALSE, Boolean.TRUE,main,null,null,searchName,searchLink);
+            }
+            if(search.equals("SearchSendMail")){
+                String main = ApplicationConstants.manageSendMail;
+                String searchName = ApplicationConstants.manageSendMailSerach;
+                String searchLink = ApplicationConstants.manageSendMailSerachLink;
+                insertForPermissions(ptype, Boolean.FALSE, Boolean.TRUE,main,null,null,searchName,searchLink);
+            }
+            if(search.equals("SearchEnquiry")){
+                String main = ApplicationConstants.manageEnquiry;
+                String searchName = ApplicationConstants.manageEnquirySerach;
+                String searchLink = ApplicationConstants.manageEnquirySerachLink;
                 insertForPermissions(ptype, Boolean.FALSE, Boolean.TRUE,main,null,null,searchName,searchLink);
             }
             
@@ -194,7 +220,18 @@ public class AdminPermissionsController {
                 String addLink = ApplicationConstants.managePostAddLink;
                 insertForPermissions(ptype, Boolean.TRUE, Boolean.FALSE,main,addName,addLink,null,null);
             }
-            
+            if(add.equals("SendMail")){
+                String main = ApplicationConstants.manageSendMail;
+                String addName = ApplicationConstants.manageSendMailAdd;
+                String addLink = ApplicationConstants.manageSendMailAddLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.FALSE,main,addName,addLink,null,null);
+            }
+            if(add.equals("AddEnquiry")){
+                String main = ApplicationConstants.manageEnquiry;
+                String addName = ApplicationConstants.manageEnquiryAdd;
+                String addLink = ApplicationConstants.manageEnquiryAddLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.FALSE,main,addName,addLink,null,null);
+            }
         }
         else{
             

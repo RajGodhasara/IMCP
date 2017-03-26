@@ -46,9 +46,23 @@ public abstract class ApplicationConstants {
     public static final String manageAdminSerach = "Search Admin";
     public static final String manageAdminSerachLink = "admin_search_admin";
     
+    public static final String manageSendMail = "Manage Send Mail";
+    public static final String manageSendMailLink = "";
+    public static final String manageSendMailAdd = "Send Mail";
+    public static final String manageSendMailAddLink = "admin_send_mail";
+    public static final String manageSendMailSerach = "Search Sent Mail";
+    public static final String manageSendMailSerachLink = "admin_search_mail";
+    
     public static final String managePost = "Manage Post";
     public static final String managePostLink = "";
     public static final String managePostAdd = "Add Post";
     public static final String managePostAddLink = "admin_add_activity";
+    
+    public static final String manageEnquiry = "Manage Enquiry";
+    public static final String manageEnquiryLink = "";
+    public static final String manageEnquiryAdd = "Add Enquiry";
+    public static final String manageEnquiryAddLink = "admin_add_enquiry";
+    public static final String manageEnquirySerach = "Search Enquiry";
+    public static final String manageEnquirySerachLink = "admin_search_enquiry";
     
 }

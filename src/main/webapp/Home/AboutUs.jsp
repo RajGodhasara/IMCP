@@ -59,7 +59,7 @@
         <div class="container">
             <div class="header-main-wrapper">
                 <div class="navbar-heade">
-                    <div class="logo pull-left"><a href="index.html" class="header-logo"><img src="assets/images/logo-color-1.png" alt=""/></a></div>
+                    <div class="logo pull-left"><a href="index.html" class="header-logo"><img src="data:image/jpeg;base64,${logo}" alt=""/></a></div>
                     <button type="button" data-toggle="collapse" data-target=".navigation" class="navbar-toggle edugate-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <nav class="navigation collapse navbar-collapse pull-right">
@@ -266,8 +266,8 @@
                                     <div class="staff-item customize">
                                     <div class="staff-item-wrapper"><!--data:image/jpeg;utf8;base64,-->
                                         <!-- insted use file system for image and while getting download image from database into file system and then fetch that file from the file system to print image on jsp file.-->
-                                        <!-- for low Server-client operation you can download all the images at the time of initialize project and use latter from the file system.
-                                        <div class="staff-info"><a href="#" class="staff-avatar"><img src="${teachers.photograph}" alt="" style="border-color: red; border: 1px;" class=""/></a><a href="#" class="staff-name">${teachers.name}</a>
+                                        <!-- for low Server-client operation you can download all the images at the time of initialize project and use latter from the file system.-->
+                                        <div class="staff-info"><a href="#" class="staff-avatar"><img src="data:image/jpeg;base64,${userImage}" alt="" style="border-color: red; border: 1px;" class=""/></a><a href="#" class="staff-name">${teachers.name}</a>
 
                                             <div class="staff-job">${teachers.designation}</div>
                                             <div class="staff-desctiption">${teachers.thought}</div>
@@ -333,7 +333,7 @@
                                     <div class="peopel-item item active"><p class="peopel-comment">" ${corporates.thought}"</p>
 
                                     <div class="group-peole-info">
-                                        <div class="peopel-avatar"><img src="assets/images/people-avatar-1.jpg" alt="" class="img-responsive"/></div>
+                                        <div class="peopel-avatar"><img src="data:image/jpeg;base64,${corporatesImage}" alt="" class="img-responsive"/></div>
                                         <div class="peopel-name">${corporates.name}</div>
                                         <div class="people-job">${corporates.designation}</div>
                                     </div>
@@ -538,12 +538,6 @@
         </ul>
     </div>
 </div>
-<!-- LOADING--><!-- JAVASCRIPT LIBS-->
-<script>if ((Cookies.get('color-skin') != undefined) && (Cookies.get('color-skin') != 'color-1')) {
-    $('.logo .header-logo img').attr('src', 'assets/images/logo-' + Cookies.get('color-skin') + '.png');
-} else if ((Cookies.get('color-skin') == undefined) || (Cookies.get('color-skin') == 'color-1')) {
-    $('.logo .header-logo img').attr('src', 'assets/images/logo-color-1.png');
-}</script>
 <script src="assets/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="assets/libs/smooth-scroll/jquery-smoothscroll.js"></script>
 <script src="assets/libs/owl-carousel-2.0/owl.carousel.min.js"></script>

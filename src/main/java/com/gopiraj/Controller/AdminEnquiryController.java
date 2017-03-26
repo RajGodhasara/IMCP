@@ -68,7 +68,7 @@ public class AdminEnquiryController {
         }
      
         EnquiryBusiness business = new EnquiryBusiness();
-     
+        enq.setGender("Male");
         enq.setCreationTime(new Date());
         
         if(enq!=null){

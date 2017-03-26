@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Mail</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <style>
                body{margin-top:20px;
 background:#eee;
@@ -272,10 +273,11 @@ background:#eee;
     background: #e4e5e6
 }
         </style>
-        <script>
+<!--        <script>
             $(document).ready(function()
             {
                jQuery("#submit").click(function () {
+                   alert(jQuery('#To').val());
                     jQuery.ajax({
                         url: 'admin_send_mail_send',
                         async: false,
@@ -295,7 +297,7 @@ background:#eee;
                     });
                 }); 
             });
-    </script>
+    </script>-->
     <script>
         function setText(){
             $("#message").val($('#PreTextMessage').val());
@@ -310,42 +312,39 @@ background:#eee;
 		<div class="panel panel-default">
 			<div class="panel-body message">
 				<p class="text-center">New Message</p>
-				<form class="form-horizontal" role="form">
+                                <div style="margin-bottom: 10px;">
+                                Select Status of Enquiry for Sorting:
+                                
+                                <select id="status" class="form-control">
+                                    <option value="Interested">Interested</option>
+                                    <option value="Partially Interested">Partially Interested</option>
+                                    <option value="Not Interested">Not Interested</option>
+                                </select>
+                                </div>
+                                <form class="form-horizontal" action="admin_send_mail_send" role="form">
 					<div class="form-group">
 				    	<label for="to" class="col-sm-1 control-label">To:</label>
 				    	<div class="col-sm-11">
-                                            <select id="To" class="form-control">
-                                                <option selected="selected">Select Mail ID</option>
-                                        <c:forEach var="list" items="${listEnquiry}">
-                                            <option value="${list.mailId}">${list.mailId}</option>
-                                        </c:forEach>
-                                </select>
+                                            <select id="To" name="TO" class="form-control selectpicker" multiple data-selected-text-format="count > 3">    
+                                            </select>
             			    	</div>
 				  	</div>
 					<div class="form-group">
             			    	<label for="cc" class="col-sm-1 control-label">CC:</label>
 				    	<div class="col-sm-11">
-                                        <select id="CC" class="form-control">
-                                                <option selected="selected">Select Mail ID</option>
-                                        <c:forEach var="list" items="${listEnquiry}">
-                                            <option value="${list.mailId}">${list.mailId}</option>
-                                        </c:forEach>
-                                </select>
+                                            <select id="CC" name="CC" class="form-control selectpicker" multiple data-selected-text-format="count > 3">
+                                            </select>
 				    	</div>
 				  	</div>
 					<div class="form-group">
 				    	<label for="bcc" class="col-sm-1 control-label">BCC:</label>
 				    	<div class="col-sm-11">
-                                        <select id="BCC" class="form-control">
-                                                <option selected="selected">Select Mail ID</option>
-                                        <c:forEach var="list" items="${listEnquiry}">
-                                            <option value="${list.mailId}">${list.mailId}</option>
-                                        </c:forEach>
-                                </select>
+                                            <select id="BCC" name="BCC" class="form-control selectpicker" multiple data-selected-text-format="count > 3">
+                                            </select>
 				    	</div>
 				  	</div>
 				  
-				</form>
+				
 				<div class="col-sm-11 col-sm-offset-1">
 					<div class="btn-toolbar" role="toolbar">
 						<div class="btn-group">
@@ -369,39 +368,51 @@ background:#eee;
 						  	<button class="btn btn-default"><span class="fa fa-list-ol"></span></button>
 						</div>
 						<button class="btn btn-default"><span class="fa fa-trash-o"></span></button>	
-						<button class="btn btn-default"><span class="fa fa-paperclip"></span></button>
-						<div class="btn-group">
-							<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="fa fa-tags"></span> <span class="caret"></span></button>
-							<ul class="dropdown-menu">
-								<li><a href="#">add label <span class="label label-danger"> Home</span></a></li>
-								<li><a href="#">add label <span class="label label-info">Job</span></a></li>
-								<li><a href="#">add label <span class="label label-success">Clients</span></a></li>
-								<li><a href="#">add label <span class="label label-warning">News</span></a></li>
-							</ul>
+                                                <button class="btn btn-default"><span class="fa fa-paperclip"></span></button>
+                                                <div style="margin-top:10px;">
+                                                <input type="file" name="file" class="file-upload" />
 						</div>
 					</div>
-					<br>	
+						
 					<div class="form-group">
                                             
-                                                      <select id="PreTextMessage" class="form-control" onchange="setText();">
+                                            <select id="PreTextMessage" class="form-control" onchange="setText();" name="message">
                                                           <option selected="selected" >Select Message</option>
                                         <c:forEach var="list" items="${listPretext}">
                                             <option value="${list.message}" id="${list.message}" class="option">${list.title}</option>
                                         </c:forEach>
                                 </select><br/>
-                                <textarea class="form-control" id="message" name="body" rows="12" placeholder="Click here to reply" disabled="disabled"></textarea>
+                                <!-- if we add disable to textarea then the value of it wont be sent by the form as its readonly property -->
+                                <textarea class="form-control" id="message" rows="12" placeholder="Click here to reply"></textarea>
         				</div>
 					<div class="form-group">	
                                             <button type="submit" id="submit" class="btn btn-success">Send</button>
+                                            
 						<button type="submit" class="btn btn-default">Draft</button>
 						<button type="submit" class="btn btn-danger">Discard</button>
 					</div>
 				</div>	
+                                    </form>
 			</div>	
 		</div>	
 	</div><!--/.col-->		
 </div>
 </div>
 
-    </body>
+<script>
+jQuery('#status').change(function (){
+    jQuery('#To').find('option').remove();
+    jQuery('#CC').find('option').remove();
+    jQuery('#BCC').find('option').remove();
+    <c:forEach var="list" items="${listEnquiry}">
+            if("${list.status}" === jQuery('#status').val()){
+                jQuery('#To').append("<option>"+"${list.mailId}"+"</option>");
+                jQuery('#CC').append("<option>"+"${list.mailId}"+"</option>");
+                jQuery('#BCC').append("<option>"+"${list.mailId}"+"</option>");
+            }
+    </c:forEach>
+});       
+</script>    
+    
+</body>
 </html>

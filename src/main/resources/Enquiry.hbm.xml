@@ -36,7 +36,7 @@
             <column name="DOB" length="19" not-null="false" />
         </property>
         <property name="gender" type="string">
-            <column name="Gender" length="45" not-null="true" />
+            <column name="Gender" length="45" not-null="false" />
         </property>
         <property name="streetAddress" type="string">
             <column name="Street_Address" length="45" not-null="true" />
@@ -52,25 +52,25 @@
         </property>
         <set name="enquiryCourses" table="enquiry_course" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Enquiry_Course_id" not-null="true" />
+                <column name="Enquiry_Course_id" not-null="false" />
             </key>
             <one-to-many class="com.gopiraj.Model.EnquiryCourse" />
         </set>
         <set name="enquiryContactnos" table="enquiry_contactno" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Enquiry_id" not-null="true" />
+                <column name="Enquiry_id" not-null="false" />
             </key>
             <one-to-many class="com.gopiraj.Model.EnquiryContactno" />
         </set>
         <set name="sentMails" table="sent_mail" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Enq_id" not-null="true" />
+                <column name="Enq_id" not-null="false" />
             </key>
             <one-to-many class="com.gopiraj.Model.SentMail" />
         </set>
         <set name="sentSmses" table="sent_sms" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Enq_id" not-null="true" />
+                <column name="Enq_id" not-null="false" />
             </key>
             <one-to-many class="com.gopiraj.Model.SentSms" />
         </set>

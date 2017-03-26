@@ -41,18 +41,26 @@ public class LoginBusiness {
     public Boolean authentication(String email,String pass)
     {
         try{
+            String password="extra";
             Session s = sf.openSession();
             String hql = "SELECT personId FROM Person P WHERE P.mailId = ?";
             int id = (int)s.createQuery(hql).setString(0, email).uniqueResult();
-            
-            String hql1 = "SELECT password FROM OrganizationAdmin A WHERE A.organizationAdmin = ?";
-            String password = (String)s.createQuery(hql1).setInteger(0, id).uniqueResult();
+            OrganizationAdminBusiness business = new OrganizationAdminBusiness();
+            if(business.searchById(id)!=null){
+                 
+            String hql1 = "SELECT A.password FROM OrganizationAdmin A WHERE A.organizationAdmin = ?";
+            try{
+                password = (String)s.createQuery(hql1).setInteger(0, id).uniqueResult();
+            }catch(Exception e){
+                
+            }
+            }
             System.out.println(pass+" :"+password);
             if(password.equals(pass)){
                 return true;
             }else{
-                String hql2 = "SELECT password FROM Employee E WHERE E.employeeId = ?";
-                String password2 = (String)s.createQuery(hql1).setInteger(0, id).uniqueResult();
+                String hql2 = "SELECT E.password FROM Employee E WHERE E.employeeId = ?";
+                String password2 = (String)s.createQuery(hql2).setInteger(0, id).uniqueResult();
                 System.out.println(pass+" :"+password2);
                 if(password2.equals(pass)){
                     return true;

@@ -17,17 +17,26 @@ import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -56,7 +65,7 @@ public class AdminSendMailController {
     {
         String CC=null;
         String BCC=null;
-        String TO = req.getParameter("TO");
+        String[] TO = req.getParameterValues("TO");
         if(req.getParameter("CC")!=null){
             CC = req.getParameter("CC");
         }
@@ -64,11 +73,32 @@ public class AdminSendMailController {
             BCC = req.getParameter("BCC");
         }
         
-        String message = req.getParameter("DESC");
+        String message = req.getParameter("message");
+       
+        Multipart multipart = new MimeMultipart();
+        BodyPart messageBodyPart = new MimeBodyPart();
+        /*
+        try{
+            
+        DataSource source = new FileDataSource("C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg");
+        
+        messageBodyPart = new MimeBodyPart();
+         messageBodyPart.setDataHandler(new DataHandler(source));
+         messageBodyPart.setFileName("Desert.jpg");
+         multipart.addBodyPart(messageBodyPart);
+         messageBodyPart.setText(message);
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+        */
         
         String subject = "IMCP";
+                System.out.println(message);
+        System.out.println(mailAuth(TO,subject,message));
+        
+        
         if(TO!=null && message!=null){
-            System.out.println(mailAuth(TO,subject,message));
+            //System.out.println(mailAuth(TO,subject,message));
         }
         
 
@@ -82,8 +112,8 @@ public class AdminSendMailController {
         return model;
     }
     
-    private Boolean mailAuth(String to,String subject,String message){
-        //String to="mnagariya@gmail.com";//change accordingly  
+    private Boolean mailAuth(String[] to,String subject,String message){
+          
   
         //Get the session object  
         Properties props = new Properties();  
@@ -94,7 +124,7 @@ public class AdminSendMailController {
         props.put("mail.smtp.auth", "true");  
         props.put("mail.smtp.port", "465");  
         
-        javax.mail.Session session = javax.mail.Session.getDefaultInstance(props,  
+        javax.mail.Session session = javax.mail.Session.getInstance(props,  
             new javax.mail.Authenticator() {  
                 protected javax.mail.PasswordAuthentication getPasswordAuthentication() {  
                     return new javax.mail.PasswordAuthentication("raj.godhasara22@gmail.com","Godhu)$08!((%");//change accordingly  
@@ -105,10 +135,16 @@ public class AdminSendMailController {
         {  
             MimeMessage message1 = new MimeMessage(session);  
             message1.setFrom(new InternetAddress("raj.godhasara22@gmail.com"));//change accordingly  
-            message1.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+            //message1.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
             message1.setSubject(subject);  
             message1.setText(message);  
             
+            for (String mail: to)
+            {
+                message1.addRecipient(Message.RecipientType.TO,new InternetAddress(mail));
+            }
+            
+           // message1.setContent(multipart);
             //MAILING TO MULTIPLE ADDRESS
             //message1.addRecipients(Message.RecipientType.TO, addresses);
             
@@ -121,9 +157,27 @@ public class AdminSendMailController {
         } 
         catch (MessagingException e) 
         {
+            System.out.println(e.getMessage());
             return false;
             //throw new RuntimeException(e);
             
         }  
+    }
+    
+    @RequestMapping("/admin_search_mail_bystatus")
+    public ModelAndView getAdminSearchMailByStatus(ModelMap map,HttpServletRequest req)
+    {
+        System.out.println("IN SEARCH BY STATUS:");
+        EnquiryBusiness business = new EnquiryBusiness();
+        List<Enquiry> listEnquiry = business.searchObjectByStatus(req.getParameter("status"));
+        System.out.println("LIST SIZE:"+listEnquiry.size());
+        PreTextBusiness textBusiness = new PreTextBusiness();
+        List<PreText> listText = textBusiness.search();
+        System.out.println("LISTPRETEXT SIZE:"+listText.size());
+        map.addAttribute("listEnquiry", listEnquiry);
+        map.addAttribute("listPretext", listText);
+        
+        ModelAndView model = new ModelAndView("AdminJsp-SendMail","command",new SentMail());
+        return model;
     }
 }

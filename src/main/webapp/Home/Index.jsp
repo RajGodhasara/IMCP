@@ -58,7 +58,7 @@
         <div class="container">
             <div class="header-main-wrapper">
                 <div class="navbar-heade">
-                    <div class="logo pull-left"><a href="index.html" class="header-logo"><img src="assets/images/logo-color-1.png" alt=""/></a></div>
+                    <div class="logo pull-left"><a href="index.html" class="header-logo"><img src="data:image/jpeg;base64,${logo}" alt=""/></a></div>
                     <button type="button" data-toggle="collapse" data-target=".navigation" class="navbar-toggle edugate-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <nav class="navigation collapse navbar-collapse pull-right">
@@ -798,12 +798,6 @@
 <div class="body-2 loading">
     <div class="dots-loader"></div>
 </div>
-<!-- JAVASCRIPT LIBS-->
-<script>if ((Cookies.get('color-skin') != undefined) && (Cookies.get('color-skin') != 'color-1')) {
-    $('.logo .header-logo img').attr('src', 'assets/images/logo-' + Cookies.get('color-skin') + '.png');
-} else if ((Cookies.get('color-skin') == undefined) || (Cookies.get('color-skin') == 'color-1')) {
-    $('.logo .header-logo img').attr('src', 'assets/images/logo-color-1.png');
-}</script>
 <script src="assets/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="assets/libs/smooth-scroll/jquery-smoothscroll.js"></script>
 <script src="assets/libs/owl-carousel-2.0/owl.carousel.min.js"></script>

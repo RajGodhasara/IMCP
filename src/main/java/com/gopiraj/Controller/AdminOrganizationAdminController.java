@@ -23,7 +23,7 @@ public class AdminOrganizationAdminController {
     @RequestMapping("/admin_add_admin")
     public ModelAndView getAdminAddAdmin(ModelMap map)
     {
-        ModelAndView model = new ModelAndView("test","command",new OrganizationAdmin());
+        ModelAndView model = new ModelAndView("AdminJsp-AddAdmin","command",new OrganizationAdmin());
         model.addObject("emp",new Person());
         return model;
     }
