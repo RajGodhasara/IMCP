@@ -12,10 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <jsp:include page="../AdminTemp/AdminHeaderSide.jsp"></jsp:include>
-       <div class="mainbar">
-          <jsp:include page="../AdminJsp/AddCourse.jsp"></jsp:include>
-      </div>
-          <jsp:include page="../AdminTemp/AdminFooter.jsp"></jsp:include>
+        <jsp:include page="../AdminTemp/AdminHeaderSide.jsp"></jsp:include>
+            <div class="mainbar">
+            <jsp:include page="../AdminJsp/AddCourse.jsp"></jsp:include>
+            </div>
+        <jsp:include page="../AdminTemp/AdminFooter.jsp"></jsp:include>
     </body>
 </html>

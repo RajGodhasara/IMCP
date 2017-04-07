@@ -6,7 +6,7 @@
 
 <hibernate-mapping>
 
-  <class name="com.gopiraj.Model.SocialLinks" table="social_links" catalog="projecttest">
+    <class name="com.gopiraj.Model.SocialLinks" table="social_links" catalog="projecttest">
         <id name="SocialLinkId" type="java.lang.Integer">
             <column name="social_link_id" />
             <generator class="identity" />

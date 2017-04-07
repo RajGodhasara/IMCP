@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Business;
 
 import com.gopiraj.Model.Enquiry;
@@ -12,194 +11,184 @@ import com.gopiraj.Model.PreBrochures;
 import com.gopiraj.Model.PreText;
 import com.gopiraj.Model.SentMail;
 import com.gopiraj.dispature.MyDispatureServlet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import org.hibernate.*;
+
 /**
  *
  * @author GOPIRAJ
  */
 public class SentMailBusiness {
+
     SessionFactory sf;
-    Session s=null;
+    Session s = null;
     SentMail sentmail = new SentMail();
     Scanner sc = new Scanner(System.in);
-    
-    public SentMailBusiness()
-    {
-        try
-        {
+
+    public SentMailBusiness() {
+        try {
             sf = MyDispatureServlet.getSessionFactory();
-            
+
+        } catch (Exception e) {
+            System.out.println("Error in Constructor:");
+            e.printStackTrace();
         }
-        catch(Exception e)
-        {
-           System.out.println("Error in Constructor:");
-           e.printStackTrace();
-        }
-    }  
-    
-    
-    public String insert(SentMail sentmail)
-    {
-             s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-           
-            try
-            {
-                if(sentmail!=null)
-                {
-                    s.save(sentmail);
-                }
-                tx.commit();
-                return "Inserted.";      
-            }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
-            }
     }
-    public SentMail searchById(int id)
-    {
-        try
-        {
-             s = sf.openSession();        
-            sentmail = (SentMail)s.get(SentMail.class, id);
-            return sentmail;
+
+    public String insert(SentMail sentmail) {
+        s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (sentmail != null) {
+                s.save(sentmail);
+            }
+            tx.commit();
+            return "Inserted.";
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
         }
-        catch(Exception e)
-        {
+    }
+
+    public SentMail searchById(int id) {
+        try {
+            s = sf.openSession();
+            sentmail = (SentMail) s.get(SentMail.class, id);
+            return sentmail;
+        } catch (Exception e) {
             return null;
         }
     }
-    
-    
-    public List search()
-    {
-        try
-        {
-            s = sf.openSession(); 
+
+    public List search() {
+        try {
+            s = sf.openSession();
             Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from SentMail").list();
             t.commit();
             s.close();
             return list;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
-    
-    public String delete(int id)
-    {
-            sentmail = searchById(id);
-             s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-            
-            try
-            {
-                
-                if(sentmail!=null )
-                {
-                    s.delete(sentmail);
-                    tx.commit();                       
-                    return "Deleted Success.";
-                }
-                else
-                {
-                     return "Could not find.";
-                }
-            }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
-            }
-            
-    }
-    
-    public String update(SentMail sentmail)
-    {
-            //Session s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-           
-            try
-            {
-                if(sentmail!=null)
-                {
-                    s.update(sentmail);
-                }
+
+    public String delete(int id) {
+        sentmail = searchById(id);
+        s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+
+            if (sentmail != null) {
+                s.delete(sentmail);
                 tx.commit();
-            
-                return "Updated.";      
+                return "Deleted Success.";
+            } else {
+                return "Could not find.";
             }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
+        }
+
+    }
+
+    public String update(SentMail sentmail) {
+        //Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (sentmail != null) {
+                s.update(sentmail);
             }
+            tx.commit();
+
+            return "Updated.";
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
+        }
+    }
+
+    public Enquiry getenq(int id) {
+        s = sf.openSession();
+        Enquiry enq = (Enquiry) s.get(Enquiry.class, id);
+
+        if (enq != null) {
+            return enq;
+        } else {
+            return null;
+        }
+
+    }
+
+    public PreText getpretext(int id) {
+        s = sf.openSession();
+        PreText text = (PreText) s.get(PreText.class, id);
+
+        if (text != null) {
+            return text;
+        } else {
+            return null;
+        }
+
+    }
+
+    public Person getperid(int id) {
+        s = sf.openSession();
+        Person person = (Person) s.get(Person.class, id);
+
+        if (person != null) {
+            return person;
+        } else {
+            return null;
+        }
+
+    }
+
+    public PreBrochures getprebro(int id) {
+        s = sf.openSession();
+        PreBrochures bro = (PreBrochures) s.get(PreBrochures.class, id);
+
+        if (bro != null) {
+            return bro;
+        } else {
+            return null;
+        }
+
     }
     
-    public Enquiry getenq(int id)
-    {
-             s = sf.openSession();            
-            Enquiry enq = (Enquiry)s.get(Enquiry.class, id);
-            
-                   if(enq!=null )
-                   {
-                       return enq;                
-                   }
-                   else
-                   {
-                       return null;
-                   }                  
-            
-    }    
-    
-    public PreText getpretext(int id)
-    {
-             s = sf.openSession();            
-            PreText text = (PreText)s.get(PreText.class, id);
-            
-                   if(text!=null )
-                   {
-                       return text;                
-                   }
-                   else
-                   {
-                       return null;
-                   }                      
-            
+    public void deleteMultiple(List<SentMail> list) {
+        Session s;
+        s = sf.openSession();
+        Transaction t = s.beginTransaction();
+        for (int i = 0; i < list.size(); i++) {
+            s.delete(list.get(i));
+        }
+
+        t.commit();
     }
-    public Person getperid(int id)
-    {
-             s = sf.openSession();            
-            Person person = (Person)s.get(Person.class, id);
-            
-                   if(person!=null )
-                   {
-                       return person;                
-                   }
-                   else
-                   {
-                       return null;
-                   }                      
-            
-    }
-    public PreBrochures getprebro(int id)
-    {
-             s = sf.openSession();            
-            PreBrochures bro = ( PreBrochures)s.get(PreBrochures.class, id);
-            
-                   if(bro!=null )
-                   {
-                       return bro;                
-                   }
-                   else
-                   {
-                       return null;
-                   }                      
-            
+
+    public List<SentMail> getSendMailObject(String str) {
+        try {
+            List<SentMail> listStudent = new ArrayList<SentMail>();
+            Session s;
+            SessionFactory sf = MyDispatureServlet.getSessionFactory();
+            s = sf.openSession();
+            String[] parts = str.split(":");
+            for (int i = 0; i < parts.length; i++) {
+                SentMail st = (SentMail) s.get(SentMail.class, Integer.parseInt(parts[i]));
+                listStudent.add(st);
+            }
+            s.close();
+            return listStudent;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

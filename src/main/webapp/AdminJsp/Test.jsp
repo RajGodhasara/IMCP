@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
-    WelCome to Application.
+
+        WelCome to Application.
     </body>
 </html>

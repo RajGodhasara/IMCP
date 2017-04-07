@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="preBrochures" class="com.gopiraj.Model.PreBrochures" fetch="select">
-            <column name="Brochures_id" not-null="true" />
+            <column name="Brochures_id" not-null="false" />
         </many-to-one>
         <many-to-one name="enquiry" class="com.gopiraj.Model.Enquiry" fetch="select">
             <column name="Enq_id" not-null="true" />
@@ -18,7 +18,7 @@
             <column name="Person_id" not-null="true" />
         </many-to-one>
         <many-to-one name="preText" class="com.gopiraj.Model.PreText" fetch="select">
-            <column name="Pre_Text_id" not-null="true" />
+            <column name="Pre_Text_id" not-null="false" />
         </many-to-one>
         <property name="creationTime" type="timestamp">
             <column name="Creation_Time" length="19" not-null="true" />

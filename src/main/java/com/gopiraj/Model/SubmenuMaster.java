@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Model;
 
 import java.io.Serializable;
@@ -14,7 +13,8 @@ import java.util.Set;
  *
  * @author GOPIRAJ
  */
-public class SubmenuMaster implements Serializable{
+public class SubmenuMaster implements Serializable {
+
     private Integer subMenuMasterId;
     private String subPageName;
     private MenuMaster menuMaster;
@@ -61,6 +61,5 @@ public class SubmenuMaster implements Serializable{
     public void setSubMenuName(String subMenuName) {
         this.subMenuName = subMenuName;
     }
-    
-    
+
 }

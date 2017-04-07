@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <jsp:include page="../Home/404.jsp"></jsp:include>
+        <jsp:include page="../Home/404.jsp"></jsp:include>
     </body>
 </html>

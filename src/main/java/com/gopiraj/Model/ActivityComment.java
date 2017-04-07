@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Model;
 
 import java.util.Date;
@@ -13,15 +12,15 @@ import java.util.Date;
  * @author GOPIRAJ
  */
 public class ActivityComment {
-    
+
     private Integer activityCommentId;
     private String comment;
     private Activity activity;
     private Person person;
     private Date creationTime;
-    
+
     public ActivityComment() {
-        
+
     }
 
     public ActivityComment(Integer activityCommentId, String comment, Activity activity, Person person, Date creationTime) {
@@ -31,7 +30,7 @@ public class ActivityComment {
         this.person = person;
         this.creationTime = creationTime;
     }
-    
+
     public Integer getActivityCommentId() {
         return activityCommentId;
     }
@@ -71,7 +70,5 @@ public class ActivityComment {
     public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
-    
-    
-    
+
 }

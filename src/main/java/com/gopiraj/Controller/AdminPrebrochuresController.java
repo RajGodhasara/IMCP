@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Controller;
 
 import com.gopiraj.Business.PreBrochuresBusiness;
-import com.gopiraj.Model.OrganizationAdmin;
+import com.gopiraj.Business.Utils;
 import com.gopiraj.Model.Person;
 import com.gopiraj.Model.PreBrochures;
-import com.gopiraj.dispature.MyDispatureServlet;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.fileupload.FileUploadException;
-import org.hibernate.SessionFactory;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,59 +31,134 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class AdminPrebrochuresController {
-    
-    private static final String UPLOAD_DIRECTORY ="/brochures";
-    
+
+    private static final String UPLOAD_DIRECTORY = "/brochures";
+
     @RequestMapping("/admin_add_prebrochures")
-    public ModelAndView getAdminAddPreBrochures(ModelMap map)
-    {
-        ModelAndView model = new ModelAndView("AdminJsp-AddBrochures","command",new PreBrochures());
-        return model;
+    public ModelAndView getAdminAddPreBrochures(ModelMap map, HttpServletRequest req) {
+        if (Utils.isAuthenticated(req)) {
+            ModelAndView model = new ModelAndView("AdminJsp-AddBrochures", "command", new PreBrochures());
+            return model;
+        } else {
+            ModelAndView model = new ModelAndView("redirect:/login", "command", new PreBrochures());
+            return model;
+        }
+
     }
-    
+
     @RequestMapping("/admin_search_prebrochures")
-    public ModelAndView getAdminSearchPreBrochures(ModelMap map)
-    {
-        ModelAndView model = new ModelAndView("AdminJsp-SearchBrochures","command",new PreBrochures());
-        return model;
+    public ModelAndView getAdminSearchPreBrochures(ModelMap map, HttpServletRequest req) {
+        if (Utils.isAuthenticated(req)) {
+            ModelAndView model = new ModelAndView("AdminJsp-SearchBrochures", "command", new PreBrochures());
+            PreBrochuresBusiness business = new PreBrochuresBusiness();
+            List<PreBrochures> list = new ArrayList<PreBrochures>();
+            list = business.search();
+            System.out.println("Size:" + list.size());
+            model.addObject("list", list);
+            return model;
+        } else {
+            ModelAndView model = new ModelAndView("redirect:/login", "command", new PreBrochures());
+            return model;
+        }
+
     }
+
     
     @RequestMapping("/admin_add_prebrochures_insert")
-    public ModelAndView getAdminInsertCourse(ModelMap map,@ModelAttribute PreBrochures brochure,HttpServletRequest res,
-            @RequestParam CommonsMultipartFile file,HttpSession session) {
-        
-        SessionFactory sf = MyDispatureServlet.getSessionFactory();
-        PreBrochuresBusiness business = new PreBrochuresBusiness();
-        Person person=null;
-        
-        String path=session.getServletContext().getRealPath(UPLOAD_DIRECTORY);
-        String filename=file.getOriginalFilename();
-        System.out.println("FILE:"+path+" "+filename);
-        try{
-            byte[] bytes = file.getBytes();  
-            brochure.setUpload(bytes);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
+    public ModelAndView getAdminInsertCourse(ModelMap map, @ModelAttribute PreBrochures brochure, HttpServletRequest res,
+            @RequestParam CommonsMultipartFile file, HttpSession session) {
+
+        if (Utils.isAuthenticated(res)) {
+            PreBrochuresBusiness business = new PreBrochuresBusiness();
+            Person person = null;
+            
+            
+            
+            String path = session.getServletContext().getRealPath(UPLOAD_DIRECTORY);
+            String filename = file.getOriginalFilename();
+            System.out.println("FILE:" + path + " " + filename);
+            try {
+                byte[] bytes = file.getBytes();
+                brochure.setUpload(bytes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 //        BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(  
 //         new File(path + File.separator + filename)));  
 //        stream.write(bytes);  
 //        stream.flush();  
 //        stream.close(); 
-        
-        HttpSession session1 = res.getSession(false);
-        person = (Person)session1.getAttribute("person");
-        if(person!=null){
-            brochure.setOrganizationAdmin(person.getOrganizationAdmin());
-            System.out.println("setting admin");
+            HttpSession session1 = res.getSession(false);
+            person = (Person) session1.getAttribute("person");
+            if (person != null) {
+                brochure.setOrganizationAdmin(person.getOrganizationAdmin());
+                System.out.println("setting admin");
+            }
+
+            String answer = business.insert(brochure);
+            System.out.println(answer);
+
+            ModelAndView model = new ModelAndView("AdminJsp-AddBrochures", "command", new PreBrochures());
+            model.addObject(answer);
+            return model;
+        } else {
+            ModelAndView model = new ModelAndView("redirect:/login", "command", new PreBrochures());
+            return model;
         }
-       
-        String answer = business.insert(brochure, sf);
-        System.out.println(answer);
-        
-        ModelAndView model = new ModelAndView("AdminJsp-AddBrochures", "command", new PreBrochures());
-        model.addObject(answer);
-        return model;
+
+    }
+
+    @RequestMapping("/admin_delete_multiple_brochures")
+    public String deleteMultipleStudent(ModelMap map, HttpServletRequest req) {
+
+        if (Utils.isAuthenticated(req)) {
+            PreBrochuresBusiness brochuresBusiness = new PreBrochuresBusiness();
+            String id = req.getParameter("listSelectedBrochures");
+            if (id != null) {
+                List<PreBrochures> st = brochuresBusiness.getBrochuresObject(id);
+                if (st != null) {
+                    brochuresBusiness.deleteMultiple(st);
+                } else {
+                    System.out.println("IN ELSE");
+                }
+            }
+            List<PreBrochures> list = new ArrayList<PreBrochures>();
+            list = brochuresBusiness.search();
+            map.addAttribute("list", list);
+            return "AdminJsp-SearchBrochures";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+
+    @RequestMapping("/EditBrochures")
+    public String editGrid(ModelMap map, HttpServletRequest req) {
+
+        if (Utils.isAuthenticated(req)) {
+            System.out.println("IN EDIT");
+            int id = Integer.parseInt(req.getParameter("id"));
+            String name = req.getParameter("title");
+            PreBrochures brochures = new PreBrochures();
+            brochures.setTitle(name);
+            brochures.setPreBrochuresId(id);
+
+            PreBrochuresBusiness brochuresBusiness = new PreBrochuresBusiness();
+
+            PreBrochures brochuresObj = brochuresBusiness.searchById(id);
+
+            brochures.setOrganizationAdmin(brochuresObj.getOrganizationAdmin());
+
+            System.out.println(brochuresBusiness.update(brochures));
+
+            List<PreBrochures> brochuresList = brochuresBusiness.search();
+            System.out.println("Size:" + brochuresList.size());
+            map.addAttribute("list", brochuresList);
+            return "AdminJsp-SearchCourse";
+        } else {
+            return "redirect:/login";
+        }
+
     }
 }

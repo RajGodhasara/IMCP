@@ -15,10 +15,10 @@
     <body>
         <h1>Hello World!</h1>
         <ul>
-            
+
             <c:forEach items="${sessionScope.menu}" var="m">
                 <li><a href="${m.pageName}">${m.menuName}</a></li>
-            </c:forEach>
+                </c:forEach>
         </ul>
     </body>
 </html>

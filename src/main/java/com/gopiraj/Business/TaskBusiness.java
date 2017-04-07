@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Business;
-
 
 import com.gopiraj.Model.Employee;
 import com.gopiraj.Model.OrganizationAdmin;
@@ -23,149 +21,113 @@ import org.hibernate.cfg.Configuration;
  * @author GOPIRAJ
  */
 public class TaskBusiness {
+
     SessionFactory sf;
     Task task = new Task();
-    
-    Session s=null;
+
+    Session s = null;
     Scanner sc = new Scanner(System.in);
-    
-    public TaskBusiness()
-    {
-        try
-        {
+
+    public TaskBusiness() {
+        try {
             sf = MyDispatureServlet.getSessionFactory();
-            
+
+        } catch (Exception e) {
+            System.out.println("Error in Constructor:");
+            e.printStackTrace();
         }
-        catch(Exception e)
-        {
-           System.out.println("Error in Constructor:");
-           e.printStackTrace();
-        }
-    }  
-    
-    
-    public String insert(Task task)
-    {
-            s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-           
-            try
-            {
-                if(task!=null)
-                {
-                    s.save(task);
-                }
-                tx.commit();
-                return "Inserted.";      
-            }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
-            }
     }
-    public Task searchById(int id)
-    {
-        try
-        {
-            s = sf.openSession();        
-            task = (Task)s.get(Task.class, id);
-            return task;
+
+    public String insert(Task task) {
+        s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (task != null) {
+                s.save(task);
+            }
+            tx.commit();
+            return "Inserted.";
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
         }
-        catch(Exception e)
-        {
+    }
+
+    public Task searchById(int id) {
+        try {
+            s = sf.openSession();
+            task = (Task) s.get(Task.class, id);
+            return task;
+        } catch (Exception e) {
             return null;
         }
     }
-    
-    public List search()
-    {
-        try
-        {
-            s = sf.openSession(); 
+
+    public List search() {
+        try {
+            s = sf.openSession();
             Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from Task").list();
             t.commit();
             s.close();
             return list;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
-    
-    public String delete(int id)
-    {
-            task = searchById(id);
-            s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-            
-            try
-            {
-                if(task!=null )
-                {
-                    s.delete(task);
-                    tx.commit();                       
-                    return "Deleted Success.";
-                }
-                else
-                {
-                     return "Could not find.";
-                }
-            }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
-            }
-            
-    }
-    
-    public String update(Task task)
-    {
-            //Session ss = sf.openSession();
-            Transaction tx = s.beginTransaction();
-           
-            try
-            {
-                if(task!=null)
-                {
-                    s.update(task);
-                }
+
+    public String delete(int id) {
+        task = searchById(id);
+        s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (task != null) {
+                s.delete(task);
                 tx.commit();
-            
-                return "Updated.";      
+                return "Deleted Success.";
+            } else {
+                return "Could not find.";
             }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
-            }
-    }
-    
-    public OrganizationAdmin searchByAdmin(int id)
-    {
-        try
-        {
-            s = sf.openSession();        
-            OrganizationAdmin admin = (OrganizationAdmin)s.get(OrganizationAdmin.class, id);
-            return admin;
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
         }
-        catch(Exception e)
-        {
+
+    }
+
+    public String update(Task task) {
+        //Session ss = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (task != null) {
+                s.update(task);
+            }
+            tx.commit();
+
+            return "Updated.";
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
+        }
+    }
+
+    public OrganizationAdmin searchByAdmin(int id) {
+        try {
+            s = sf.openSession();
+            OrganizationAdmin admin = (OrganizationAdmin) s.get(OrganizationAdmin.class, id);
+            return admin;
+        } catch (Exception e) {
             return null;
         }
     }
-    
-    public Employee searchByEmployee(int id)
-    {
-        try
-        {
-            s = sf.openSession();        
-            Employee emp = (Employee)s.get(Employee.class, id);
+
+    public Employee searchByEmployee(int id) {
+        try {
+            s = sf.openSession();
+            Employee emp = (Employee) s.get(Employee.class, id);
             return emp;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }

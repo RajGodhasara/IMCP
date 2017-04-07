@@ -13,10 +13,10 @@
     </head>
     <body>
         <jsp:include page="../AdminTemp/AdminHeaderSide.jsp"></jsp:include>
-        
-        <div class="mainbar">
-          <jsp:include page="../AdminJsp/AddBasicDetails.jsp"></jsp:include>
-        </div>
-          <jsp:include page="../AdminTemp/AdminFooter.jsp"></jsp:include>
+
+            <div class="mainbar">
+            <jsp:include page="../AdminJsp/AddBasicDetails.jsp"></jsp:include>
+            </div>
+        <jsp:include page="../AdminTemp/AdminFooter.jsp"></jsp:include>
     </body>
 </html>

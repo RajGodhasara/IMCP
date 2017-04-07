@@ -50,12 +50,16 @@
         <property name="creationTime" type="timestamp">
             <column name="Creation_Time" length="19" />
         </property>
-        <set name="enquiryCourses" table="enquiry_course" inverse="true" lazy="true" fetch="select">
+        <set name="enqCourse" cascade="save-update" table="enquiry_course">
+            <key column="Enquiry_Course_id"/>
+            <many-to-many column="Enq_Course_id" class="com.gopiraj.Model.Course"/>
+        </set>
+<!--        <set name="enquiryCourses" table="enquiry_course" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Enquiry_Course_id" not-null="false" />
             </key>
             <one-to-many class="com.gopiraj.Model.EnquiryCourse" />
-        </set>
+        </set>-->
         <set name="enquiryContactnos" table="enquiry_contactno" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Enquiry_id" not-null="false" />

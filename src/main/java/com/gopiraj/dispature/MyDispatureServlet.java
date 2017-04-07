@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.dispature;
 
 import org.hibernate.SessionFactory;
@@ -14,18 +13,17 @@ import org.springframework.web.servlet.DispatcherServlet;
  *
  * @author GOPIRAJ
  */
-public class MyDispatureServlet extends DispatcherServlet{
+public class MyDispatureServlet extends DispatcherServlet {
+
     private static SessionFactory sf;
-    
-    static 
-    {
+
+    static {
         System.out.println("Going to Check CFG File.");
         sf = new Configuration().configure().buildSessionFactory();
         System.out.println("Done Checking CFG file.");
     }
-    
-    public static SessionFactory getSessionFactory()
-    {
+
+    public static SessionFactory getSessionFactory() {
         return sf;
     }
 }

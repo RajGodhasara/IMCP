@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Model;
 
 /**
@@ -11,7 +10,7 @@ package com.gopiraj.Model;
  * @author GOPIRAJ
  */
 public class Login {
-    
+
     public String Email;
     public String Pass;
 
@@ -38,6 +37,5 @@ public class Login {
     public void setPass(String Pass) {
         this.Pass = Pass;
     }
-    
-    
+
 }

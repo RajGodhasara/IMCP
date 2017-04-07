@@ -20,11 +20,11 @@
         <property name="Description" type="string">
             <column name="Description" not-null="true" />
         </property>
-        <set name="enquiryCourses" table="enquiry_course" inverse="true" lazy="true" fetch="select">
+<!--        <set name="enquiryCourses" table="enquiry_course" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="Enquiry_Course_id" not-null="true" />
             </key>
             <one-to-many class="com.gopiraj.Model.EnquiryCourse" />
-        </set>
+        </set>-->
     </class>
 </hibernate-mapping>

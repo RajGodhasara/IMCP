@@ -24,7 +24,7 @@
     <mapping resource="MenuType.hbm.xml"/>
     <mapping resource="Task.hbm.xml"/>
     <mapping resource="Employee.hbm.xml"/>
-    <mapping resource="EnquiryCourse.hbm.xml"/>
+<!--    <mapping resource="EnquiryCourse.hbm.xml"/>-->
     <mapping resource="OrganizationAdmin.hbm.xml"/>
     <mapping resource="ActivityComment.hbm.xml"/>
     <mapping resource="SubMenuMaster.hbm.xml"/>
@@ -33,5 +33,8 @@
     <mapping resource="Teachers.hbm.xml"/>
     <mapping resource="Corporates.hbm.xml"/>
     <mapping resource="PersonType.hbm.xml"/>
+    <mapping resource="Aboutus.hbm.xml"/>
+    <mapping resource="SliderImage.hbm.xml"/>
+    <mapping resource="Gallery.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

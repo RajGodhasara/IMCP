@@ -4,33 +4,33 @@
     Author     : GOPIRAJ
 --%>
 
- 
+
 
 <!-- Mainbar ends -->
-        <div class="clearfix"></div>
+<div class="clearfix"></div>
 
-    </div>
-    <!-- Content ends -->
+</div>
+<!-- Content ends -->
 
-    <!-- Footer starts -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Copyright info -->
-                    <p class="copy">Copyright &copy; 2013 | <a href="#">Your Site</a> </p>
-                </div>
+<!-- Footer starts -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Copyright info -->
+                <p class="copy">Copyright &copy; 2013 | <a href="#">Your Site</a> </p>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- Footer ends -->
+<!-- Footer ends -->
 
-    <!-- Scroll to top -->
-    <span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span>
+<!-- Scroll to top -->
+<span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span>
 
-    <!-- JS -->
-    <!--<script src="js/jquery.js"></script> <!-- jQuery -->
+<!-- JS -->
+<!--<script src="js/jquery.js"></script> <!-- jQuery -->
 <!--<script src="js/bootstrap.js"></script> <!-- Bootstrap -->
 
 </body>

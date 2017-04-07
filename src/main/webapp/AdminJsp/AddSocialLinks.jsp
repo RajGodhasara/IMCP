@@ -16,6 +16,7 @@
             Add Social Links only for first time.
         </h1>
         <form:form method="POST" commandName="command" action="admin_add_social_links_insert">
+            <form:hidden path="SocialLinkId" cssClass="form-control"/>
             <table>
                 <tr>
                     <td>

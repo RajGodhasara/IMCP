@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Business;
 
 import com.gopiraj.Model.SocialLinks;
@@ -19,62 +18,57 @@ import org.hibernate.Transaction;
  * @author GOPIRAJ
  */
 public class SocialLinksBusiness {
+
     SessionFactory sf;
     SocialLinks social = new SocialLinks();
-    public SocialLinksBusiness()
-    {
-        try
-        {
-            sf = MyDispatureServlet.getSessionFactory(); 
-        }
-        catch(Exception e)
-        {
-           System.out.println("Error in Constructor:");
-           e.printStackTrace();
+
+    public SocialLinksBusiness() {
+        try {
+            sf = MyDispatureServlet.getSessionFactory();
+        } catch (Exception e) {
+            System.out.println("Error in Constructor:");
+            e.printStackTrace();
         }
     }
-    
-    public String insert(SocialLinks links)
-    {
+
+    public String insert(SocialLinks links) {
+        Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+        try {
+            if (search().isEmpty()) {
+                if (links != null) {
+                    s.save(links);
+                    tx.commit();
+                    s.close();
+                    return "Inserted.";
+                } else {
+                    return "Null.";
+                }
+            } else {
+                if (links != null) {
+                    s.merge(links);
+                    tx.commit();
+                    s.close();
+                    return "Updated.";
+                } else {
+                    return "Null.";
+                }
+            }
+
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
+        }
+    }
+
+    public List<SocialLinks> search() {
+        try {
             Session s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-            try
-            {
-                if(search().isEmpty()){
-                    if(links!=null)
-                    {
-                        s.save(links);
-                        tx.commit();
-                        s.close();
-                        return "Inserted.";      
-                    }else{
-                        return "Null.";      
-                    }
-                }
-                else{
-                    return "Data Exist.";
-                }
-                
-            }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
-            }
-    }
-    
-    public List<SocialLinks> search()
-    {
-        try
-        {
-            Session s = sf.openSession(); 
             Transaction t = s.beginTransaction();
             List<SocialLinks> list = new ArrayList<>();
             list = s.createQuery("from SocialLinks").list();
             t.commit();
             return list;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }

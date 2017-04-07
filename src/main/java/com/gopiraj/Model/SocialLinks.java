@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Model;
 
 import java.io.Serializable;
@@ -13,6 +12,7 @@ import java.io.Serializable;
  * @author GOPIRAJ
  */
 public class SocialLinks implements Serializable {
+
     private Integer SocialLinkId;
     private String facebook;
     private String gmail;
@@ -59,6 +59,5 @@ public class SocialLinks implements Serializable {
     public void setTwitter(String twitter) {
         this.twitter = twitter;
     }
-    
-    
+
 }

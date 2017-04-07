@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="com.gopiraj.Model.SubmenuMaster" table="submenu_master">
-      <id name="subMenuMasterId" type="java.lang.Integer">
+    <class name="com.gopiraj.Model.SubmenuMaster" table="submenu_master">
+        <id name="subMenuMasterId" type="java.lang.Integer">
             <column name="submenu_master_id" />
             <generator class="identity" />
-      </id>
-      <property name="subPageName" type="string">
+        </id>
+        <property name="subPageName" type="string">
             <column name="subpage_name" length="45" not-null="false" />
-      </property>
-      <property name="subMenuName" type="string">
+        </property>
+        <property name="subMenuName" type="string">
             <column name="submenu_name" length="45" not-null="false" />
-      </property>
-      <many-to-one name="menuMaster" class="com.gopiraj.Model.MenuMaster" fetch="select">
+        </property>
+        <many-to-one name="menuMaster" class="com.gopiraj.Model.MenuMaster" fetch="select">
             <column name="menu_master_id" not-null="true" />
-      </many-to-one>
-  </class>
+        </many-to-one>
+    </class>
 </hibernate-mapping>

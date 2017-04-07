@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Business;
 
 import com.gopiraj.Model.MenuMaster;
@@ -23,97 +22,84 @@ import org.hibernate.classic.Session;
  * @author GOPIRAJ
  */
 public class SubmenuMasterBusiness {
+
     SessionFactory sf;
-    
-    public SubmenuMasterBusiness()
-    {
-        try
-        {
+
+    public SubmenuMasterBusiness() {
+        try {
             sf = MyDispatureServlet.getSessionFactory();
-            
-        }
-        catch(Exception e)
-        {
-           System.out.println("Error in Constructor:");
-           e.printStackTrace();
+
+        } catch (Exception e) {
+            System.out.println("Error in Constructor:");
+            e.printStackTrace();
         }
     }
-    
-    public String insert(SubmenuMaster menu)
-    {
-            org.hibernate.Session s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-            
-            try
-            {
-                if(menu!=null)
-                {
-                    s.save(menu);
-                }
-                tx.commit();
-                s.close();
-              //  s.flush();
-                return "Inserted.";      
+
+    public String insert(SubmenuMaster menu) {
+        org.hibernate.Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (menu != null) {
+                s.save(menu);
             }
-            catch(Exception e)
-            {
-                return "Error:"+e.getMessage();
-            }
+            tx.commit();
+            s.close();
+            //  s.flush();
+            return "Inserted.";
+        } catch (Exception e) {
+            return "Error:" + e.getMessage();
+        }
     }
-    
-    public List<SubmenuMaster> getSubMenu(int menu_id)
-    {
-        try
-        {
+
+    public List<SubmenuMaster> getSubMenu(int menu_id) {
+        try {
             /**
              * Problem in HQL query.
              */
-            List<SubmenuMaster> list=null;
+            List<SubmenuMaster> list = null;
             System.out.println("test1");
-            Session s = sf.openSession();        
+            Session s = sf.openSession();
             System.out.println("test2");
             String hql = "FROM SubmenuMaster m WHERE m.menuMaster.menuMasterId=:menu_id";
             System.out.println("test3");
-            Query q=s.createQuery(hql);
+            Query q = s.createQuery(hql);
             System.out.println("test4");
             q.setParameter("menu_id", menu_id);
             System.out.println("test5");
-            list=(ArrayList)q.list();
+            list = (ArrayList) q.list();
             //ArrayList list2=(ArrayList)q.list();
             System.out.println("test6");
-            System.out.println("SubMenu Size:"+list.size());
+            System.out.println("SubMenu Size:" + list.size());
             System.out.println("test7");
             return list;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-    
-    public List<MenuMaster> getSub(List<MenuMaster> list){
-        try{
-            
+
+    public List<MenuMaster> getSub(List<MenuMaster> list) {
+        try {
+
             //MenuMaster menu = new MenuMaster();
-            List<SubmenuMaster> subMenuList=null;
+            List<SubmenuMaster> subMenuList = null;
             List<MenuMaster> menuList = new ArrayList<MenuMaster>();
             SubmenuMasterBusiness businessSubmenu = new SubmenuMasterBusiness();
-            for(int i=0;i<list.size();i++){
+            for (int i = 0; i < list.size(); i++) {
                 MenuMaster menu = list.get(i);
-                System.out.println("ARG ID:"+menu.getMenuMasterId());
+                System.out.println("ARG ID:" + menu.getMenuMasterId());
                 subMenuList = businessSubmenu.getSubMenu(menu.getMenuMasterId());
                 Set<SubmenuMaster> set = new HashSet<SubmenuMaster>(subMenuList);
                 menu.setSubMenuTypes(set);
                 menuList.add(menu);
             }
             return menuList;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        
+
     }
-    
+
 }

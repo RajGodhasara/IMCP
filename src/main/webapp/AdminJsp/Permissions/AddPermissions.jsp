@@ -14,25 +14,25 @@
         <script type="text/javascript">
             $(document).ready(function()
             {
-                jQuery("#submitPerson").click(function () {
+                jQuery("#submitPerson").click(function() {
                     jQuery.ajax({
                         url: 'admin_add_person_insert',
                         async: false,
                         data: {
                             PersonName: jQuery('#ptype').val()
-                            
-                        },  
+
+                        },
                         dataType: 'text',
-                        success: function (params) {
+                        success: function(params) {
                             alert('Role Added Successfully.');
                         },
-                        error: function (error) {
-                            alert('failed !!'+error.val());
+                        error: function(error) {
+                            alert('failed !!' + error.val());
                         }
                     });
                 });
-                
-                jQuery("#submitRoles").click(function () {
+
+                jQuery("#submitRoles").click(function() {
                     var AddCourse;
                     var SearchCourse;
                     var AddPreText;
@@ -48,147 +48,148 @@
                     var SearchSendMail;
                     var AddEnquiry;
                     var SearchEnquiry;
+
                     if ($('#SendMail').is(":checked"))
                     {
                         SendMail = jQuery('#SendMail').val();
                     }
-                    else{   
+                    else {
                         SendMail = "";
                     }
                     if ($('#SearchSendMail').is(":checked"))
                     {
                         SearchSendMail = jQuery('#SearchSendMail').val();
                     }
-                    else{   
+                    else {
                         SearchSendMail = "";
                     }
                     if ($('#AddEmployee').is(":checked"))
                     {
                         AddEmployee = jQuery('#AddEmployee').val();
                     }
-                    else{   
+                    else {
                         AddEmployee = "";
                     }
                     if ($('#AddPost').is(":checked"))
                     {
                         AddPost = jQuery('#AddPost').val();
                     }
-                    else{   
+                    else {
                         AddPost = "";
                     }
                     if ($('#SearchEmployee').is(":checked"))
                     {
                         SearchEmployee = jQuery('#SearchEmployee').val();
                     }
-                    else{   
+                    else {
                         SearchEmployee = "";
                     }
                     if ($('#AddAdmin').is(":checked"))
                     {
                         AddAdmin = jQuery('#AddAdmin').val();
                     }
-                    else{   
+                    else {
                         AddAdmin = "";
                     }
                     if ($('#SearchAdmin').is(":checked"))
                     {
                         SearchAdmin = jQuery('#SearchAdmin').val();
                     }
-                    else{   
+                    else {
                         SearchAdmin = "";
                     }
                     if ($('#AddCourse').is(":checked"))
                     {
                         AddCourse = jQuery('#AddCourse').val();
                     }
-                    else{   
+                    else {
                         AddCourse = "";
                     }
                     if ($('#SearchCourse').is(":checked"))
                     {
                         SearchCourse = jQuery('#SearchCourse').val();
                     }
-                    else{   
+                    else {
                         SearchCourse = "";
                     }
                     if ($('#AddPreText').is(":checked"))
                     {
                         AddPreText = jQuery('#AddPreText').val();
                     }
-                    else{   
+                    else {
                         AddPreText = "";
                     }
                     if ($('#SearchPreText').is(":checked"))
                     {
                         SearchPreText = jQuery('#SearchPreText').val();
                     }
-                    else{   
+                    else {
                         SearchPreText = "";
                     }
                     if ($('#AddBrochures').is(":checked"))
                     {
                         AddBrochures = jQuery('#AddBrochures').val();
                     }
-                    else{   
+                    else {
                         AddBrochures = "";
                     }
                     if ($('#SearchBrochures').is(":checked"))
                     {
                         SearchBrochures = jQuery('#SearchBrochures').val();
                     }
-                    else{   
+                    else {
                         SearchBrochures = "";
                     }
                     if ($('#AddEnquiry').is(":checked"))
                     {
                         AddEnquiry = jQuery('#AddEnquiry').val();
                     }
-                    else{   
+                    else {
                         AddEnquiry = "";
                     }
                     if ($('#SearchEnquiry').is(":checked"))
                     {
                         SearchEnquiry = jQuery('#SearchEnquiry').val();
                     }
-                    else{   
+                    else {
                         SearchEnquiry = "";
                     }
-                    
+
                     jQuery.ajax({
                         url: 'admin_add_permission_insert',
                         async: false,
                         data: {
-                            AddCourse:AddCourse,
-                            SearchCourse:SearchCourse,
-                            AddPreText:AddPreText,
-                            AddBrochures:AddBrochures,
-                            SearchBrochures:SearchBrochures,
-                            SearchPreText:SearchPreText,
-                            AddEmployee:AddEmployee,
-                            SearchEmployee:SearchEmployee,
-                            AddAdmin:AddAdmin,
-                            SearchAdmin:SearchAdmin,
-                            AddPost:AddPost,
-                            SendMail:SendMail,
-                            SearchSendMail:SearchSendMail,
-                            AddEnquiry:AddEnquiry,
-                            SearchEnquiry:SearchEnquiry,
-                            ptype:jQuery('#pTypeSelect').val()
-                        },  
+                            AddCourse: AddCourse,
+                            SearchCourse: SearchCourse,
+                            AddPreText: AddPreText,
+                            AddBrochures: AddBrochures,
+                            SearchBrochures: SearchBrochures,
+                            SearchPreText: SearchPreText,
+                            AddEmployee: AddEmployee,
+                            SearchEmployee: SearchEmployee,
+                            AddAdmin: AddAdmin,
+                            SearchAdmin: SearchAdmin,
+                            AddPost: AddPost,
+                            SendMail: SendMail,
+                            SearchSendMail: SearchSendMail,
+                            AddEnquiry: AddEnquiry,
+                            SearchEnquiry: SearchEnquiry,
+                            ptype: jQuery('#pTypeSelect').val()
+                        },
                         dataType: 'text',
-                        success: function (params) {
+                        success: function(params) {
                             alert('Permission Added successfully');
                             location.reload();
                         },
-                        error: function (error) {
-                            alert('failed !!'+error.val());
+                        error: function(error) {
+                            alert('failed !!' + error.val());
                         }
                     });
                 });
             });
         </script>
 
-        
+
     </head>
     <body>
         <h1>Manage Roles:</h1>
@@ -199,31 +200,31 @@
                     <td><input type="text" name="ptype" id="ptype" class="form-control"/></td>
                 </tr>
             </table>
-            
+
             <table border="0" style="margin-top: 20px;">
                 <tr>
                     <td><input type="submit" value="Submit" name="submit" id="submitPerson" class="buttons"/></td>
                 </tr>
             </table>
-                <h1 style="margin-top: 20px;">Manage Access rights for particular Role:</h1>
+            <h1 style="margin-top: 20px;">Manage Access rights for particular Role:</h1>
             <table border="0" style="width: 500px; margin-top: 50px;">
                 <tr>
                     <td>Select User type for provide Access rights:</td>
                     <td >
-                        
+
                         <select id="pTypeSelect" class="form-control" style="width: 200px;">
-  					
-                                        <c:forEach var="list" items="${list}">
-                                            <option value="${list.personTypeName}">${list.personTypeName}</option>
-                                        </c:forEach>
-                                </select>
-                        
+
+                            <c:forEach var="list" items="${list}">
+                                <option value="${list.personTypeName}">${list.personTypeName}</option>
+                            </c:forEach>
+                        </select>
+
                     </td>
                 </tr>
             </table>
-            
+
             <table border="0" style="margin-top: 20px; width: 1000px;">
-                
+
                 <tr>
                     <td>Manage Course:</td>
                     <td><input type="checkbox" value="AddCourse" name="course" id="AddCourse" class="form-control"/></td>
@@ -235,7 +236,7 @@
                     <td>Manage Post:</td>
                     <td><input type="checkbox" value="AddPost" name="course" id="AddPost" class="form-control"/></td>
                     <td>Post</td>
-                    
+
                 </tr>
                 <tr>
                     <td>Manage Pretext:</td>
@@ -303,9 +304,15 @@
                     <td>Add Teachers</td>
                     <td><input type="checkbox" value="AddCorporates" name="post" id="AddCorporates" class="form-control"/></td>
                     <td>Add Corporates</td>
+                    <td><input type="checkbox" value="AddAboutus" name="post" id="AddAboutus" class="form-control"/></td>
+                    <td>Add AboutUs</td>
+                    <td><input type="checkbox" value="AddSliderImage" name="post" id="AddSliderImage" class="form-control"/></td>
+                    <td>Add Slider Image</td>
+                    <td><input type="checkbox" value="AddGalleryImage" name="post" id="AddGalleryImage" class="form-control"/></td>
+                    <td>Add Image for Gallery</td>
                 </tr>
             </table>
-            
+
             <table border="0" style="margin-top: 20px;">
                 <tr>
                     <td><input type="button" value="Submit" name="submit" id="submitRoles"/></td>

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Business;
 
 import com.gopiraj.Model.MenuType;
@@ -17,41 +16,33 @@ import org.hibernate.Transaction;
  * @author GOPIRAJ
  */
 public class MenuTypeBusiness {
+
     SessionFactory sf;
-    
-    public MenuTypeBusiness()
-    {
-        try
-        {
+
+    public MenuTypeBusiness() {
+        try {
             sf = MyDispatureServlet.getSessionFactory();
-            
-        }
-        catch(Exception e)
-        {
-           System.out.println("Error in Constructor:");
-           e.printStackTrace();
+
+        } catch (Exception e) {
+            System.out.println("Error in Constructor:");
+            e.printStackTrace();
         }
     }
-    
-    public String insert(MenuType menu)
-    {
-            Session s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-            
-            try
-            {
-                if(menu!=null)
-                {
-                    s.save(menu);
-                }
-                tx.commit();
-                s.close();
-              //  s.flush();
-                return "Inserted.";      
+
+    public String insert(MenuType menu) {
+        Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (menu != null) {
+                s.save(menu);
             }
-            catch(Exception e)
-            {
-                return "Error:"+e.getMessage();
-            }
+            tx.commit();
+            s.close();
+            //  s.flush();
+            return "Inserted.";
+        } catch (Exception e) {
+            return "Error:" + e.getMessage();
+        }
     }
 }

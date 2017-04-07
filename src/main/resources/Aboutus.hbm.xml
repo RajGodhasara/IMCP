@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 26, 2017 11:06:24 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.gopiraj.Model.Aboutus" table="aboutus" catalog="projecttest">
+        <id name="aboutusId" type="java.lang.Integer">
+            <column name="aboutus_id" />
+            <generator class="identity" />
+        </id>
+        <property name="photograph" type="binary">
+            <column name="photograph" />
+        </property>
+        <property name="smallIntro" type="string">
+            <column name="small_intro" />
+        </property>
+        <property name="teachersNo" type="java.lang.Integer">
+            <column name="teachers_no" />
+        </property>
+        <property name="studentsNo" type="java.lang.Integer">
+            <column name="students_no" />
+        </property>
+        <property name="courseNo" type="java.lang.Integer">
+            <column name="course_no" />
+        </property>
+        <property name="citiesNo" type="java.lang.Integer">
+            <column name="cities_no" />
+        </property>
+    </class>
+</hibernate-mapping>

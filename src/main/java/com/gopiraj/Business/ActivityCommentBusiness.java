@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.gopiraj.Business;
 
 import com.gopiraj.Model.ActivityComment;
@@ -19,58 +18,46 @@ import org.hibernate.Transaction;
  * @author GOPIRAJ
  */
 public class ActivityCommentBusiness {
+
     SessionFactory sf;
-    
-    public ActivityCommentBusiness()
-    {
-        try
-        {
-                       sf = MyDispatureServlet.getSessionFactory(); 
-        }
-        catch(Exception e)
-        {
-           System.out.println("Error in Constructor:");
-           e.printStackTrace();
+
+    public ActivityCommentBusiness() {
+        try {
+            sf = MyDispatureServlet.getSessionFactory();
+        } catch (Exception e) {
+            System.out.println("Error in Constructor:");
+            e.printStackTrace();
         }
     }
-    
-    public String insert(ActivityComment comment)
-    {
+
+    public String insert(ActivityComment comment) {
+        Session s = sf.openSession();
+        Transaction tx = s.beginTransaction();
+
+        try {
+            if (comment != null) {
+                s.save(comment);
+            }
+            tx.commit();
+            s.close();
+            return "Inserted.";
+        } catch (Exception e) {
+            return "Error:" + e.getStackTrace();
+        }
+    }
+
+    public List search() {
+        try {
             Session s = sf.openSession();
-            Transaction tx = s.beginTransaction();
-           
-            try
-            {
-                if(comment!=null)
-                {
-                    s.save(comment);
-                }
-                tx.commit();
-                s.close();
-                return "Inserted.";      
-            }
-            catch(Exception e)
-            {
-                return "Error:"+e.getStackTrace();
-            }
-    }
-    
-    public List search()
-    {
-        try
-        {
-            Session s = sf.openSession(); 
             Transaction t = s.beginTransaction();
             List list;
             //ResultSet rs;
             list = s.createQuery("from ActivityComment").list();
-            
+
             t.commit();
-            //s.close();
+//            s.close();
             return list;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
