@@ -5,59 +5,62 @@
 --%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>
-            Add Social Links only for first time.
-        </h1>
-        <form:form method="POST" commandName="command" action="admin_add_social_links_insert">
-            <form:hidden path="SocialLinkId" cssClass="form-control"/>
-            <table>
-                <tr>
-                    <td>
-                        <label class="col-xs-3 control-label">Facebook</label>
-                    </td>
-                    <td>
-                        <div class="col-xs-5">
-                            <form:input path="facebook" cssClass="form-control"/>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="col-xs-3 control-label">Gmail</label>
-                    </td>
-                    <td>
-                        <div class="col-xs-5">
-                            <form:input path="gmail" cssClass="form-control"/>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="col-xs-3 control-label">Twitter</label>
-                    </td>
-                    <td>
-                        <div class="col-xs-5">
-                            <form:input path="twitter" cssClass="form-control"/>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div class="form-group">
-                            <div class="col-xs-5 col-xs-offset-3" style="margin-left: 150px;">
-                                <button type="submit" id="btn" class="btn btn-success">Submit</button>     
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </form:form>
-    </body>
-</html>
+<jsp:include page="../IncludeResourse/jQuery.jsp"></jsp:include>
+    <script>
+        $(document).ready(function() {
+            $("#Form").validate({
+                rules: {
+                    'facebook': {
+                        required: true
+                    },
+                    'gmail': {
+                        required: true
+                    },
+                    'twitter': {
+                        required: true
+                    }
+                }
+            });
+        });
+    </script>
+
+    <h1>
+        Add/Update Social Links.
+    </h1>
+    <div class="container" style="margin-top: 20px;">
+        <div id="progressmain" class="progress" style="width: 400px;">
+            <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                0%
+            </div>
+        </div>
+    </div>
+<form:form method="POST" id="Form" commandName="command" action="admin_add_social_links_insert">
+    <form:hidden path="SocialLinkId" cssClass="form-control"/>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="facebook">Facebook</label>
+            <div class="col-sm-4">
+                <form:input path="facebook" cssClass="form-control CheckField" placeholder="Facebook Link"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="gmail">Gmail</label>
+            <div class="col-sm-4">
+                <form:input path="gmail" cssClass="form-control CheckField" placeholder="gmail Link"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="twitter">Twitter</label>
+            <div class="col-sm-4">
+                <form:input path="twitter" cssClass="form-control CheckField" placeholder="twitter Link"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</form:form>
+

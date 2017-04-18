@@ -72,7 +72,9 @@ public class AdminPermissionsController {
             checkForAvailable(req.getParameter("AddEmployee"), req.getParameter("SearchEmployee"), ptype);
             checkForAvailable(req.getParameter("AddAdmin"), req.getParameter("SearchAdmin"), ptype);
             checkForAvailable(req.getParameter("SendMail"), req.getParameter("SearchSendMail"), ptype);
+            checkForAvailable(req.getParameter("SendSMS"), req.getParameter("SearchSendSMS"), ptype);
             checkForAvailable(req.getParameter("AddEnquiry"), req.getParameter("SearchEnquiry"), ptype);
+            checkForAvailable(req.getParameter("PieChart"), req.getParameter("BarChart"), ptype);
             checkForAvailable(req.getParameter("AddPost"), "", ptype);
 
             PersonTypeBusiness business = new PersonTypeBusiness();
@@ -139,12 +141,28 @@ public class AdminPermissionsController {
                 String searchLink = ApplicationConstants.manageSendMailSerachLink;
                 insertForPermissions(ptype, Boolean.TRUE, Boolean.TRUE, main, addName, addLink, searchName, searchLink);
             }
+            if (add.equals("SendSMS") && search.equals("SearchSendSMS")) {
+                String main = ApplicationConstants.manageSendSMS;
+                String addName = ApplicationConstants.manageSendSMSAdd;
+                String addLink = ApplicationConstants.manageSendSMSAddLink;
+                String searchName = ApplicationConstants.manageSendSMSSerach;
+                String searchLink = ApplicationConstants.manageSendSMSSerachLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.TRUE, main, addName, addLink, searchName, searchLink);
+            }
             if (add.equals("AddEnquiry") && search.equals("SearchEnquiry")) {
                 String main = ApplicationConstants.manageEnquiry;
                 String addName = ApplicationConstants.manageEnquiryAdd;
                 String addLink = ApplicationConstants.manageEnquiryAddLink;
                 String searchName = ApplicationConstants.manageEnquirySerach;
                 String searchLink = ApplicationConstants.manageEnquirySerachLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.TRUE, main, addName, addLink, searchName, searchLink);
+            }
+            if (add.equals("PieChart") && search.equals("BarChart")) {
+                String main = ApplicationConstants.manageGraphics;
+                String addName = ApplicationConstants.manageGraphicsPie;
+                String addLink = ApplicationConstants.manageGraphicsPieLink;
+                String searchName = ApplicationConstants.manageGraphicsBar;
+                String searchLink = ApplicationConstants.manageGraphicsBarLink;
                 insertForPermissions(ptype, Boolean.TRUE, Boolean.TRUE, main, addName, addLink, searchName, searchLink);
             }
 
@@ -185,10 +203,22 @@ public class AdminPermissionsController {
                 String searchLink = ApplicationConstants.manageSendMailSerachLink;
                 insertForPermissions(ptype, Boolean.FALSE, Boolean.TRUE, main, null, null, searchName, searchLink);
             }
+            if (search.equals("SearchSendSMS")) {
+                String main = ApplicationConstants.manageSendSMS;
+                String searchName = ApplicationConstants.manageSendSMSSerach;
+                String searchLink = ApplicationConstants.manageSendSMSSerachLink;
+                insertForPermissions(ptype, Boolean.FALSE, Boolean.TRUE, main, null, null, searchName, searchLink);
+            }
             if (search.equals("SearchEnquiry")) {
                 String main = ApplicationConstants.manageEnquiry;
                 String searchName = ApplicationConstants.manageEnquirySerach;
                 String searchLink = ApplicationConstants.manageEnquirySerachLink;
+                insertForPermissions(ptype, Boolean.FALSE, Boolean.TRUE, main, null, null, searchName, searchLink);
+            }
+            if (search.equals("BarChart")) {
+                String main = ApplicationConstants.manageGraphics;
+                String searchName = ApplicationConstants.manageGraphicsBar;
+                String searchLink = ApplicationConstants.manageGraphicsBarLink;
                 insertForPermissions(ptype, Boolean.FALSE, Boolean.TRUE, main, null, null, searchName, searchLink);
             }
 
@@ -235,10 +265,22 @@ public class AdminPermissionsController {
                 String addLink = ApplicationConstants.manageSendMailAddLink;
                 insertForPermissions(ptype, Boolean.TRUE, Boolean.FALSE, main, addName, addLink, null, null);
             }
+            if (add.equals("SendSMS")) {
+                String main = ApplicationConstants.manageSendSMS;
+                String addName = ApplicationConstants.manageSendSMSAdd;
+                String addLink = ApplicationConstants.manageSendSMSAddLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.FALSE, main, addName, addLink, null, null);
+            }
             if (add.equals("AddEnquiry")) {
                 String main = ApplicationConstants.manageEnquiry;
                 String addName = ApplicationConstants.manageEnquiryAdd;
                 String addLink = ApplicationConstants.manageEnquiryAddLink;
+                insertForPermissions(ptype, Boolean.TRUE, Boolean.FALSE, main, addName, addLink, null, null);
+            }
+            if (add.equals("PieChart")) {
+                String main = ApplicationConstants.manageGraphics;
+                String addName = ApplicationConstants.manageGraphicsPie;
+                String addLink = ApplicationConstants.manageGraphicsPieLink;
                 insertForPermissions(ptype, Boolean.TRUE, Boolean.FALSE, main, addName, addLink, null, null);
             }
         } else {

@@ -9,8 +9,9 @@ import com.gopiraj.Business.ActivityBusiness;
 import com.gopiraj.Business.ActivityCommentBusiness;
 import com.gopiraj.Business.Utils;
 import com.gopiraj.Model.Activity;
-import com.gopiraj.Model.Person;
 import com.gopiraj.Model.ActivityComment;
+import com.gopiraj.Model.Login;
+import com.gopiraj.Model.Person;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -30,24 +31,17 @@ public class AdminActivityController {
     @RequestMapping("/admin_add_activity")
     public String getAdminAddActivity(ModelMap map, HttpServletRequest req) {
         if (Utils.isAuthenticated(req)) {
-
             ActivityCommentBusiness acBusiness = new ActivityCommentBusiness();
             ActivityBusiness business = new ActivityBusiness();
             List<Activity> list = business.search();
             List<ActivityComment> list2 = acBusiness.search();
             if (list != null) {
-
-                System.out.println("Adding list to activity SIZE:" + list.size());
                 map.addAttribute("activity", list);
             }
             if (list2 != null) {
-
-                System.out.println("Adding list of Comments to activity SIZE:" + list2.size());
                 map.addAttribute("activityComment", list2);
             }
-
             return "AdminJsp-AaddActivity";
-
         } else {
             return "redirect:/login";
         }
@@ -61,17 +55,13 @@ public class AdminActivityController {
             Person person = (Person) session.getAttribute("person");
             if (person != null) {
                 activity.setPerson(person);
-                System.out.println("setting admin");
             }
             if (req.getParameter("Description") != null) {
                 ActivityBusiness business = new ActivityBusiness();
-                System.out.println("setting Date");
                 activity.setCreationTime(new Date());
-                System.out.println("setting Description");
                 activity.setDescription(req.getParameter("Description"));
                 System.out.println(business.insert(activity));
             }
-
             return "AdminJsp-AaddActivity";
         } else {
             return "redirect:/login";
@@ -90,10 +80,8 @@ public class AdminActivityController {
             Person person = (Person) session.getAttribute("person");
             if (person != null) {
                 comment.setPerson(person);
-                System.out.println("setting admin");
             }
             if (req.getParameter("ActivityID") != null && req.getParameter("Comment") != null) {
-
                 comment.setCreationTime(new Date());
                 comment.setActivity(aBusiness.searchById(Integer.parseInt(req.getParameter("ActivityID"))));
                 comment.setComment(req.getParameter("Comment"));
@@ -105,11 +93,10 @@ public class AdminActivityController {
              */
 
             //return "redirect:/admin_add_activity";
-            return "AdminJsp-AaddActivity";
+            return "redirect:/admin_add_activity";
         } else {
             return "redirect:/login";
         }
-
     }
 
     @RequestMapping("/admin_search_activity")
@@ -118,7 +105,7 @@ public class AdminActivityController {
             ModelAndView model = new ModelAndView("AdminJsp-SearchActivity", "command", new Activity());
             return model;
         } else {
-            ModelAndView model = new ModelAndView("404", "command", new Activity());
+            ModelAndView model = new ModelAndView("redirect:/login", "command", new Login());
             return model;
         }
 

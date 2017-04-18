@@ -8,14 +8,12 @@ package com.gopiraj.Business;
 import com.gopiraj.Model.Activity;
 import com.gopiraj.Model.Person;
 import com.gopiraj.dispature.MyDispatureServlet;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -26,21 +24,17 @@ public class ActivityBusiness {
     SessionFactory sf;
     Activity activity = new Activity();
 
-    Scanner sc = new Scanner(System.in);
-
     public ActivityBusiness() {
         try {
             sf = MyDispatureServlet.getSessionFactory();
         } catch (Exception e) {
-            System.out.println("Error in Constructor:");
-            e.printStackTrace();
+            System.out.println("Error in ActivityBusiness Constructor:"+e.getMessage());
         }
     }
 
     public String insert(Activity activity) {
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();
-
         try {
             if (activity != null) {
                 s.save(activity);
@@ -48,8 +42,8 @@ public class ActivityBusiness {
             tx.commit();
             s.close();
             return "Inserted.";
-        } catch (Exception e) {
-            return "Error:" + e.getStackTrace();
+        } catch (HibernateException e) {
+            return "Error in insert ActivityBusiness:" + e.getMessage();
         }
     }
 
@@ -59,8 +53,10 @@ public class ActivityBusiness {
             Activity act = (Activity) s.get(Activity.class, id);
             s.close();
             return act;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
+            System.out.println("Error in searchById ActivityBusiness:"+e.getMessage());
             return null;
+            
         }
     }
 
@@ -68,9 +64,9 @@ public class ActivityBusiness {
         try {
             Session s = sf.openSession();
             Person person = (Person) s.get(Person.class, id);
-
             return person;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
+            System.out.println("Error in searchByPersonId ActivityBusiness:"+e.getMessage());
             return null;
         }
     }
@@ -80,14 +76,12 @@ public class ActivityBusiness {
             Session s = sf.openSession();
             Transaction t = s.beginTransaction();
             List list;
-            //ResultSet rs;
             list = s.createQuery("from Activity").list();
-            System.out.println("Reversing list");
             Collections.reverse(list);
             t.commit();
-            //s.close();
             return list;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
+            System.out.println("Error in search ActivityBusiness:"+e.getMessage());
             return null;
         }
     }
@@ -95,10 +89,8 @@ public class ActivityBusiness {
     public String delete(int id) {
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();
-
         try {
-            //pretext = pretextbusiness1.searchById(id);
-            Activity activity = (Activity) s.get(Activity.class, id);
+            activity = (Activity) s.get(Activity.class, id);
             if (activity != null) {
                 s.delete(activity);
                 tx.commit();
@@ -107,17 +99,14 @@ public class ActivityBusiness {
             } else {
                 return "Could not find.";
             }
-        } catch (Exception e) {
-            return "Error:" + e.getStackTrace();
+        } catch (HibernateException e) {
+            return "Error in delete ActivityBusiness:" + e.getMessage();
         }
-
     }
 
     public String update(Activity activity) {
-
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();
-
         try {
             if (activity != null) {
                 s.update(activity);
@@ -125,7 +114,8 @@ public class ActivityBusiness {
             tx.commit();
             s.close();
             return "Updated.";
-        } catch (Exception e) {
+        } catch (HibernateException e) {
+            System.out.println("Error in update ActivityBusiness:"+e.getMessage());
             return "Error:" + e.getMessage();
         }
     }

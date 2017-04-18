@@ -7,8 +7,8 @@ package com.gopiraj.Business;
 
 import com.gopiraj.Model.ActivityComment;
 import com.gopiraj.dispature.MyDispatureServlet;
-import java.util.Collections;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,15 +25,13 @@ public class ActivityCommentBusiness {
         try {
             sf = MyDispatureServlet.getSessionFactory();
         } catch (Exception e) {
-            System.out.println("Error in Constructor:");
-            e.printStackTrace();
+            System.out.println("Error in ActivityCommentBusiness Constructor:"+e.getMessage());
         }
     }
 
     public String insert(ActivityComment comment) {
         Session s = sf.openSession();
         Transaction tx = s.beginTransaction();
-
         try {
             if (comment != null) {
                 s.save(comment);
@@ -41,8 +39,8 @@ public class ActivityCommentBusiness {
             tx.commit();
             s.close();
             return "Inserted.";
-        } catch (Exception e) {
-            return "Error:" + e.getStackTrace();
+        } catch (HibernateException e) {
+            return "Error in insert ActivityCommentBusiness:" + e.getMessage();
         }
     }
 
@@ -51,13 +49,11 @@ public class ActivityCommentBusiness {
             Session s = sf.openSession();
             Transaction t = s.beginTransaction();
             List list;
-            //ResultSet rs;
             list = s.createQuery("from ActivityComment").list();
-
             t.commit();
-//            s.close();
             return list;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
+            System.out.println("Error in search ActivityCommentBusiness:"+e.getMessage());
             return null;
         }
     }

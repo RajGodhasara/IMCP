@@ -59,11 +59,11 @@ public class AdminPretextController {
     @RequestMapping("/admin_add_pretext_insert")
     public ModelAndView getAdminInsertCourse(ModelMap map, @ModelAttribute PreText pretext, HttpServletRequest req) {
         if (Utils.isAuthenticated(req)) {
-            SessionFactory sf = MyDispatureServlet.getSessionFactory();
+            
             PreTextBusiness business = new PreTextBusiness();
             System.out.println(business.insert(pretext));
 
-            ModelAndView model = new ModelAndView("AdminJsp-AddPretext", "command", new PreText());
+            ModelAndView model = new ModelAndView("redirect:/admin_add_pretext", "command", new PreText());
             return model;
         } else {
             ModelAndView model = new ModelAndView("redirect:/login", "command", new Gallery());
@@ -81,19 +81,18 @@ public class AdminPretextController {
                 List<PreText> st = pretextBusiness.getPreTextObject(id);
                 if (st != null) {
                     System.out.println(pretextBusiness.deleteMultiple(st));
-                } else {
-                    System.out.println("IN ELSE");
-                }
+                } 
             }
             List<PreText> list = new ArrayList<PreText>();
             list = pretextBusiness.search();
             map.addAttribute("list", list);
+            return "redirect:/admin_search_pretext";
         } else {
 
             return "redirect:/login";
         }
 
-        return "AdminJsp-SearchPretext";
+        
     }
 
     @RequestMapping("/EditPreText")
@@ -114,9 +113,8 @@ public class AdminPretextController {
             System.out.println(business.update(pretext));
 
             List<PreText> pretextList = business.search();
-            System.out.println("Size:" + pretextList.size());
             map.addAttribute("list", pretextList);
-            return "AdminJsp-SearchPretext";
+            return "redirect:/admin_search_pretext";
         } else {
 
             return "redirect:/login";

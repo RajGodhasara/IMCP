@@ -15,10 +15,10 @@
             <column name="Password" length="45" not-null="true" />
         </property>
         <property name="position" type="string">
-            <column name="Position" length="45" not-null="true" />
+            <column name="Position" length="45" not-null="false" />
         </property>
         <property name="accessLevel" type="string">
-            <column name="Access_Level" length="45" not-null="true" />
+            <column name="Access_Level" length="45" not-null="false" />
         </property>
         <set name="tasks" table="task" inverse="true" lazy="true" fetch="select">
             <key>

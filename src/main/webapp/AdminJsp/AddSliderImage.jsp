@@ -5,18 +5,14 @@
 --%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+<jsp:include page="../IncludeResourse/jQuery.jsp"></jsp:include>
     <script>
         $(document).ready(function() {
             $("#Form").validate({
                 rules: {
+                    'file': {
+                        required: true
+                    },
                     'description': {
                         required: true
                     },
@@ -27,9 +23,9 @@
             });
         });
     </script>
-    <body>
+    <div style="margin-left: 200px; margin-top: 20px;">   
         <h1>
-            Add Slider Image details of company
+            Add Slider Image.
         </h1>
         <div class="container">
             <div id="progressmain" class="progress" style="width: 400px;">
@@ -38,41 +34,25 @@
                 </div>
             </div>
         </div>
-        <form:form method="POST" id="Form" commandName="command" action="admin_add_sliderimage_insert"enctype="multipart/form-data">
-            <table>
-                <tr>
-                    <td>
-                        <label class="col-xs-3 control-label">Image</label>
-                    </td>
-                    <td>
-                        <div class="col-xs-5">
-                            <div class="col-xs-5">
-                                <input type="file" name="file" required="required" class="CheckField"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="col-xs-3 control-label">Small Description about Image</label>
-                    </td>
-                    <td>
-                        <div class="col-xs-5">
-                            <form:textarea path="description" id="description" name="description" cssClass="form-control CheckField"/>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2">
-                        <div class="form-group">
-                            <div class="col-xs-5 col-xs-offset-3" style="margin-left: 150px;">
-                                <button type="submit" id="btn" class="btn btn-success">Submit</button>     
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </form:form>
-    </body>
-</html>
+    <form:form method="POST" id="Form" commandName="command" action="admin_add_sliderimage_insert"enctype="multipart/form-data">
+        <div class="form-horizontal" style="margin-top: 20px;">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="file">Image</label>
+                <div class="col-sm-4">
+                    <input type="file" name="file" required="required" class="CheckField file-upload"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="description">Small Description about Image</label>
+                <div class="col-sm-4">
+                    <form:textarea path="description" id="description" name="description" cssClass="form-control CheckField" placeholder="Small Description about slider"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form:form>
+</div>

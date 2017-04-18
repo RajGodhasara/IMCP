@@ -82,10 +82,7 @@
                         <div id="mydiv"></div>
                     </td>
                 </tr>
-                <tr>
-                    <td><label class="col-xs-11 control-label">Position:</label></td>
-                    <td><input type="text" class="form-control CheckField" value="${sessionScope.person.employee.position}" name="position" id="position"/></td>
-                </tr>
+                
                 <tr>
                     <td colspan="2">
                         <div class="form-group">
@@ -100,12 +97,13 @@
                 <table>
                     <tr>
                     <td><label class="col-xs-11 control-label">Current password:</label></td>
-                    <td><input type="text" class="form-control CheckField" name="currentPassword" id="currentPassword"/></td>
+                    <td><input type="password" class="form-control CheckField" name="currentPassword" id="currentPassword" required="required"/></td>
                 </tr>
                 <tr>
                     <td><label class="col-xs-11 control-label">New Password:</label></td>
-                    <td><input type="text" class="form-control CheckField" name="newPassword" id="newPassword"/></td>
+                    <td><input type="password" class="form-control CheckField" name="newPassword" id="newPassword" required="required"/></td>
                 </tr>
+                ${changepassword}
                 <input type="hidden" class="form-control CheckField" value="${sessionScope.person.employee.password}" name="email" id="email"/>
                 <tr>
                     <td colspan="2">

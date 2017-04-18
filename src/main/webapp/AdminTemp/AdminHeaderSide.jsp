@@ -16,21 +16,7 @@
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="author" content="">
-
-        <link rel="stylesheet" href="Grid/css/demo_page.css">
-        <link rel="stylesheet" href="Grid/css/demo_table.css">
-        <link rel="stylesheet" href="Grid/css/demo_table_iui.css">
-        <link rel="stylesheet" href="Grid/css/demo_table_iui.css">
-
-        <!-- Grid JS Vaishali -->
-        <script src="Grid/jquery.validate.js"></script>
-        <script src="Grid/jquery.jeditable.js"></script>
-        <script src="Grid/jquery.dataTables.min.js"></script>
-        <script src="Grid/jquery.dataTables.editable.min.js"></script>
-        <script src="Grid/jquery.colorbox-min.js"></script>
-        <script src="Grid/jquery-ui-1.10.4.custom.min.js"></script>
-        <script src="Grid/jquery-1.9.1.js"></script>
-
+        
 
         <!-- Stylesheets -->
         <link href="AdminStyle/bootstrap.css" rel="stylesheet">
@@ -68,8 +54,6 @@
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon/favicon.png">
 
-        <script src="Scripts/jquery-1.7.1.min.js"></script>
-        <script src="Scripts/jquery.validate.min.js"></script>
         <script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
 
         <script src="AdminJS/jquery-3.1.0.js"></script>
@@ -234,24 +218,38 @@
                         </li>
                     </c:forEach>
 
-                    <c:if test="${person.personType == 'AdminMaster'}">
-                        <li class="has_sub"><a href="#" class="open"><i class="fa fa-home"></i><span>Manage Permissions</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
+                    <c:if test="${person.personType == 'SuperAdmin'}">
+                        <li class="has_sub"><a href="#" class=""><i class="fa fa-home"></i><span>Manage Permissions</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
                             <ul>
                                 <li><a href="admin_add_permissions">Add Permissions</a></li>
-                                <li><a href="#">Search Permissions</a></li>
                             </ul>
-                        </li>    
+                        </li>
+                        <li class="has_sub"><a href="#" class=""><i class="fa fa-home"></i><span>Manage Employee</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
+                            <ul>
+                                <li><a href="admin_add_employee">Add Employee</a></li>
+                            </ul>
+                        </li>
+                        <li class="has_sub"><a href="#" class=""><i class="fa fa-home"></i><span>Manage Comapny Profile</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
+                            <ul>
+                                <li><a href="admin_add_social_links">Add Social Links</a></li>
+                                <li><a href="admin_add_basic_details">Add Basic Details</a></li>
+                                <li><a href="admin_add_teachers">Add Faculty Details</a></li>
+                                <li><a href="admin_add_corporates">Add Corporates</a></li>
+                                <li><a href="admin_add_aboutus">Add AboutUs Details</a></li>
+                                <li><a href="admin_add_sliderimage">Add Slider Details</a></li>
+                            </ul>
+                        </li>
                     </c:if>
 
 
-                    <!--                 Main menu with font awesome icon 
-                                    <li class="has_sub"><a href="#" class="open"><i class="fa fa-home"></i><span>Manage Post</span><span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
-                                        <ul>
-                                            <li><a href="admin_add_activity">Add Post</a></li>
-                                            <li><a href="admin_search_activity">Search Post</a></li>
-                                        </ul>
+                                    
+                                    <li class=""><a href="profile" class=""><i class="fa fa-home"></i><span>Profile</span></a>
+                                        
                                     </li>
-                                    <li class="has_sub"><a href="#"><i class="fa fa-list-alt"></i><span>Send SMS</span> <span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
+                                    <li class=""><a href="logout" class=""><i class="fa fa-home"></i><span>Logout</span></a>
+                                        
+                                    </li>
+                      <!--              <li class="has_sub"><a href="#"><i class="fa fa-list-alt"></i><span>Send SMS</span> <span class="pull-right"><i class="fa fa-chevron-left"></i></span></a>
                                         <ul>
                                             <li><a href="admin_send_sms">Send SMS</a></li>
                                             <li><a href="admin_search_sms">Search sent SMS</a></li>

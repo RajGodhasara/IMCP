@@ -109,12 +109,12 @@ public class PreTextBusiness {
         }
     }
 
-    public List searchTitle() {
+    public List<PreText> searchTitle() {
         try {
             s = sf.openSession();
             Transaction t = s.beginTransaction();
-            List list;
-            list = s.createQuery("select title from PreText").list();
+            List<PreText> list;
+            list = s.createQuery("from PreText").list();
             t.commit();
 
             return list;

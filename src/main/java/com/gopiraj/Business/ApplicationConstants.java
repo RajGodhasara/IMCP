@@ -52,6 +52,13 @@ public abstract class ApplicationConstants {
     public static final String manageSendMailAddLink = "admin_send_mail";
     public static final String manageSendMailSerach = "Search Sent Mail";
     public static final String manageSendMailSerachLink = "admin_search_mail";
+    
+    public static final String manageSendSMS = "Manage Send SMS";
+    public static final String manageSendSMSLink = "";
+    public static final String manageSendSMSAdd = "Send SMS";
+    public static final String manageSendSMSAddLink = "admin_send_sms";
+    public static final String manageSendSMSSerach = "Search Sent SMS";
+    public static final String manageSendSMSSerachLink = "admin_search_sms";
 
     public static final String managePost = "Manage Post";
     public static final String managePostLink = "";
@@ -64,5 +71,12 @@ public abstract class ApplicationConstants {
     public static final String manageEnquiryAddLink = "admin_add_enquiry";
     public static final String manageEnquirySerach = "Search Enquiry";
     public static final String manageEnquirySerachLink = "admin_search_enquiry";
+    
+    public static final String manageGraphics = "Manage Graphics";
+    public static final String manageGraphicsLink = "";
+    public static final String manageGraphicsPie = "Pie Chart";
+    public static final String manageGraphicsPieLink = "admin_add_piechart";
+    public static final String manageGraphicsBar = "Bar Chart";
+    public static final String manageGraphicsBarLink = "admin_add_barchart";
 
 }

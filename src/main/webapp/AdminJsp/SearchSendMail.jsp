@@ -5,19 +5,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <script src="AdminJS/bootstrap.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
-        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-              rel = "stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <jsp:include page="../IncludeResourse/DataTables.jsp"></jsp:include>
         <script type="text/javascript">
 
             function deleteSelectedMail() {
@@ -131,8 +120,8 @@
                 });
             });
         </script>
-    <body>
-        <div class="datatable_container" style="min-width: 800px; max-width: 800px; margin: -15px 98px"> 
+
+        <div class="datatable_container" style="min-width: 800px; max-width: 800px; margin: -15px 98px; margin-top: 20px;"> 
             <div id="dt_example">
                 <div id="container">
                     <div id="demo_jui">
@@ -177,6 +166,9 @@
                 </div>
             </div>
         </div>
-        <input type="button" id="buttondelete"  onclick="deleteSelectedMail()" value="Delete Selected Course"/>
-    </body>
-</html>
+        
+        <div style="margin-top: 80px; margin-left: 100px;">
+            <input type="button" id="buttondelete"  onclick="deleteSelectedMail()" value="Delete Selected Mail" class="btn btn-primary"/>
+        </div>
+        
+

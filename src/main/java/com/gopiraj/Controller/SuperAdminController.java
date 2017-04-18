@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.gopiraj.Controller;
 
 import com.gopiraj.Business.Crypt;
@@ -18,33 +19,31 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @author GOPIRAJ
  */
 @Controller
-public class AdminEmployeeController {
-
-    @RequestMapping("/admin_add_employee")
-    public String getAdminAddEmployee(ModelMap map, HttpServletRequest req) {
-        if (Utils.isAuthenticated(req)) {
+public class SuperAdminController {
+    @RequestMapping("/super_admin")
+    public String getSuperAdmin(final RedirectAttributes redirectAttributes,ModelMap map, HttpServletRequest req) {
         EmployeeBusiness employeeBusiness = new EmployeeBusiness();
-            List<PersonType> list = employeeBusiness.searchbyPersonType();
-            if (list != null) {
-                System.out.println("SIZE:" + list.size());
-                map.addAttribute("list", list);
+            List<PersonType> list = employeeBusiness.search();
+            if(list.isEmpty()){
+                return "SuperAdminJsp";
+            }else{
+                System.out.println("IN ELSE");
+                redirectAttributes.addFlashAttribute("status", "You have already created SuperAdmin account.");
+                //return "redirect:/login";
+                return "SuperAdminJsp";
             }
-            return "AdminJsp-AddEmployee";
-        } else {
-            return "redirect:/login";
-        }
-
     }
-
-    @RequestMapping("/admin_add_employee_insert")
-    public String getAdminAddEmployeeInsert(ModelMap map, HttpServletRequest req) {
-        if (Utils.isAuthenticated(req)) {
+    
+    @RequestMapping("/super_admin_insert")
+    public String getSuperAdminInsert(final RedirectAttributes redirectAttributes,ModelMap map, HttpServletRequest req) {
+        
             Date date = null;
             
             String firstName = req.getParameter("firstName");
@@ -121,8 +120,9 @@ public class AdminEmployeeController {
 
             employee.setPosition(position);
             employee.setPerson(person);
-
-            System.out.println(empBusiness.insert(employee));
+            
+            String answer = empBusiness.insert(employee);
+            System.out.println(answer);
 
             if (contactNo != null) {
                 PersonContactno cn = new PersonContactno();
@@ -155,28 +155,13 @@ public class AdminEmployeeController {
                 System.out.println(empBusiness.insertContactno(cn));
             }
 
-            EmployeeBusiness employeeBusiness = new EmployeeBusiness();
-            List<PersonType> list = employeeBusiness.searchbyPersonType();
-            if (list != null) {
-                map.addAttribute("list", list);
+            if(answer.equals("Inserted.")){
+                redirectAttributes.addFlashAttribute("status", "SuperAdmin account created successfully.");
+                return "redirect:/login";
+            }else{
+                redirectAttributes.addFlashAttribute("status", "Some problem occured please try again.");
+                return "redirect:/login";
             }
-            return "AdminJsp-AddEmployee";
-        } else {
-            return "redirect:/login";
-        }
-    }
-
-    @RequestMapping("/admin_search_employee")
-    public String getAdminSearchAdmin(ModelMap map, HttpServletRequest req) {
-        if (Utils.isAuthenticated(req)) {
-            EmployeeBusiness business = new EmployeeBusiness();
-            List<Employee> list = business.search();
-            map.addAttribute("list", list);
-
-            return "AdminJsp-SearchEmployee";
-        } else {
-            return "redirect:/login";
-        }
-
+        
     }
 }

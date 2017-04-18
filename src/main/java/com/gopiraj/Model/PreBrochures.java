@@ -10,7 +10,7 @@ import java.util.Set;
 public class PreBrochures implements java.io.Serializable {
 
     private Integer preBrochuresId;
-    private OrganizationAdmin organizationAdmin;
+    private Person person;
     private String title;
     private byte[] upload;
     private Set sentMails = new HashSet(0);
@@ -18,14 +18,14 @@ public class PreBrochures implements java.io.Serializable {
     public PreBrochures() {
     }
 
-    public PreBrochures(OrganizationAdmin organizationAdmin, String title, byte[] upload) {
-        this.organizationAdmin = organizationAdmin;
+    public PreBrochures(Person organizationAdmin, String title, byte[] upload) {
+        this.person = organizationAdmin;
         this.title = title;
         this.upload = upload;
     }
 
-    public PreBrochures(OrganizationAdmin organizationAdmin, String title, byte[] upload, Set sentMails) {
-        this.organizationAdmin = organizationAdmin;
+    public PreBrochures(Person organizationAdmin, String title, byte[] upload, Set sentMails) {
+        this.person = organizationAdmin;
         this.title = title;
         this.upload = upload;
         this.sentMails = sentMails;
@@ -39,12 +39,12 @@ public class PreBrochures implements java.io.Serializable {
         this.preBrochuresId = preBrochuresId;
     }
 
-    public OrganizationAdmin getOrganizationAdmin() {
-        return this.organizationAdmin;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setOrganizationAdmin(OrganizationAdmin organizationAdmin) {
-        this.organizationAdmin = organizationAdmin;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public String getTitle() {

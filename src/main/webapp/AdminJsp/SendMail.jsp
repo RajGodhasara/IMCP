@@ -5,11 +5,7 @@
 --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Mail</title>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <style>
             body{margin-top:20px;
@@ -303,9 +299,7 @@
                 $("#message").val($('#PreTextMessage').val());
             }
         </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    </head>
-    <body>
+
         <div class="container">
             <div class="row inbox">
                 <div class="col-md-9">
@@ -325,7 +319,7 @@
                                 <div class="form-group">
                                     <label for="to" class="col-sm-1 control-label">To:</label>
                                     <div class="col-sm-11">
-                                        <select id="To" name="TO" class="form-control selectpicker" multiple data-selected-text-format="count > 3">    
+                                        <select id="To" name="TO" class="form-control selectpicker" multiple data-selected-text-format="count > 3" required="required">    
                                         </select>
                                     </div>
                                 </div>
@@ -376,14 +370,14 @@
 
                                     <div class="form-group">
 
-                                        <select id="PreTextMessage" class="form-control" onchange="setText();" name="message">
-                                            <option selected="selected" >Select Message</option>
+                                        <select id="PreTextMessage" class="form-control" onchange="setText();" name="message" required="required">
+                                            
                                             <c:forEach var="list" items="${listPretext}">
                                                 <option value="${list.message}" id="${list.message}" class="option">${list.title}</option>
                                             </c:forEach>
                                         </select><br/>
                                         <!-- if we add disable to textarea then the value of it wont be sent by the form as its readonly property -->
-                                        <textarea class="form-control" id="message" rows="12" placeholder="Click here to reply"></textarea>
+                                        <textarea class="form-control" id="message" rows="12" placeholder="Click here to reply" readonly="readonly" required="required"></textarea>
                                     </div>
                                     <div class="form-group">	
                                         <button type="submit" id="submit" class="btn btn-success">Send</button>
@@ -414,5 +408,3 @@
             });
         </script>    
 
-    </body>
-</html>

@@ -104,6 +104,11 @@ public class AdminSendMailController {
             
             Multipart multipart = new MimeMultipart();
             BodyPart messageBodyPart = new MimeBodyPart();
+            
+            /*
+            TODO: send link of download document insted of attachment
+            */
+            
             /*
              try{
             

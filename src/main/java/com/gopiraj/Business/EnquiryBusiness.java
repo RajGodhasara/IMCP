@@ -77,12 +77,12 @@ public class EnquiryBusiness {
         }
     }
 
-    public List<String> searchByStatus(String status) {
+    public List<Integer> searchByStatus(String status) {
         try {
             s = sf.openSession();
             Transaction t = s.beginTransaction();
-            List<String> list = new ArrayList<String>();
-            String hql = "select firstName from Enquiry E where E.status = ?";
+            List<Integer> list = new ArrayList<Integer>();
+            String hql = "select enqId from Enquiry E where E.status = ?";
             list = (List) s.createQuery(hql).setString(0, status).list();
             return list;
         } catch (Exception e) {
@@ -91,15 +91,38 @@ public class EnquiryBusiness {
         }
     }
     
-    public List<String> searchCNByID(int id) {
+    public List<EnquiryContactno> searchCNByID(int id) {
         try {
             s = sf.openSession();
             Transaction t = s.beginTransaction();
-            List<String> list = new ArrayList<String>();
-            String hql = "select contactNumber from EnquiryContactno E where E.enquiry = ?";
+            List<EnquiryContactno> list = new ArrayList<EnquiryContactno>();
+            String hql = "from EnquiryContactno E where E.enquiry = ?";
             list = (List) s.createQuery(hql).setInteger(0, id).list();
             s.close();
             return list;
+        } catch (Exception e) {
+            System.out.println("searchCNByID:" + e.getMessage());
+            return null;
+        }
+    }
+    
+    public Enquiry searchCNByNumber(String id) {
+        try {
+            s = sf.openSession();
+            Transaction t = s.beginTransaction();
+            List<EnquiryContactno> list = new ArrayList<EnquiryContactno>();
+            Enquiry enq = new Enquiry();
+            EnquiryContactno enc = new EnquiryContactno();
+            String hql = "from EnquiryContactno E where E.contactNumber = ?";
+            list = s.createQuery(hql).setString(0, id).list();
+            if(!list.isEmpty()){
+                enc = list.get(0);
+                if(enc!=null){
+                    enq = enc.getEnquiry();
+                }
+            }
+            //s.close();
+            return enq;
         } catch (Exception e) {
             System.out.println("searchCNByID:" + e.getMessage());
             return null;
@@ -163,6 +186,21 @@ public class EnquiryBusiness {
             Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from Enquiry").list();
+            t.commit();
+            //s.close();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
+    public List searchCN() {
+        try {
+            s = sf.openSession();
+            Transaction t = s.beginTransaction();
+            List list;
+            list = s.createQuery("from EnquiryContactno").list();
             t.commit();
             //s.close();
             return list;

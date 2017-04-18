@@ -8,7 +8,7 @@
             <column name="Pre_Brochures_id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="organizationAdmin" class="com.gopiraj.Model.OrganizationAdmin" fetch="select">
+        <many-to-one name="person" class="com.gopiraj.Model.Person" fetch="select">
             <column name="Org_id" not-null="true" />
         </many-to-one>
         <property name="title" type="string">

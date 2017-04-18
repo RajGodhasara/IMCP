@@ -45,10 +45,28 @@
                     var SearchBrochures;
                     var AddPost;
                     var SendMail;
+                    var SendSMS;
+                    var SearchSendSMS;
                     var SearchSendMail;
                     var AddEnquiry;
                     var SearchEnquiry;
+                    var PieChart;
+                    var BarChart;
 
+                    if ($('#SendSMS').is(":checked"))
+                    {
+                        SendSMS = jQuery('#SendSMS').val();
+                    }
+                    else {
+                        SendSMS = "";
+                    }
+                    if ($('#SearchSendSMS').is(":checked"))
+                    {
+                        SearchSendSMS = jQuery('#SearchSendSMS').val();
+                    }
+                    else {
+                        SearchSendSMS = "";
+                    }
                     if ($('#SendMail').is(":checked"))
                     {
                         SendMail = jQuery('#SendMail').val();
@@ -154,6 +172,20 @@
                     else {
                         SearchEnquiry = "";
                     }
+                    if ($('#PieChart').is(":checked"))
+                    {
+                        PieChart = jQuery('#PieChart').val();
+                    }
+                    else {
+                        PieChart = "";
+                    }
+                    if ($('#BarChart').is(":checked"))
+                    {
+                        BarChart = jQuery('#BarChart').val();
+                    }
+                    else {
+                        BarChart = "";
+                    }
 
                     jQuery.ajax({
                         url: 'admin_add_permission_insert',
@@ -170,10 +202,14 @@
                             AddAdmin: AddAdmin,
                             SearchAdmin: SearchAdmin,
                             AddPost: AddPost,
+                            SendSMS:SendSMS,
+                            SearchSendSMS:SearchSendSMS,
                             SendMail: SendMail,
                             SearchSendMail: SearchSendMail,
                             AddEnquiry: AddEnquiry,
                             SearchEnquiry: SearchEnquiry,
+                            BarChart:BarChart,
+                            PieChart:PieChart,
                             ptype: jQuery('#pTypeSelect').val()
                         },
                         dataType: 'text',
@@ -197,34 +233,28 @@
             <table border="0" style="margin-top: 20px;">
                 <tr>
                     <td>Person Type:</td>
-                    <td><input type="text" name="ptype" id="ptype" class="form-control"/></td>
+                    <td><input type="text" name="ptype" id="ptype" class="form-control" required="required"/></td>
                 </tr>
             </table>
-
             <table border="0" style="margin-top: 20px;">
                 <tr>
-                    <td><input type="submit" value="Submit" name="submit" id="submitPerson" class="buttons"/></td>
+                    <td><input type="submit" value="Submit" name="submit" id="submitPerson" class="btn btn-primary"/></td>
                 </tr>
             </table>
             <h1 style="margin-top: 20px;">Manage Access rights for particular Role:</h1>
             <table border="0" style="width: 500px; margin-top: 50px;">
                 <tr>
                     <td>Select User type for provide Access rights:</td>
-                    <td >
-
+                    <td>
                         <select id="pTypeSelect" class="form-control" style="width: 200px;">
-
                             <c:forEach var="list" items="${list}">
                                 <option value="${list.personTypeName}">${list.personTypeName}</option>
                             </c:forEach>
                         </select>
-
                     </td>
                 </tr>
             </table>
-
             <table border="0" style="margin-top: 20px; width: 1000px;">
-
                 <tr>
                     <td>Manage Course:</td>
                     <td><input type="checkbox" value="AddCourse" name="course" id="AddCourse" class="form-control"/></td>
@@ -236,7 +266,6 @@
                     <td>Manage Post:</td>
                     <td><input type="checkbox" value="AddPost" name="course" id="AddPost" class="form-control"/></td>
                     <td>Post</td>
-
                 </tr>
                 <tr>
                     <td>Manage Pretext:</td>
@@ -260,17 +289,10 @@
                     <td>Search Employee</td>
                 </tr>
                 <tr>
-                    <td>Manage Admin:</td>
-                    <td><input type="checkbox" value="AddAdmin" name="course" id="AddAdmin" class="form-control"/></td>
-                    <td>Add Admin</td>
-                    <td><input type="checkbox" value="SearchAdmin" name="post" id="SearchAdmin" class="form-control"/></td>
-                    <td>Search Admin</td>
-                </tr>
-                <tr>
                     <td>Manage SMS:</td>
                     <td><input type="checkbox" value="SendSMS" name="course" id="SendSMS" class="form-control"/></td>
                     <td>Send SMS</td>
-                    <td><input type="checkbox" value="SearchSentSMS" name="post" id="SearchSentSMS" class="form-control"/></td>
+                    <td><input type="checkbox" value="SearchSentSMS" name="post" id="SearchSendSMS" class="form-control"/></td>
                     <td>Search Sent SMS</td>
                 </tr>
                 <tr>
@@ -279,6 +301,13 @@
                     <td>Send Mail</td>
                     <td><input type="checkbox" value="SearchSentMail" name="post" id="SearchSentMail" class="form-control"/></td>
                     <td>Search Sent Mail</td>
+                </tr>
+                <tr>
+                    <td>Manage Graphics:</td>
+                    <td><input type="checkbox" value="PieChart" name="PieChart" id="PieChart" class="form-control"/></td>
+                    <td>Pie Chart</td>
+                    <td><input type="checkbox" value="BarChart" name="BarChart" id="BarChart" class="form-control"/></td>
+                    <td>Bar Chart</td>
                 </tr>
                 <tr>
                     <td>Manage Task:</td>
@@ -294,28 +323,10 @@
                     <td><input type="checkbox" value="SearchEnquiry" name="SearchEnquiry" id="SearchEnquiry" class="form-control"/></td>
                     <td>Search Enquiry</td>
                 </tr>
-                <tr>
-                    <td>Manage Comapny Profile</td>
-                    <td><input type="checkbox" value="AddSocialLinks" name="course" id="AddSocialLinks" class="form-control"/></td>
-                    <td>Add Social Links</td>
-                    <td><input type="checkbox" value="AddCompanyDetails" name="post" id="AddCompanyDetails" class="form-control"/></td>
-                    <td>Add Company Basic Details</td>
-                    <td><input type="checkbox" value="AddTeachers" name="post" id="AddTeachers" class="form-control"/></td>
-                    <td>Add Teachers</td>
-                    <td><input type="checkbox" value="AddCorporates" name="post" id="AddCorporates" class="form-control"/></td>
-                    <td>Add Corporates</td>
-                    <td><input type="checkbox" value="AddAboutus" name="post" id="AddAboutus" class="form-control"/></td>
-                    <td>Add AboutUs</td>
-                    <td><input type="checkbox" value="AddSliderImage" name="post" id="AddSliderImage" class="form-control"/></td>
-                    <td>Add Slider Image</td>
-                    <td><input type="checkbox" value="AddGalleryImage" name="post" id="AddGalleryImage" class="form-control"/></td>
-                    <td>Add Image for Gallery</td>
-                </tr>
             </table>
-
             <table border="0" style="margin-top: 20px;">
                 <tr>
-                    <td><input type="button" value="Submit" name="submit" id="submitRoles"/></td>
+                    <td><input type="button" value="Submit" name="submit" class="btn btn-primary" id="submitRoles"/></td>
                 </tr>
             </table>
         </form>

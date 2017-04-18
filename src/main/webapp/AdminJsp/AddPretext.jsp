@@ -7,62 +7,63 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Pretext</title>
-    </head>
-    <body>
-        <div class="form-group">
-            <form:form method="POST" commandName="command" action="admin_add_pretext_insert">
-                <table>
-                    <tr>
-                        <td>
-                            <label class="col-xs-3 control-label">Title</label>
-                        </td>
-                        <td>
-                            <div class="col-xs-5">
-                                <form:input path="title" cssClass="form-control"/>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="col-xs-3 control-label">Description</label>
-                        </td>
-                        <td>
-                            <div class="col-xs-5">
-                                <form:textarea path="message" cssClass="form-control"/>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="col-xs-3 control-label">For What</label>
-                        </td>
-                        <td>
-                            <div class="col-xs-5">
-                                <form:select path="forWhat">
-                                    <form:option value="NONEE" label="--- Select ---"/>
-                                    <form:option label="SMS" value="SMS" />
-                                    <form:option label="EMAIL" value="EMAIL" />
-                                </form:select>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <div class="form-group">
-                                <div class="col-xs-5 col-xs-offset-3" style="margin-left: 150px;">
-                                    <button type="submit" id="btn" class="btn btn-success">Submit</button>     
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </form:form>
+<jsp:include page="../IncludeResourse/jQuery.jsp"></jsp:include>
+    <script>
+        $(document).ready(function() {
+            $("#Form").validate({
+                rules: {
+                    'title': {
+                        required: true
+                    },
+                    'message': {
+                        required: true
+                    },
+                    'forWhat': {
+                        required: true
+                    }
+                }
+            });
+        });
+    </script>
+    <div style="margin-left: 200px;">   
+        <h1 style="margin-left: 180px;">Add New Pretext</h1>
+        <div class="container">
+            <div id="progressmain" class="progress" style="width: 400px;">
+                <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                    0%
+                </div>
+            </div>
         </div>
-    </body>
-</html>
+        <div class="form-group">
+        <form:form method="POST" id="Form" commandName="command" action="admin_add_pretext_insert">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="title">Title</label>
+                    <div class="col-sm-4">
+                        <form:input path="title" id="title" name="title" cssClass="form-control CheckField" placeholder="Pretext Title"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="message">Description</label>
+                    <div class="col-sm-4">
+                        <form:textarea path="message" id="message" name="message" cssClass="form-control CheckField" placeholder="Pretext Description"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="forWhat">For What?</label>
+                    <div class="col-sm-4">
+                        <form:select path="forWhat" id="forWhat" name="forWhat" class="CheckField form-control">
+                            <form:option label="SMS" value="SMS" />
+                            <form:option label="EMAIL" value="EMAIL" />
+                        </form:select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form:form>
+    </div>
+</div>

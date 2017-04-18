@@ -7,9 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en">
-
-    <!-- Mirrored from swlabs.co/edugate/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 23 Dec 2016 05:52:28 GMT -->
-    <head><title>Edugate | Contact</title>
+    <head><title>Contact</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- LIBRARY FONT-->

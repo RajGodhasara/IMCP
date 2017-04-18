@@ -65,11 +65,11 @@ public class SentMailBusiness {
     public List search() {
         try {
             s = sf.openSession();
-            Transaction t = s.beginTransaction();
+            //Transaction t = s.beginTransaction();
             List list;
             list = s.createQuery("from SentMail").list();
-            t.commit();
-            s.close();
+            //t.commit();
+            //s.close();
             return list;
         } catch (Exception e) {
             return null;

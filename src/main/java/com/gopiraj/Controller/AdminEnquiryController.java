@@ -12,6 +12,7 @@ import com.gopiraj.Model.Course;
 import com.gopiraj.Model.Enquiry;
 import com.gopiraj.Model.EnquiryContactno;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -149,10 +151,16 @@ public class AdminEnquiryController {
         Workbook wb = null;
         try {
             File convFile = new File(file.getOriginalFilename());
+            System.err.println(convFile.exists());
+            if(convFile.exists())
+            {
+                System.out.println(convFile.delete());
+            }
+            System.err.println(convFile.exists());
             file.transferTo(convFile);
             wb = new XSSFWorkbook(convFile);
-        } catch (Exception e) {
-            System.out.println("Error1:" + e.getMessage());
+        } catch (IOException | IllegalStateException | InvalidFormatException e) {
+            System.out.println("Error in getAdminInsertExcel in EnquiryController:" + e.getMessage());
         }
 
         try {

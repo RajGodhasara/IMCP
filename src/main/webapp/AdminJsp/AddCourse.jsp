@@ -5,90 +5,61 @@
 --%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html>
-<html>
-    <head>
+<jsp:include page="../IncludeResourse/jQuery.jsp"></jsp:include>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Course</title>
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $("#Form").validate({
-                    rules: {
-                        'courseName': {
-                            required: true
-                        },
-                        'duration': {
-                            required: true
-                        },
-                        'Description': {
-                            required: true
-                        }
+    <script>
+        $(document).ready(function() {
+            $("#Form").validate({
+                rules: {
+                    'courseName': {
+                        required: true
+                    },
+                    'duration': {
+                        required: true,
+                        number: true
+                    },
+                    'Description': {
+                        required: true
                     }
-                });
+                }
             });
-        </script>
-    </head>
-    <body>
-        <div style="margin-left: 200px;">   
-            <h1 style="margin-left: 180px;">Course</h1>
-            <div id="mydiv">
-            </div>
-
-            <div class="container">
-                <div id="progressmain" class="progress" style="width: 400px;">
-                    <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                        0%
-                    </div>
+        });
+    </script>
+    <div style="margin-left: 200px;">   
+        <h1 style="margin-left: 180px;">Add New Course</h1>
+        <div class="container">
+            <div id="progressmain" class="progress" style="width: 400px;">
+                <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                    0%
                 </div>
             </div>
-            <form:form id="Form" method="POST" commandName="command" action="admin_insert_course">
-                <table>
-                    <tr>
-                        <td>
-                            <label class="col-xs-11 control-label">Name</label>
-                        </td>
-                        <td>
-                            <div class="col-xs-5">
-                                <form:input path="courseName" id="courseName" name="courseName" cssClass="form-control CheckField"/>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="col-xs-11 control-label">Duration</label>
-                        </td>
-                        <td>
-                            <div class="col-xs-5">
-                                <form:input path="duration" id="duration" name="duration" cssClass="form-control CheckField" />
-                            </div>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="col-xs-11 control-label">Description</label>
-                        </td>
-                        <td>
-                            <div class="col-xs-5">
-                                <form:textarea path="Description" id="Description" name="Description" cssClass="form-control CheckField"/>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                            <div class="form-group">
-                                <div class="col-xs-5 col-xs-offset-3" style="margin-left: 150px;">
-                                    <button type="submit" id="btn" class="btn btn-success">Submit</button>     
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </form:form>
         </div>
-    </body>
-</html>
+    <form:form id="Form" method="POST" commandName="command" action="admin_insert_course">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="courseName">Course Name</label>
+                <div class="col-sm-4">
+                    <form:input path="courseName" id="courseName" name="courseName" cssClass="form-control CheckField" placeholder="Course Name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="duration">Duration</label>
+                <div class="col-sm-4">
+                    <form:input path="duration" id="duration" name="duration" value="" cssClass="form-control CheckField" placeholder="Course Duration"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Description</label>
+                <div class="col-sm-4">
+                    <form:textarea path="Description" id="Description" name="Description" cssClass="form-control CheckField" placeholder="Course Descriptions"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+
+    </form:form>
+</div>
